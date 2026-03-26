@@ -1,8 +1,8 @@
 site_name: OpenClaw完全攻略ガイド
 site_description: エンジニア向け OpenClaw 体系解説テキスト
-site_url: https://niso1985.github.io/openclaw-guide/
-repo_url: https://github.com/niso1985/openclaw-guide
-repo_name: niso1985/openclaw-guide
+site_url: https://koji-inc.github.io/openclaw-guide/
+repo_url: https://github.com/koji-inc/openclaw-guide
+repo_name: koji-inc/openclaw-guide
 
 theme:
   name: material

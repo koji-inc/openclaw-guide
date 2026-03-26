@@ -1,0 +1,77 @@
+site_name: OpenClaw完全攻略ガイド
+site_description: エンジニア向け OpenClaw 体系解説テキスト
+site_url: https://niso1985.github.io/openclaw-guide/
+repo_url: https://github.com/niso1985/openclaw-guide
+repo_name: niso1985/openclaw-guide
+
+theme:
+  name: material
+  language: ja
+  palette:
+    - scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切り替え
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Noto Sans JP
+    code: JetBrains Mono
+
+nav:
+  - ホーム: index.md
+  - カリキュラム:
+    - 第1章 OpenClawとは何か: ch01-what-is-openclaw.md
+    # - 第2章 アーキテクチャ全体像: ch02-architecture.md
+    # - 第3章 インストール＆初期設定: ch03-install.md
+  - このガイドについて: about.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: ja
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/openclaw/openclaw
+    - icon: fontawesome/brands/discord
+      link: https://discord.com/invite/clawd
+
+copyright: "&copy; 2026 こうじ株式会社"

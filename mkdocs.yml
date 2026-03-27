@@ -40,7 +40,7 @@ nav:
   - カリキュラム:
     - 第1章 OpenClawとは何か: ch01-what-is-openclaw.md
     - 第2章 アーキテクチャ全体像: ch02-architecture.md
-    # - 第3章 インストール＆初期設定: ch03-install.md
+    - 第3章 インストール＆初期設定: ch03-installation.md
   - このガイドについて: about.md
 
 markdown_extensions:

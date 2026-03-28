@@ -68,6 +68,20 @@ plugins:
       lang: ja
 
 extra:
+  analytics:
+    provider: google
+    property: G-PLACEHOLDER
+    feedback:
+      title: この記事は役に立ちましたか？
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: 役に立った
+          data: 1
+          note: フィードバックありがとうございます！
+        - icon: material/emoticon-sad-outline
+          name: 改善の余地あり
+          data: 0
+          note: フィードバックありがとうございます。改善します！
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/openclaw/openclaw

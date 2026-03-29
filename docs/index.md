@@ -23,7 +23,7 @@ OpenClawは、WhatsApp・Telegram・Discord・iMessageなど複数のチャッ�
 | 3 | [インストール＆初期設定](ch03-installation.md) | Node.js準備、オンボーディング、設定ファイル理解 |
 | 4 | [エージェントの仕組み](ch04-agent-mechanics.md) | 2層構造、ライフサイクル、記憶、マルチエージェント |
 | 5 | [セッション管理](ch05-session-management.md) | セッションキー、スコープ、リセット、cron連携 |
-| 6 | コンテキストエンジン | *Coming Soon* |
+| 6 | [コンテキストエンジン](ch06-context-engine.md) | システムプロンプト、Bootstrap files、コンパクション、トークン管理 |
 | 7 | チャンネル接続 | *Coming Soon* |
 | 8 | ツールとスキル | *Coming Soon* |
 | 9 | 自動化 | *Coming Soon* |

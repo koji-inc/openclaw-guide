@@ -2,18 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/</loc>
-         <lastmod>2026-03-27</lastmod>
+         <lastmod>2026-03-29</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/about/</loc>
-         <lastmod>2026-03-27</lastmod>
+         <lastmod>2026-03-29</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch01-what-is-openclaw/</loc>
-         <lastmod>2026-03-27</lastmod>
+         <lastmod>2026-03-29</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch02-architecture/</loc>
-         <lastmod>2026-03-27</lastmod>
+         <lastmod>2026-03-29</lastmod>
+    </url>
+    <url>
+         <loc>https://koji-inc.github.io/openclaw-guide/ch03-installation/</loc>
+         <lastmod>2026-03-29</lastmod>
+    </url>
+    <url>
+         <loc>https://koji-inc.github.io/openclaw-guide/ch04-agent-mechanics/</loc>
+         <lastmod>2026-03-29</lastmod>
+    </url>
+    <url>
+         <loc>https://koji-inc.github.io/openclaw-guide/ch05-session-management/</loc>
+         <lastmod>2026-03-29</lastmod>
     </url>
 </urlset>

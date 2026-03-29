@@ -42,6 +42,7 @@ nav:
     - 第2章 アーキテクチャ全体像: ch02-architecture.md
     - 第3章 インストール＆初期設定: ch03-installation.md
     - 第4章 エージェントの仕組み: ch04-agent-mechanics.md
+    - 第5章 セッション管理: ch05-session-management.md
   - このガイドについて: about.md
 
 markdown_extensions:

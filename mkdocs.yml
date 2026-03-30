@@ -44,6 +44,7 @@ nav:
     - 第4章 エージェントの仕組み: ch04-agent-mechanics.md
     - 第5章 セッション管理: ch05-session-management.md
     - 第6章 コンテキストエンジン: ch06-context-engine.md
+    - 第7章 チャンネル接続: ch07-channel-connection.md
   - このガイドについて: about.md
 
 markdown_extensions:

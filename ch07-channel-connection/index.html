@@ -1,0 +1,2393 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="エンジニア向け OpenClaw 体系解説テキスト">
+      
+      
+      
+        <link rel="canonical" href="https://koji-inc.github.io/openclaw-guide/ch07-channel-connection/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第7章：チャンネル接続 - OpenClaw完全攻略ガイド</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans JP";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-PEJWVD6EE4"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-PEJWVD6EE4",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-PEJWVD6EE4",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="OpenClaw完全攻略ガイド" class="md-header__button md-logo" aria-label="OpenClaw完全攻略ガイド" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenClaw完全攻略ガイド
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第7章：チャンネル接続
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="ダークモードに切り替え"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="ダークモードに切り替え" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="ライトモードに切り替え"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="ライトモードに切り替え" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/koji-inc/openclaw-guide" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    koji-inc/openclaw-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ch01-what-is-openclaw/" class="md-tabs__link">
+          
+  
+  
+  カリキュラム
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  このガイドについて
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenClaw完全攻略ガイド" class="md-nav__button md-logo" aria-label="OpenClaw完全攻略ガイド" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenClaw完全攻略ガイド
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/koji-inc/openclaw-guide" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    koji-inc/openclaw-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    カリキュラム
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    カリキュラム
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01-what-is-openclaw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 OpenClawとは何か
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 アーキテクチャ全体像
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03-installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 インストール＆初期設定
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04-agent-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 エージェントの仕組み
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05-session-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 セッション管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06-context-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 コンテキストエンジン
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    このガイドについて
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        この章が解き明かす「つながりの仕組み」
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 チャンネルとは何か — 外部世界への接続口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 チャンネルとは何か — 外部世界への接続口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        翻訳者としてのチャンネル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第5章との関係：セッションキーの再来
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        アーキテクチャ上の位置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 対応プラットフォーム一覧 — 20以上の接続先を分類整理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 対応プラットフォーム一覧 — 20以上の接続先を分類整理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6つのカテゴリー分類
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定の簡単さランキング
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグイン vs コアエクステンション
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 アーキテクチャ — プラグインシステムとの関係
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 アーキテクチャ — プラグインシステムとの関係">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コア vs プラグインの役割分担
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        メッセージツール統合の妙
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 チャンネルルーティング — メッセージはどうエージェントに届くか
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 チャンネルルーティング — メッセージはどうエージェントに届くか">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ルーティング原則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        よく使うパターン3つ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        エージェント選択の8段階ルール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        セッションキー形式の再確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        メインDMルート固定の仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 グループチャット対応 — 複数人の会話での振る舞い
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5 グループチャット対応 — 複数人の会話での振る舞い">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        デフォルト動作：賢い「お客さん」
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        メンション検出の2つの仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        グループポリシーの3つのモード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        評価順序の重要性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        実用的な設定例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76-discordtelegramwhatsappslack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 主要チャンネルの設定ガイド — Discord・Telegram・WhatsApp・Slack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6 主要チャンネルの設定ガイド — Discord・Telegram・WhatsApp・Slack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discord：専用サーバー推奨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#telegram3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telegram：3分で完了する最速セットアップ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whatsappqr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WhatsApp：QRペアリング（専用番号推奨）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slacksocket-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slack：Socket Mode設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 ペアリングとセキュリティ — 「誰を信頼するか」の制御
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.7 ペアリングとセキュリティ — 「誰を信頼するか」の制御">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dm8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMペアリング：8文字コードの承認フロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodeデバイスペアリング：モバイルアプリとの接続
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        セキュリティ設計の考慮点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8 ブロードキャスト — マルチエージェント応答の実験機能
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.8 ブロードキャスト — マルチエージェント応答の実験機能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        「専門家チーム」としてのブロードキャスト
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        動作メカニズム
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        実用的な用途例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        大規模展開時の注意点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#79" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.9 チャンネルプラグイン開発 — 独自プラットフォーム対応
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.9 チャンネルプラグイン開発 — 独自プラットフォーム対応">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SDKベースの開発フロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4つの主要コンポーネント
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ファイル構造の標準
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        インバウンドメッセージハンドリング
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配布とインストール
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#710" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.10 トラブルシューティング — 接続できない時の診断と解決
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.10 トラブルシューティング — 接続できない時の診断と解決">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        診断コマンド階層
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チャンネル別の典型的障害パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ログ解析のポイント
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プリベンティブ（予防的）チェック
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第7章のまとめ — 外部世界との接続を完全制覇
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第7章のまとめ — 外部世界との接続を完全制覇">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要なポイントの振り返り
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次の章への橋渡し
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="7">第7章：チャンネル接続<a class="headerlink" href="#7" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><em>"We are all connected."</em> — 映画『マトリックス』で語られた、全てがつながった世界の真理（っぽいやつ）。OpenClawも同じだ。Discord、Telegram、WhatsApp、Slack……どのプラットフォームからでも、同じエージェントと話している感覚を与える。第5章で学んだセッションキーに <code>discord:direct:</code> や <code>telegram:group:</code> が含まれていたのを覚えているだろうか？あれこそが、この「接続」の正体だった。チャンネルは、OpenClawが外部世界と出会うための「言語の翻訳者」なのだ。</p>
+</blockquote>
+<hr />
+<h2 id="_1">この章が解き明かす「つながりの仕組み」<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>第5章でセッション管理を、第6章でコンテキストエンジンを学んだあなたは、OpenClawの「内側」をよく理解している。しかし、外部世界との接点——Discord、WhatsApp、Telegram——がどう動作しているかは、まだ「魔法」のように見えているはずだ。</p>
+<p>この章のテーマは<strong>チャンネル接続</strong>——OpenClawが20+のメッセージングプラットフォームと対話する仕組みの全貌だ。アーキテクチャ、ルーティング、設定方法、セキュリティ……すべてを解剖する。</p>
+<p>読み終える頃には、「Discord経由でメッセージを送ると、どうしてCLIでも同じエージェントの記憶を参照できるのか」が完全にわかるようになる。そして、独自プラットフォームへの対応方法も身につく。チャンネルは魔法じゃない。論理的で拡張可能なシステムなのだ。</p>
+<!-- IMAGE: channel-overview.png - チャンネルがユーザー・プラットフォーム・Gateway・エージェント間の翻訳者として機能する全体図 -->
+
+<hr />
+<h2 id="71">7.1 チャンネルとは何か — 外部世界への接続口<a class="headerlink" href="#71" title="Permanent link">&para;</a></h2>
+<p>チャンネルとは、OpenClawにおける<strong>メッセージングプラットフォームへの接続インターフェース</strong>だ。より具体的に言えば、Discord Bot API、Telegram grammY、WhatsApp Baileysライブラリといった「プラットフォーム固有のAPI」と、OpenClaw内部の「統一されたメッセージ形式」を相互変換する層である。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 実際にDiscordでOpenClawを使ってみると、「チャンネル」の威力がよくわかる。Discord特有のembedやリアクション機能も自然に使えるし、同じエージェントとTelegramでも会話できる。プラットフォームの違いを意識せずに済むのは、この「翻訳者」のおかげなんだなと実感する。</p>
+</blockquote>
+<h3 id="_2">翻訳者としてのチャンネル<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>チャンネルを「翻訳者」だと考えるとわかりやすい。</p>
+<p>あなたがWhatsAppで「今日の天気は？」と送ると：</p>
+<ol>
+<li><strong>WhatsAppサーバー</strong> → Baileysライブラリがメッセージを受信</li>
+<li><strong>WhatsAppチャンネル</strong> → 送信者ID、時刻、メディア等をOpenClaw内部形式に変換</li>
+<li><strong>Gateway</strong> → セッション管理・ルーティング経由でエージェントに配信</li>
+<li><strong>エージェント</strong> → 天気情報を取得、返答を生成</li>
+<li><strong>WhatsAppチャンネル</strong> → OpenClaw内部形式をWhatsApp API形式に変換</li>
+<li><strong>WhatsAppサーバー</strong> → あなたのアプリに天気情報が届く</li>
+</ol>
+<p>この過程で、チャンネルは「WhatsApp語」と「OpenClaw語」を双方向に翻訳している。Discord、Telegram、Slackでも基本的な流れは同じだが、プラットフォームごとの「方言」（APIの違い、認証方式、メディア対応等）を各チャンネルが吸収している。</p>
+<h3 id="5">第5章との関係：セッションキーの再来<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>第5章で学んだセッションキー <code>agent:main:discord:direct:990665145992745030</code> を思い出そう。この <code>:discord:</code> 部分こそが、チャンネルの正体だった。</p>
+<ul>
+<li><code>discord</code> — チャンネル名（どのプラットフォーム経由か）</li>
+<li><code>direct</code> — チャットタイプ（DM、グループ、チャンネル）</li>
+<li><code>990665...</code> — 送信者ID（プラットフォーム固有の識別子）</li>
+</ul>
+<p>つまり、セッション管理とチャンネル接続は表裏一体だ。チャンネルが「どこから来たか」を記録し、セッション管理が「どこに戻すか」を制御する。</p>
+<h3 id="_3">アーキテクチャ上の位置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>チャンネルがOpenClawの全体アーキテクチャのどこに位置するかを確認しよう：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ユーザー ↔ プラットフォーム ↔ チャンネルプラグイン ↔ Gateway ↔ エージェント
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>層</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ユーザー</td>
+<td>Discord、WhatsApp等のアプリを使う人</td>
+</tr>
+<tr>
+<td>プラットフォーム</td>
+<td>Discord、Telegram、WhatsApp等のサービス</td>
+</tr>
+<tr>
+<td>チャンネルプラグイン</td>
+<td>プラットフォーム固有APIとOpenClaw内部形式の変換</td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>セッション管理・ルーティング・エージェント配信</td>
+</tr>
+<tr>
+<td>エージェント</td>
+<td>AI推論・ツール実行・応答生成</td>
+</tr>
+</tbody>
+</table>
+<p>チャンネルはGatewayの「手下」として動作し、各プラットフォームの「出張所」を運営している感覚だ。</p>
+<!-- IMAGE: platform-categories.png - 6つのカテゴリーごとにプラットフォームを分類した一覧図 -->
+
+<hr />
+<h2 id="72-20">7.2 対応プラットフォーム一覧 — 20以上の接続先を分類整理<a class="headerlink" href="#72-20" title="Permanent link">&para;</a></h2>
+<p><strong>どれから始めればいいかわからない？→ Telegram一択</strong></p>
+<p>OpenClawは2026年3月時点で、20以上のメッセージングプラットフォームに対応している。初心者は迷わずTelegramから始めることを強く推奨する。Bot Token取得だけで3分で設定完了し、すべてのOpenClaw機能を体験できる。</p>
+<p>これらを機能と設定難易度で分類してみよう。</p>
+<h3 id="6">6つのカテゴリー分類<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>カテゴリー</th>
+<th>プラットフォーム</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>メッセージング</strong></td>
+<td>WhatsApp、Telegram、Signal、LINE、Zalo</td>
+<td>個人間コミュニケーション重視</td>
+</tr>
+<tr>
+<td><strong>チャット</strong></td>
+<td>Discord、Slack、Microsoft Teams、Google Chat</td>
+<td>チーム・組織内コミュニケーション</td>
+</tr>
+<tr>
+<td><strong>プロトコル系</strong></td>
+<td>Matrix、IRC、Nostr</td>
+<td>オープンプロトコル・分散化</td>
+</tr>
+<tr>
+<td><strong>Apple生態系</strong></td>
+<td>iMessage (legacy)、BlueBubbles</td>
+<td>macOS・iOS統合</td>
+</tr>
+<tr>
+<td><strong>エンタープライズ</strong></td>
+<td>Mattermost、Nextcloud Talk、Synology Chat</td>
+<td>自社運営・プライベートクラウド</td>
+</tr>
+<tr>
+<td><strong>その他</strong></td>
+<td>WebChat、Twitch、Feishu、Tlon、Voice Call</td>
+<td>特殊用途・実験的対応</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">設定の簡単さランキング<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>実際に使い始めるときの参考に、設定の簡単さでランキングを付けてみる：</p>
+<table>
+<thead>
+<tr>
+<th>順位</th>
+<th>プラットフォーム</th>
+<th>設定時間</th>
+<th>必要な作業</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🥇</td>
+<td>Telegram</td>
+<td>3分</td>
+<td>Bot Token取得のみ</td>
+</tr>
+<tr>
+<td>🥈</td>
+<td>Discord</td>
+<td>5分</td>
+<td>アプリ作成、特権インテント有効化</td>
+</tr>
+<tr>
+<td>🥈</td>
+<td>Slack</td>
+<td>5分</td>
+<td>アプリ作成、Socket Mode有効化</td>
+</tr>
+<tr>
+<td>🥉</td>
+<td>WhatsApp</td>
+<td>10分</td>
+<td>QRペアリング、状態管理の理解</td>
+</tr>
+<tr>
+<td>4位</td>
+<td>Signal</td>
+<td>15分</td>
+<td>signal-cli セットアップ</td>
+</tr>
+<tr>
+<td>5位</td>
+<td>iMessage (BlueBubbles)</td>
+<td>30分</td>
+<td>macOS server構築</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 個人的にはTelegramが一番楽だった。@BotFatherとの会話だけでBot作成完了、トークンをコピペするだけ。Discordは機能豊富だけど、特権インテント設定で初心者がつまずきがち。WhatsAppは実用性が高いが、QRペアリングの概念理解が必要。迷ったらTelegramで基本を覚えてから他に展開するのが賢明。</p>
+</blockquote>
+<h3 id="vs">プラグイン vs コアエクステンション<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<p>重要な区別として、プラットフォーム対応には2つの実装レベルがある：</p>
+<p><strong>コアエクステンション（OpenClaw本体にバンドル）：</strong>
+- Discord、Telegram、WhatsApp、Slack、IRC、WebChat
+- <code>/usr/lib/node_modules/openclaw/dist/extensions/</code> に含まれる
+- 追加インストール不要</p>
+<p><strong>プラグイン（外部パッケージとして配布）：</strong>
+- LINE (<code>@openclaw/line</code>)、Matrix (<code>@openclaw/matrix</code>)、Microsoft Teams等
+- <code>openclaw plugins install @openclaw/&lt;name&gt;</code> でインストール
+- 特定用途・ニッチな需要に対応</p>
+<p>最初の一歩として、コアエクステンションのどれかから始めることを強く推奨する。</p>
+<blockquote>
+<p>💡 <strong>コラム：なぜチャンネルは「プラグイン」なのか</strong><br />
+OpenClawがチャンネルをプラグイン化したのは、3つのメリットがあるからだ。まず「<strong>新しいプラットフォームの追加</strong>」——新SNSが登場しても、コア機能を変更せずプラグインとして対応できる。次に「<strong>独立したアップデート</strong>」——Telegram API仕様変更があっても、そのプラグインだけアップデートすればいい。最後に「<strong>コア機能との分離</strong>」——チャンネル障害がGateway全体を巻き込まない。これにより、外部開発者も独自プラットフォーム対応を作成・配布できるエコシステムが生まれている。</p>
+</blockquote>
+<!-- IMAGE: channel-architecture.png - コア機能とプラグイン提供機能の役割分担を示すレイヤー図 -->
+
+<hr />
+<h2 id="73">7.3 アーキテクチャ — プラグインシステムとの関係<a class="headerlink" href="#73" title="Permanent link">&para;</a></h2>
+<p>チャンネルがOpenClawのどこに実装されているか、その設計思想を深掘りしてみよう。チャンネルは「専門店」のような設計になっている。</p>
+<h3 id="vs_1">コア vs プラグインの役割分担<a class="headerlink" href="#vs_1" title="Permanent link">&para;</a></h3>
+<p>OpenClawのチャンネルアーキテクチャは、「コア機能」と「プラグイン提供機能」を明確に分離している：</p>
+<p><strong>コア提供（Gateway担当）：</strong>
+- 共通<code>message</code>ツール（送信インターフェース）
+- セッション管理・ルーティング
+- プロンプト配線・ディスパッチ
+- セキュリティフレームワーク</p>
+<p><strong>プラグイン提供（各チャンネル担当）：</strong>
+- アカウント解決・設定ウィザード
+- セキュリティ（DMポリシー・許可リスト）
+- ペアリング（DM承認フロー）
+- アウトバウンド（プラットフォーム送信）
+- スレッディング（返信の配線方法）</p>
+<p>これは「専門店モデル」だと考えるとわかりやすい。Gatewayは「デパートの管理会社」で、各チャンネルは「テナントの専門店」だ。共通のインフラ（エレベーター、警備、会計システム）はデパート側が提供し、専門的なサービス（商品、接客、店舗運営）は各テナントが担当する。</p>
+<h3 id="_5">ディレクトリ構造<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>実際のファイル配置を見ると、この設計がよくわかる：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/usr/lib/node_modules/openclaw/dist/extensions/
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── discord/
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│   ├── package.json      # &quot;openclaw.channel&quot; メタデータ
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   ├── channel.js        # Discord Bot API実装
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   └── setup.js          # 設定ウィザード
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├── whatsapp/
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│   ├── package.json      # Baileysライブラリ構成
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│   ├── channel.js        # WhatsApp Business API実装
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   └── setup.js          # QRペアリング処理
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>├── telegram/
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│   ├── package.json      # grammY構成
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│   ├── channel.js        # Bot API実装
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│   └── setup.js          # Bot Token設定
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>└── slack/
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    ├── package.json      # Bolt SDK構成
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    ├── channel.js        # Socket Mode実装
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    └── setup.js          # アプリトークン設定
+</code></pre></div>
+<p>各チャンネルは独立したnpmパッケージとして構成され、<code>package.json</code> に <code>"openclaw.channel"</code> フィールドを持つことでOpenClawに認識される。この設計により、チャンネル単体でのアップデート・配布・テストが可能になっている。</p>
+<h3 id="_6">メッセージツール統合の妙<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>特筆すべきは、チャンネルプラグインが「独自のsend/edit/reactツール」を持たないことだ。代わりにOpenClaw中核が共通 <code>message</code> ツールを提供し、各チャンネルはその「アウトバウンド処理」のみを担当する。</p>
+<p>これにより、エージェント側は「どのプラットフォームに送信するか」を意識せずに済む。 <code>message</code> ツールで送信すれば、現在のセッションキーに基づいてGatewayが自動的に適切なチャンネルにルーティングする。「翻訳者」の真価がここにある。</p>
+<!-- IMAGE: routing-decision-tree.png - 8段階のエージェント選択ルールを決定木で表現した図 -->
+
+<hr />
+<h2 id="74">7.4 チャンネルルーティング — メッセージはどうエージェントに届くか<a class="headerlink" href="#74" title="Permanent link">&para;</a></h2>
+<p>ここからがチャンネル接続の核心だ。メッセージが「どのエージェントに」「どのセッションで」処理されるかは、決定論的なルールに従って決まる。感覚ではなく、論理だ。</p>
+<h3 id="_7">ルーティング原則<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>OpenClawのルーティングは<strong>「メッセージが来たチャンネルに戻す」</strong>という単純な原則に基づく。これは「住所配達」のようなもので、AIモデルがチャンネルを選択するのではなく、ホスト設定によって決定論的に決まる。</p>
+<p>つまり、Discord DMで質問すればDiscord DMに回答が返り、Telegram グループで質問すればそのグループに回答が返る。これにより、会話の文脈が散らばることなく、プラットフォーム横断でも一貫した体験を提供できる。</p>
+<h3 id="3">よく使うパターン3つ<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>実際の運用では、以下3つのパターンが使用頻度の大半を占める：</p>
+<ol>
+<li><strong>DM（個人チャット）</strong> — Discord・Telegram・WhatsAppでの1対1会話</li>
+<li><strong>グループチャット</strong> — <code>@エージェント名</code> でのメンション応答</li>
+<li><strong>専用チャンネル</strong> — Discord・Slackの専用部屋での常時応答</li>
+</ol>
+<p>これらを理解すれば、日常的な使用には十分対応できる。</p>
+<h3 id="8">エージェント選択の8段階ルール<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<p>メッセージを受信したとき、どのエージェントが処理するかは以下の8段階で決定される：</p>
+<table>
+<thead>
+<tr>
+<th>優先順位</th>
+<th>判定条件</th>
+<th>具体例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>完全一致</strong></td>
+<td><code>bindings</code>の<code>peer.kind</code> + <code>peer.id</code>が完全マッチ</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>親ピア一致</strong></td>
+<td>スレッド継承（返信チェーン）</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Guild + roles一致</strong></td>
+<td>Discord: <code>guildId</code> + <code>roles</code>の組み合わせ</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Guild一致</strong></td>
+<td>Discord: <code>guildId</code>のみ</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>チーム一致</strong></td>
+<td>Slack: <code>teamId</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>アカウント一致</strong></td>
+<td>チャンネル上の<code>accountId</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>チャンネル一致</strong></td>
+<td>チャンネル上の任意アカウント（<code>accountId: "*"</code>）</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>デフォルトエージェント</strong></td>
+<td><code>agents.list[].default</code>、なければ最初のエントリ、最終的には<code>main</code></td>
+</tr>
+</tbody>
+</table>
+<p>この評価は上から順に行われ、最初にマッチした条件でエージェントが決定される。</p>
+<h3 id="_8">セッションキー形式の再確認<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>第5章で学んだセッションキー形式を、チャンネル視点で再整理してみよう：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># 基本形式
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>agent:&lt;agentId&gt;:&lt;channel&gt;:&lt;type&gt;:&lt;id&gt;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a># 実際の例
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>agent:main:telegram:group:-1001234567890           # Telegramグループ
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>agent:main:discord:channel:123456                  # Discordチャンネル
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>agent:main:whatsapp:direct:+15551234567            # WhatsApp DM
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a># スレッド拡張
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>agent:main:discord:channel:123456:thread:987654    # Discordスレッド
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>agent:main:telegram:group:-1001234567890:topic:42  # Telegramフォーラムトピック
+</code></pre></div>
+<p>このキー生成を担当するのが各チャンネルプラグインの <code>resolveSessionKey()</code> 実装だ。プラットフォームごとの識別子の違い（Discordのsnowflake ID（Discord独自の一意識別番号）、Telegramのマイナス ID（Telegramがグループに付与する負のID）等）を吸収し、統一的なキー形式に変換する。</p>
+<h3 id="dm">メインDMルート固定の仕組み<a class="headerlink" href="#dm" title="Permanent link">&para;</a></h3>
+<p>第5章で触れた「メインDMルート固定」も、チャンネルルーティングと密接に関係している。<code>session.dmScope</code>が<code>main</code>の時、DMは一つのメインセッション（<code>agent:main:main</code>）を共有する。</p>
+<p>重要なのは、<code>allowFrom</code>に単一エントリしかない場合、所有者以外のDMは<code>lastRoute</code>を上書きしないよう保護されることだ。これにより、所有者のメインセッションが他人のメッセージで「汚染」されることを防いでいる。</p>
+<!-- IMAGE: group-policy-flow.png - groupPolicyから最終応答までの評価フローチャート -->
+
+<hr />
+<h2 id="75">7.5 グループチャット対応 — 複数人の会話での振る舞い<a class="headerlink" href="#75" title="Permanent link">&para;</a></h2>
+<p>グループチャットでのAI参加は「パーティーでの会話参加」に似ている。いつ話すか、誰に向けて話すか、どのタイミングで発言するか——これらすべてがルールで制御されている。</p>
+<h3 id="_9">デフォルト動作：賢い「お客さん」<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>OpenClawのデフォルト設定は、グループチャットで「お客さん」のように振る舞う：</p>
+<ul>
+<li><strong>グループ制限：</strong> <code>groupPolicy: "allowlist"</code>（許可リストに含まれるグループのみ参加）</li>
+<li><strong>メンション必須：</strong> 明示的に無効化しない限り@メンション必要</li>
+<li><strong>DM vs グループ：</strong> DMアクセスは<code>*.allowFrom</code>、グループアクセスは<code>*.groupPolicy</code> + <code>*.groups</code>で制御</li>
+</ul>
+<p>つまり、勝手に全てのグループに参加するのではなく、「招待されたパーティー」でかつ「名前を呼ばれた時だけ」発言する。</p>
+<h3 id="2">メンション検出の2つの仕組み<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>OpenClawは2つの方法でメンションを検出する：</p>
+<p><strong>1. 自動検出（プラットフォーム提供）：</strong>
+- Discord、Slack等の明示的@メンション
+- Telegramの返信（Bot メッセージへの返信として検出）
+- WhatsAppの引用返信</p>
+<p><strong>2. パターンマッチ（カスタム設定）：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  agents: {
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    list: {
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>      main: {
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        groupChat: {
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>          mentionPatterns: [&quot;@openclaw&quot;, &quot;openclaw&quot;, &quot;\\+15555550123&quot;]
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        }
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>      }
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    }
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  }
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>}
+</code></pre></div></p>
+<p>パターンマッチは大文字小文字を区別せず、正規表現として安全に処理される。これにより、「Hey OpenClaw」や「おーい OpenClaw」のような自然な呼びかけにも対応できる。</p>
+<h3 id="3_1">グループポリシーの3つのモード<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>グループへの参加方針は<code>groupPolicy</code>で制御される：</p>
+<table>
+<thead>
+<tr>
+<th>ポリシー</th>
+<th>動作</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disabled</code></td>
+<td>グループメッセージを完全に無視</td>
+<td>個人専用</td>
+</tr>
+<tr>
+<td><code>allowlist</code></td>
+<td>許可リストのグループのみ参加（デフォルト）</td>
+<td>管理された参加</td>
+</tr>
+<tr>
+<td><code>open</code></td>
+<td>全てのグループで応答可能</td>
+<td>オープンBot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">評価順序の重要性<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>グループメッセージの処理は、以下の順序で評価される：</p>
+<ol>
+<li><strong>groupPolicy</strong> — disabled/allowlist/openの判定</li>
+<li><strong>グループ許可リスト</strong> — <code>*.groups</code>, <code>*.groupAllowFrom</code></li>
+<li><strong>メンションゲーティング</strong> — <code>requireMention</code>, <code>/activation</code></li>
+</ol>
+<p>どの段階でも「参加不可」と判定されれば、それ以降の処理は行われない。一方、「参加可能」と判定されれば、通常のエージェント処理に進む。</p>
+<h3 id="_11">実用的な設定例<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  channels: {
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    whatsapp: {
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>      groupPolicy: &quot;allowlist&quot;,
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>      groupAllowFrom: [&quot;+15551234567&quot;],  // グループ管理者のみ招待可能
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>      groups: {
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        &quot;*&quot;: { requireMention: true },           // 全グループでメンション必要
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        &quot;120363403215116621@g.us&quot;: {             // 特定グループは常時応答
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>          requireMention: false 
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        }
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>      }
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    }
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>  }
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>}
+</code></pre></div>
+<p>この設定により、管理者が招待したグループでのみ動作し、ほとんどのグループではメンション時のみ応答するが、特定の作業グループでは全てのメッセージに対応する——という柔軟な運用が可能になる。</p>
+<blockquote>
+<p>💡 <strong>コラム：位置情報はこう扱われる</strong><br />
+Telegram、WhatsApp、Matrixでは位置情報の送受信にも対応している。受信した位置情報は <code>📍 48.858844, 2.294351 ±12m</code> という形式でテキスト化されると同時に、<code>LocationLat</code>, <code>LocationLon</code>, <code>LocationAccuracy</code> といった構造化フィールドとしてもエージェントに渡される。live locationの場合は <code>🛰 Live location: ...</code> というプレフィックスが付く。これにより、エージェントは「近くのカフェを探して」「この場所の天気を教えて」といったリクエストに正確に答えることができる。</p>
+</blockquote>
+<!-- IMAGE: setup-comparison.png - 4つのプラットフォームの設定難易度を比較したグラフ -->
+
+<hr />
+<h2 id="76-discordtelegramwhatsappslack">7.6 主要チャンネルの設定ガイド — Discord・Telegram・WhatsApp・Slack<a class="headerlink" href="#76-discordtelegramwhatsappslack" title="Permanent link">&para;</a></h2>
+<p>理論はここまで。実際に手を動かしてチャンネルを設定してみよう。最も使用頻度の高い4つのプラットフォームの「レシピ」を紹介する。</p>
+<h3 id="discord">Discord：専用サーバー推奨<a class="headerlink" href="#discord" title="Permanent link">&para;</a></h3>
+<p>Discordは最も多機能だが、設定手順がやや複雑だ。専用サーバーを作ることを強く推奨する。</p>
+<p><strong>Step 1: アプリ作成</strong><br />
+<a href="https://discord.com/developers/applications">Discord Developer Portal</a> → New Application</p>
+<p><strong>Step 2: Bot設定</strong><br />
+Bot タブ → Reset Token → トークンをコピー &amp; 保存</p>
+<p><strong>Step 3: 特権インテント有効化（重要）</strong><br />
+- Message Content Intent（必須）
+- Server Members Intent（推奨）</p>
+<p><strong>Step 4: 招待URL生成</strong><br />
+OAuth2 タブ → bot + applications.commands + 基本的な権限を選択</p>
+<p><strong>Step 5: Developer Mode有効化</strong><br />
+Discord設定 → 詳細設定 → 開発者モード</p>
+<p><strong>Step 6: ID取得</strong><br />
+- サーバーID（サーバー名右クリック → Copy Server ID）
+- ユーザーID（プロフィール右クリック → Copy User ID）</p>
+<p><strong>設定例：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DISCORD_BOT_TOKEN</span><span class="o">=</span><span class="s2">&quot;YOUR_TOKEN&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>openclaw<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>channels.discord.token<span class="w"> </span>--ref-provider<span class="w"> </span>default<span class="w"> </span>--ref-source<span class="w"> </span>env<span class="w"> </span>--ref-id<span class="w"> </span>DISCORD_BOT_TOKEN
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  channels: {
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    discord: {
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>      enabled: true,
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>      dmPolicy: &quot;pairing&quot;,
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>      allowFrom: [&quot;990665145992745030&quot;],  // あなたのユーザーID
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>      guilds: {
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        &quot;123456789012345678&quot;: {           // サーバーID
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>          channels: { 
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            &quot;general&quot;: { allow: true } 
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>          }
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        }
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>      }
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    }
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>  }
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>}
+</code></pre></div>
+<h3 id="telegram3">Telegram：3分で完了する最速セットアップ<a class="headerlink" href="#telegram3" title="Permanent link">&para;</a></h3>
+<p>Telegramは最も簡単に設定できるプラットフォームだ。</p>
+<p><strong>Step 1: Bot作成</strong><br />
+@BotFather にメッセージ → <code>/newbot</code> → Bot名とユーザー名を設定</p>
+<p><strong>Step 2: トークン保存</strong><br />
+BotFatherから受け取ったトークンを保存</p>
+<p><strong>Step 3: 設定</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>{
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  channels: {
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    telegram: {
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>      enabled: true,
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>      botToken: &quot;123456789:ABCdef1234567890abcdef1234567890ABC&quot;,
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>      dmPolicy: &quot;pairing&quot;,
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>      groups: { 
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        &quot;*&quot;: { requireMention: true } 
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>      }
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    }
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>  }
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>}
+</code></pre></div></p>
+<p><strong>Step 4: 起動と承認</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>openclaw<span class="w"> </span>gateway
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># 別ターミナルで</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>openclaw<span class="w"> </span>pairing<span class="w"> </span>list<span class="w"> </span>telegram
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>openclaw<span class="w"> </span>pairing<span class="w"> </span>approve<span class="w"> </span>telegram<span class="w"> </span>&lt;CODE&gt;
+</code></pre></div></p>
+<h3 id="whatsappqr">WhatsApp：QRペアリング（専用番号推奨）<a class="headerlink" href="#whatsappqr" title="Permanent link">&para;</a></h3>
+<p>WhatsAppはQRコードでのペアリングが特徴的だ。個人番号でも動作するが、専用番号の使用を強く推奨する。</p>
+<p><strong>Step 1: 基本設定</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  channels: {
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    whatsapp: {
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>      enabled: true,
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>      dmPolicy: &quot;pairing&quot;,
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>      allowFrom: [&quot;+15551234567&quot;],          // あなたの番号
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>      groupPolicy: &quot;allowlist&quot;,
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>      groupAllowFrom: [&quot;+15551234567&quot;]      // グループ招待許可者
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    }
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  }
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>}
+</code></pre></div></p>
+<p><strong>Step 2: ペアリング開始</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>openclaw<span class="w"> </span>channels<span class="w"> </span>login<span class="w"> </span>--channel<span class="w"> </span>whatsapp
+</code></pre></div></p>
+<p><strong>Step 3: Gateway起動</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>openclaw<span class="w"> </span>gateway
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># QRコードが表示される → WhatsAppアプリでスキャン</span>
+</code></pre></div></p>
+<p><strong>Step 4: 承認</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>openclaw<span class="w"> </span>pairing<span class="w"> </span>list<span class="w"> </span>whatsapp
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>openclaw<span class="w"> </span>pairing<span class="w"> </span>approve<span class="w"> </span>whatsapp<span class="w"> </span>&lt;8文字コード&gt;
+</code></pre></div></p>
+<p><strong>注意事項：</strong>
+- ペアリング後の状態管理ファイルを大切に保管
+- 接続が不安定になったら <code>openclaw channels login --channel whatsapp</code> で再ペアリング</p>
+<h3 id="slacksocket-mode">Slack：Socket Mode設定<a class="headerlink" href="#slacksocket-mode" title="Permanent link">&para;</a></h3>
+<p>SlackはワークスペースアプリとしてSocket Modeで動作する。</p>
+<p><strong>Step 1: アプリ作成</strong><br />
+<a href="https://api.slack.com/apps">Slack API</a> → Create New App → From scratch</p>
+<p><strong>Step 2: Socket Mode有効化</strong><br />
+Settings → Socket Mode → Enable Socket Mode</p>
+<p><strong>Step 3: App Token作成</strong><br />
+OAuth &amp; Permissions → App-Level Tokens → Generate Token<br />
+Scope: <code>connections:write</code></p>
+<p><strong>Step 4: Bot Token取得</strong><br />
+Install App → Copy Bot User OAuth Token</p>
+<p><strong>Step 5: イベント購読</strong><br />
+Event Subscriptions → Subscribe to bot events:<br />
+<code>app_mention</code>, <code>message.channels</code>, <code>message.groups</code>, <code>message.im</code>, <code>reaction_added</code>, <code>reaction_removed</code></p>
+<p><strong>Step 6: 設定</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>{
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  channels: {
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    slack: {
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>      enabled: true,
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>      mode: &quot;socket&quot;,
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>      appToken: &quot;xapp-1-A1234...&quot;,
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>      botToken: &quot;xoxb-1234...&quot;,
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>      dmPolicy: &quot;pairing&quot;
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    }
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  }
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>}
+</code></pre></div></p>
+<p>これらの設定が完了すれば、各プラットフォームからOpenClawエージェントとの対話が可能になる。</p>
+<!-- IMAGE: pairing-sequence.png - DMペアリングとNodeペアリングの認証シーケンス図 -->
+
+<hr />
+<h2 id="77">7.7 ペアリングとセキュリティ — 「誰を信頼するか」の制御<a class="headerlink" href="#77" title="Permanent link">&para;</a></h2>
+<p>OpenClawのチャンネル接続には、2つの「鍵管理」システムがある。誰がメッセージを送信できるかの<strong>DMペアリング（未知の送信者承認）</strong>と、どのデバイスがGatewayにアクセスできるかの<strong>Nodeデバイスペアリング（モバイルアプリ接続）</strong>だ。</p>
+<h3 id="dm8">DMペアリング：8文字コードの承認フロー<a class="headerlink" href="#dm8" title="Permanent link">&para;</a></h3>
+<p>DMペアリングは、未知の送信者への明示的な承認ステップだ。家の玄関の「インターホン」のようなもので、知らない人が来たら一度確認を求める。</p>
+<p><strong>ペアリングコードの仕様：</strong>
+- <strong>8文字大文字</strong>（例：<code>ABCD1234</code>）
+- <strong>曖昧文字除外</strong>（<code>0O1I</code> は含まれない）
+- <strong>1時間で期限切れ</strong>
+- <strong>チャンネルごと最大3件の保留リクエスト</strong></p>
+<p><strong>承認手順：</strong>
+1. 未知のユーザーがDMを送信
+2. OpenClawが8文字コードを生成・送信
+3. 管理者が <code>openclaw pairing list &lt;channel&gt;</code> で確認
+4. <code>openclaw pairing approve &lt;channel&gt; &lt;CODE&gt;</code> で承認
+5. 以降、そのユーザーからのDMが処理される</p>
+<p><strong>対応チャンネル（20+）：</strong>
+BlueBubbles、Discord、Feishu、Google Chat、iMessage、IRC、LINE、Matrix、Mattermost、Microsoft Teams、Nextcloud Talk、Nostr、Signal、Slack、Synology Chat、Telegram、Twitch、WhatsApp、Zalo、Zalo Personal</p>
+<p><strong>状態保存場所：</strong>
+- 保留リクエスト：<code>~/.openclaw/credentials/&lt;channel&gt;-pairing.json</code>
+- 承認済み許可リスト：<code>~/.openclaw/credentials/&lt;channel&gt;-allowFrom.json</code></p>
+<h3 id="node">Nodeデバイスペアリング：モバイルアプリとの接続<a class="headerlink" href="#node" title="Permanent link">&para;</a></h3>
+<p>Nodeデバイスペアリングは、iOS/Androidアプリ、macOSアプリ、ヘッドレスNodeがGatewayネットワークに参加する際の承認だ。</p>
+<p><strong>Telegram経由ペアリング（iOS推奨方法）：</strong></p>
+<ol>
+<li>
+<p><strong>セットアップコード生成</strong><br />
+   Telegramで <code>/pair</code> コマンドを実行</p>
+</li>
+<li>
+<p><strong>セットアップコード配布</strong><br />
+   base64エンコードされたJSONをコピー</p>
+</li>
+<li>
+<p><strong>デバイス側設定</strong><br />
+   モバイルアプリで 設定 → Gateway → ペースト＆接続</p>
+</li>
+<li>
+<p><strong>承認処理</strong><br />
+   Telegramで <code>/pair pending</code> → 承認</p>
+</li>
+</ol>
+<p><strong>セットアップコード内容：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>{
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  &quot;url&quot;: &quot;wss://your-gateway.example.com/ws&quot;,
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  &quot;bootstrapToken&quot;: &quot;single-use-bootstrap-token&quot;
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>}
+</code></pre></div></p>
+<p>このコードは一回限りのブートストラップトークンを含み、デバイス側で永続的な認証情報に変換される。</p>
+<p><strong>手動承認方法：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>openclaw<span class="w"> </span>devices<span class="w"> </span>list<span class="w">                    </span><span class="c1"># 保留中のリクエスト確認</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>openclaw<span class="w"> </span>devices<span class="w"> </span>approve<span class="w"> </span>&lt;requestId&gt;<span class="w">     </span><span class="c1"># 個別承認</span>
+</code></pre></div></p>
+<p><strong>状態保存：</strong>
+- <code>~/.openclaw/devices/pending.json</code>
+- <code>~/.openclaw/devices/paired.json</code></p>
+<h3 id="_12">セキュリティ設計の考慮点<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>OpenClawのペアリングシステムは、<strong>利便性とセキュリティのバランス</strong>を重視している：</p>
+<p><strong>利便性の配慮：</strong>
+- 一度承認すれば、以降の手動承認は不要
+- セットアップコードによるワンタイムブートストラップ
+- 複数デバイス・複数チャンネルでの同一認証情報共有</p>
+<p><strong>セキュリティの配慮：</strong>
+- 8文字コード・1時間TTLによる第三者の介入防止
+- チャンネルごと・デバイスタイプごとの独立した許可リスト
+- ブートストラップトークンの単発使用による不正アクセス防止</p>
+<p>この設計により、「最初の設定だけ少し手間だが、その後は快適」という体験を実現している。</p>
+<!-- IMAGE: broadcast-flow.png - 1つのメッセージが複数エージェントに分配されて並行処理される図 -->
+
+<hr />
+<h2 id="78">7.8 ブロードキャスト — マルチエージェント応答の実験機能<a class="headerlink" href="#78" title="Permanent link">&para;</a></h2>
+<p>⚠️ <strong>この節は実験的機能の解説です。基本的なチャンネル接続には不要なので、スキップしてOK</strong></p>
+<p>ブロードキャストは、OpenClaw 2026.1.9で追加された<strong>実験的機能</strong>だ。1つのメッセージに対して複数のエージェントが並行・順次で応答する仕組みで、現在はWhatsAppのみ対応している。</p>
+<h3 id="_13">「専門家チーム」としてのブロードキャスト<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>ブロードキャストを「専門家チーム」だと考えるとイメージしやすい。あなたがコードレビューを依頼すると、formatter（整形専門）、security-scanner（セキュリティ専門）、test-coverage（テスト専門）、docs-checker（ドキュメント専門）の4人のエージェントがそれぞれの視点でレビューを返す。</p>
+<h3 id="_14">設定例<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>{
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>  channels: {
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    whatsapp: {
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>      broadcast: {
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        strategy: &quot;parallel&quot;,  // または &quot;sequential&quot;
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>        &quot;120363403215116621@g.us&quot;: [&quot;formatter&quot;, &quot;security&quot;, &quot;test&quot;, &quot;docs&quot;],
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>        &quot;+15555550123&quot;: [&quot;support&quot;, &quot;logger&quot;]
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>      }
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    }
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>  }
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>}
+</code></pre></div>
+<p>この設定では：
+- 特定のグループでは4つのエージェントが並行処理
+- 特定のDMでは2つのエージェントが並行処理
+- <code>strategy</code> で並行（<code>parallel</code>）か順次（<code>sequential</code>）かを選択</p>
+<h3 id="_15">動作メカニズム<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p><strong>評価タイミング：</strong> ブロードキャストはチャンネル許可リスト・グループアクティベーション後に評価される。つまり、通常の「参加してよいか？」判定をパスしてから、「複数エージェントで処理するか？」が判定される。</p>
+<p><strong>セッション分離：</strong> 各エージェントは独立したセッションキー・履歴・ワークスペース・ツールアクセス権を持つ。エージェント間での情報漏洩は発生しない。</p>
+<p><strong>失敗処理：</strong> 個別エージェントの失敗は他のエージェントに影響しない。1つのエージェントがエラーを起こしても、他の3つは正常に応答する。</p>
+<h3 id="_16">実用的な用途例<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><strong>1. コードレビューチーム：</strong>
+- <code>formatter</code> — コードスタイルと整形をチェック
+- <code>security-scanner</code> — セキュリティ脆弱性を検出
+- <code>test-coverage</code> — テストケースの妥当性を評価
+- <code>docs-checker</code> — ドキュメントの整合性を確認</p>
+<p><strong>2. 多言語サポート：</strong>
+- <code>agent-en</code> — 英語で回答
+- <code>agent-de</code> — ドイツ語で回答
+- <code>agent-es</code> — スペイン語で回答</p>
+<p><strong>3. 品質管理：</strong>
+- <code>support-agent</code> — 顧客からの質問に回答
+- <code>qa-agent</code> — 回答の品質をチェック・改善提案</p>
+<p><strong>4. タスク自動化：</strong>
+- <code>task-tracker</code> — タスクをプロジェクト管理ツールに登録
+- <code>time-logger</code> — 作業時間を記録
+- <code>report-generator</code> — 週次レポートを生成</p>
+<h3 id="_17">大規模展開時の注意点<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>ブロードキャストは実験的機能のため、以下の制限に注意：</p>
+<p><strong>パフォーマンス：</strong>
+- 推奨最大5-10エージェント（WhatsAppのAPI率制限に注意）
+- 軽量モデル（opus→sonnet）の使用推奨
+- 処理時間の増加（parallelでも個別のAPI呼び出しが必要）</p>
+<p><strong>コスト：</strong>
+- エージェント数に比例してAPI使用量が増加
+- ログファイルサイズの増大</p>
+<p><strong>デバッグ：</strong>
+- 複数エージェントの独立ログによるトラブルシューティング複雑化</p>
+<blockquote>
+<p>💡 <strong>コラム：ブロードキャストの未来像</strong><br />
+現在はWhatsAppのみだが、将来的にはDiscord、Telegram、Slack等への展開が予定されている。AIエージェントチームの可能性は無限大だ。「企画チーム」「開発チーム」「QAチーム」「営業チーム」のような役割分担で、複雑なプロジェクトを複数の視点から同時に進行させることも可能になるかもしれない。まさに「AIが組織を形成する」未来の先駆けとも言える機能だ。</p>
+</blockquote>
+<!-- IMAGE: plugin-structure.png - チャンネルプラグインのファイル構造とコンポーネント関係図 -->
+
+<hr />
+<h2 id="79">7.9 チャンネルプラグイン開発 — 独自プラットフォーム対応<a class="headerlink" href="#79" title="Permanent link">&para;</a></h2>
+<p><strong>この節はTypeScript開発者向けです。プラグイン開発に興味がない方はスキップしてOK</strong></p>
+<p>OpenClawの真の価値は、既存のプラットフォーム対応だけでなく、独自のチャンネルプラグインを開発できることにある。社内SNS、自作チャットアプリ、IoTデバイス——任意の通信プラットフォームをOpenClawに接続できる。</p>
+<h3 id="sdk">SDKベースの開発フロー<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h3>
+<p>チャンネルプラグイン開発は、OpenClaw SDKの <code>createChatChannelPlugin</code> を使用する：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createChatChannelPlugin</span><span class="p">,</span><span class="w"> </span><span class="nx">createChannelPluginBase</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@openclaw/sdk&#39;</span><span class="p">;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">acmeChatPlugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createChatChannelPlugin</span><span class="o">&lt;</span><span class="nx">ResolvedAccount</span><span class="o">&gt;</span><span class="p">({</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nx">base</span><span class="o">:</span><span class="w"> </span><span class="kt">createChannelPluginBase</span><span class="p">({</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;acme-chat&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nx">setup</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">resolveAccount</span><span class="p">,</span><span class="w"> </span><span class="nx">inspectAccount</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="p">}),</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span><span class="c1">// セキュリティ（DM制御）</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">  </span><span class="nx">security</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">    </span><span class="nx">dm</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">      </span><span class="nx">channelKey</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;acme-chat&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">      </span><span class="nx">resolvePolicy</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">account</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">account</span><span class="p">.</span><span class="nx">dmPolicy</span><span class="p">,</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">      </span><span class="nx">resolveAllowFrom</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">account</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">account</span><span class="p">.</span><span class="nx">allowFrom</span><span class="p">,</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="w">      </span><span class="nx">defaultPolicy</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;allowlist&quot;</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="w">  </span><span class="c1">// ペアリング（テキスト通知）</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="w">  </span><span class="nx">pairing</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="w">      </span><span class="nx">idLabel</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Acme Chat username&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="w">      </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Send this code to verify your identity:&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="w">      </span><span class="nx">notify</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">acmeChatApi</span><span class="p">.</span><span class="nx">sendDm</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="sb">`Pairing code: </span><span class="si">${</span><span class="nx">code</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="w">  </span><span class="c1">// アウトバウンド（送信）</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="w">  </span><span class="nx">outbound</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="w">    </span><span class="nx">attachedResults</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="w">      </span><span class="nx">sendText</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">acmeChatApi</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">messageId</span><span class="o">:</span><span class="w"> </span><span class="kt">result.id</span><span class="w"> </span><span class="p">};</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a><span class="p">});</span>
+</code></pre></div>
+<h3 id="4">4つの主要コンポーネント<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p><strong>1. Base（基本構造）：</strong>
+- プラグインID・設定解決・アカウント管理
+- 最小限の実装でプラグインとして認識される</p>
+<p><strong>2. Security（DM制御）：</strong>
+- <code>dmPolicy</code>（disabled/allowlist/pairing）の処理
+- 許可リスト管理・未承認者の拒否</p>
+<p><strong>3. Pairing（承認フロー）：</strong>
+- 8文字コードの生成・配信・期限管理
+- プラットフォーム固有の通知方法</p>
+<p><strong>4. Outbound（送信処理）：</strong>
+- OpenClaw内部形式→プラットフォームAPI形式の変換
+- テキスト・画像・リアクション等の送信</p>
+<h3 id="_18">ファイル構造の標準<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>extensions/acme-chat/
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>├── package.json              # openclaw.channel メタデータ
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>├── openclaw.plugin.json      # 設定スキーマ付きマニフェスト  
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>├── index.ts                  # defineChannelPluginEntry
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>├── setup-entry.ts            # defineSetupPluginEntry（軽量ロード）
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>└── src/
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>    ├── channel.ts            # createChatChannelPlugin実装
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    ├── channel.test.ts       # ユニットテスト
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    └── client.ts             # プラットフォーム API クライアント
+</code></pre></div>
+<p><strong>package.json の重要な設定：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>{
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>  &quot;name&quot;: &quot;@yourcompany/acme-chat&quot;,
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>  &quot;openclaw&quot;: {
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    &quot;channel&quot;: true,
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    &quot;entryPoint&quot;: &quot;./index.js&quot;
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>  }
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>}
+</code></pre></div></p>
+<h3 id="_19">インバウンドメッセージハンドリング<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>プラットフォーム→OpenClawの方向（インバウンド）は、通常WebhookやWebSocketで実装される：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">// Webhook例（Express.js）</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/acme-webhook&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="c1">// プラットフォーム形式 → OpenClaw内部形式に変換</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">openclawMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="nx">messageId</span><span class="o">:</span><span class="w"> </span><span class="kt">message.id</span><span class="p">,</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">message.content</span><span class="p">,</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">    </span><span class="nx">from</span><span class="o">:</span><span class="w"> </span><span class="kt">message.sender_id</span><span class="p">,</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">created_at</span><span class="p">),</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">    </span><span class="nx">attachments</span><span class="o">:</span><span class="w"> </span><span class="kt">message.media</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">  </span><span class="p">};</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="w">  </span><span class="c1">// OpenClaw Gatewayに配信</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="w">  </span><span class="nx">gateway</span><span class="p">.</span><span class="nx">dispatchInboundMessage</span><span class="p">(</span><span class="s1">&#39;acme-chat&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">openclawMessage</span><span class="p">);</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;OK&#39;</span><span class="p">);</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="p">});</span>
+</code></pre></div>
+<p>このパターンにより、任意のプラットフォームを「OpenClawの言語」に翻訳して接続できる。</p>
+<h3 id="_20">配布とインストール<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>完成したプラグインは、npmパッケージとして配布される：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 開発者側</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>npm<span class="w"> </span>publish<span class="w"> </span>@yourcompany/acme-chat
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># ユーザー側</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>openclaw<span class="w"> </span>plugins<span class="w"> </span>install<span class="w"> </span>@yourcompany/acme-chat
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>openclaw<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>channels.acme-chat.enabled<span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
+<p>これにより、OpenClawの公式チャンネルと同等の機能を持つ独自プラットフォーム対応を作成・配布できる。</p>
+<!-- IMAGE: troubleshooting-tree.png - 症状から解決策までの診断フローチャート -->
+
+<hr />
+<h2 id="710">7.10 トラブルシューティング — 接続できない時の診断と解決<a class="headerlink" href="#710" title="Permanent link">&para;</a></h2>
+<p>チャンネル接続でトラブルが発生した時は、段階的な診断が重要だ。「症状→原因→解決策」の順で問題を絞り込んでいこう。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 最初ハマったのは、Discordで「Message Content Intent」を有効にし忘れたことだった。Botはオンラインになるのに、メッセージに全く反応しない。ログを見ると「content: null」ばかり。Discord Developer Portalでポチッと有効化するだけで解決したけど、3時間悩んだ苦い思い出。トラブル時は、まず権限周りを疑うのが鉄則。</p>
+</blockquote>
+<h3 id="_21">診断コマンド階層<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>トラブルシューティングは、以下の順序で診断コマンドを実行する：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># レベル1：基本ステータス</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>openclaw<span class="w"> </span>status
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># レベル2：Gateway詳細</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>openclaw<span class="w"> </span>gateway<span class="w"> </span>status
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="c1"># レベル3：リアルタイムログ</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>openclaw<span class="w"> </span>logs<span class="w"> </span>--follow
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="c1"># レベル4：総合チェック</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>openclaw<span class="w"> </span>doctor
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="c1"># レベル5：チャンネル接続確認</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>openclaw<span class="w"> </span>channels<span class="w"> </span>status<span class="w"> </span>--probe
+</code></pre></div>
+<p><strong>正常ベースライン：</strong>
+- <code>Runtime: running</code>
+- <code>RPC probe: ok</code>
+- Channel probe で <code>connected/ready</code></p>
+<p>これらのコマンドを上から順に実行し、どの段階で異常が検出されるかで問題を絞り込む。</p>
+<h3 id="_22">チャンネル別の典型的障害パターン<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p><strong>WhatsApp：</strong>
+- <strong>症状：</strong> 接続済みだがDM返信なし
+- <strong>原因：</strong> DMペアリング未完了
+- <strong>解決策：</strong> <code>openclaw pairing list whatsapp</code> → ペアリング承認</p>
+<ul>
+<li><strong>症状：</strong> グループメッセージ無視</li>
+<li><strong>原因：</strong> <code>requireMention</code>設定・メンションパターン</li>
+<li>
+<p><strong>解決策：</strong> メンション方法確認、グループ設定見直し</p>
+</li>
+<li>
+<p><strong>症状：</strong> ランダム切断/再ログインループ</p>
+</li>
+<li><strong>原因：</strong> 認証情報の破損・ネットワーク不安定</li>
+<li><strong>解決策：</strong> <code>openclaw channels login --channel whatsapp</code> で再ペアリング</li>
+</ul>
+<p><strong>Telegram：</strong>
+- <strong>症状：</strong> <code>/start</code>後に応答なし
+- <strong>原因：</strong> DMペアリング未承認
+- <strong>解決策：</strong> <code>openclaw pairing approve telegram &lt;CODE&gt;</code></p>
+<ul>
+<li><strong>症状：</strong> Bot オンラインだがグループ沈黙</li>
+<li><strong>原因：</strong> プライバシーモード有効・メンション不足</li>
+<li>
+<p><strong>解決策：</strong> プライバシーモード無効化 または Bot メンション</p>
+</li>
+<li>
+<p><strong>症状：</strong> 送信失敗ネットワークエラー</p>
+</li>
+<li><strong>原因：</strong> <code>api.telegram.org</code> へのアクセス問題</li>
+<li><strong>解決策：</strong> DNS/IPv6/プロキシ ルーティング確認</li>
+</ul>
+<p><strong>Discord：</strong>
+- <strong>症状：</strong> Bot オンラインだが Guild 返信なし
+- <strong>原因：</strong> Message Content Intent未有効化・チャンネル許可不足
+- <strong>解決策：</strong> 特権インテント確認、Guild/チャンネル許可設定</p>
+<ul>
+<li><strong>症状：</strong> グループメッセージ無視</li>
+<li><strong>原因：</strong> メンションゲーティング</li>
+<li>
+<p><strong>解決策：</strong> <code>requireMention: false</code> 設定またはBot メンション</p>
+</li>
+<li>
+<p><strong>症状：</strong> DM 応答欠如</p>
+</li>
+<li><strong>原因：</strong> DMペアリング未承認</li>
+<li><strong>解決策：</strong> <code>openclaw pairing approve discord &lt;CODE&gt;</code></li>
+</ul>
+<p><strong>Slack：</strong>
+- <strong>症状：</strong> Socket mode接続済みだが応答なし
+- <strong>原因：</strong> App Token・Bot Token・スコープ不足
+- <strong>解決策：</strong> トークン再確認、必要スコープ追加</p>
+<ul>
+<li><strong>症状：</strong> チャンネルメッセージ無視</li>
+<li><strong>原因：</strong> <code>groupPolicy</code>設定・チャンネル許可リスト</li>
+<li><strong>解決策：</strong> グループ設定とチャンネル許可リスト見直し</li>
+</ul>
+<p><strong>iMessage/BlueBubbles：</strong>
+- <strong>症状：</strong> インバウンドイベントなし
+- <strong>原因：</strong> webhook到達可能性・アプリ権限不足
+- <strong>解決策：</strong> macOS Messages自動化のTCC権限再付与</p>
+<p><strong>Signal：</strong>
+- <strong>症状：</strong> daemon到達可能だがBot沈黙
+- <strong>原因：</strong> <code>signal-cli</code> daemon設定・アカウント受信モード
+- <strong>解決策：</strong> daemon URL/アカウント設定確認</p>
+<p><strong>Matrix：</strong>
+- <strong>症状：</strong> 暗号化ルーム失敗
+- <strong>原因：</strong> 暗号化サポート・ルーム同期問題
+- <strong>解決策：</strong> 暗号化有効化、ルーム再参加/同期</p>
+<h3 id="_23">ログ解析のポイント<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p><code>openclaw logs --follow</code> の出力で注目すべきポイント：</p>
+<p><strong>正常パターン：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>[CHANNEL:discord] Message received from 990665...
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>[SESSION] Resolved key: agent:main:discord:direct:990665...
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>[AGENT] Processing message for agent &#39;main&#39;
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>[TOOLS] Executing message tool
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>[CHANNEL:discord] Message sent successfully
+</code></pre></div></p>
+<p><strong>異常パターンの典型例：</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>[CHANNEL:discord] Message ignored: policy violation
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>→ DMペアリング・許可リスト確認
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>[CHANNEL:discord] Send failed: Missing permissions
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>→ Bot権限・チャンネル権限確認
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>[SESSION] No agent found for peer
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>→ エージェント設定・ルーティング確認
+</code></pre></div></p>
+<h3 id="_24">プリベンティブ（予防的）チェック<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>定期的に実行すべき健全性チェック：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 月次チェック</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>openclaw<span class="w"> </span>doctor
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># 週次チェック  </span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>openclaw<span class="w"> </span>channels<span class="w"> </span>status<span class="w"> </span>--probe
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1"># トークン期限チェック（該当チャンネル）</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>openclaw<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>channels.discord.token
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>openclaw<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>channels.slack.botToken
+</code></pre></div>
+<p>これらの診断手順により、チャンネル接続の問題を迅速に特定・解決できる。</p>
+<hr />
+<h2 id="7_1">第7章のまとめ — 外部世界との接続を完全制覇<a class="headerlink" href="#7_1" title="Permanent link">&para;</a></h2>
+<p>この章では、OpenClawのチャンネル接続システムの全貌を解き明かした。「翻訳者」としてのチャンネル、20+のプラットフォーム対応、プラグインアーキテクチャ、セッションキー連携、グループチャット制御、ペアリングセキュリティ……すべてが論理的で拡張可能な設計に基づいている。</p>
+<h3 id="_25">重要なポイントの振り返り<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p><strong>1. チャンネル = 翻訳者</strong><br />
+プラットフォーム固有のAPIとOpenClaw内部形式を相互変換する役割。これにより、Discord、WhatsApp、Telegramの違いをエージェント側が意識する必要がない。</p>
+<p><strong>2. セッション管理との連携</strong><br />
+第5章で学んだセッションキーの <code>:discord:</code> や <code>:telegram:</code> 部分が、チャンネルルーティングの核心。メッセージの送信元→送信先が決定論的に決まる。</p>
+<p><strong>3. プラガブル設計</strong><br />
+コア機能（message ツール・ルーティング）とプラグイン機能（認証・送信）を分離することで、新しいプラットフォームへの対応が容易。</p>
+<p><strong>4. セキュリティ重視</strong><br />
+DMペアリング・グループポリシー・デバイスペアリングにより、「誰を信頼するか」を精密に制御。</p>
+<p><strong>5. 実験的機能への対応</strong><br />
+ブロードキャスト機能のように、将来性のある機能も構造的に収容できる設計。</p>
+<h3 id="_26">次の章への橋渡し<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>チャンネル接続により、OpenClawは外部世界と「会話」できるようになった。しかし、会話だけでは物足りない。ファイルを読み、コマンドを実行し、APIを呼び、画像を生成する——エージェントの「手足」となるのがツールとスキルだ。</p>
+<p>第8章では、OpenClawのツールシステムの全貌を解き明かす。240+の標準ツール、モデル側からのfunction calling、スキルによる専門タスクの自動化。Discord経由で <code>/weather</code> と入力すれば天気予報が、<code>/image</code> と入力すれば画像生成が始まる裏側を、次章で丸裸にしよう。</p>
+<p>チャンネルで「声」を得たOpenClaw。次は「手足」を得る番だ。</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        この記事は役に立ちましたか？
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="役に立った" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="改善の余地あり" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              フィードバックありがとうございます！
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              フィードバックありがとうございます。改善します！
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 こうじ株式会社
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/clawd" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

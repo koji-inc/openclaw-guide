@@ -1,0 +1,3987 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="エンジニア向け OpenClaw 体系解説テキスト">
+      
+      
+      
+        <link rel="canonical" href="https://koji-inc.github.io/openclaw-guide/ch08-tools-and-skills/">
+      
+      
+        <link rel="prev" href="../ch07-channel-connection/">
+      
+      
+        <link rel="next" href="../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第8章 ツールとスキル - OpenClaw完全攻略ガイド</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans JP";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-PEJWVD6EE4"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-PEJWVD6EE4",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-PEJWVD6EE4",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#8" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="OpenClaw完全攻略ガイド" class="md-header__button md-logo" aria-label="OpenClaw完全攻略ガイド" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenClaw完全攻略ガイド
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第8章 ツールとスキル
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="ダークモードに切り替え"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="ダークモードに切り替え" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="ライトモードに切り替え"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="ライトモードに切り替え" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/koji-inc/openclaw-guide" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    koji-inc/openclaw-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch01-what-is-openclaw/" class="md-tabs__link">
+          
+  
+  
+  カリキュラム
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  このガイドについて
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenClaw完全攻略ガイド" class="md-nav__button md-logo" aria-label="OpenClaw完全攻略ガイド" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenClaw完全攻略ガイド
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/koji-inc/openclaw-guide" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    koji-inc/openclaw-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    カリキュラム
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    カリキュラム
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01-what-is-openclaw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 OpenClawとは何か
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 アーキテクチャ全体像
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03-installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 インストール＆初期設定
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04-agent-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 エージェントの仕組み
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05-session-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 セッション管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06-context-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 コンテキストエンジン
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07-channel-connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 チャンネル接続
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 ツールとスキル
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 ツールとスキル
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        この章が解き明かす「行動力の正体」
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 ツールとスキル — エージェントの「手足」と「技術書」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 ツールとスキル — エージェントの「手足」と「技術書」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ツール＝エージェントが実行できるアクション
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキル＝エージェントに手順知識を与えるプロンプト注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        連携パターン：ユーザーの質問から結果返却まで
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-26-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 コアツール全26種 — 11カテゴリの武器庫
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 コアツール全26種 — 11カテゴリの武器庫">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全26ツール一覧
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代表的なツールをピックアップ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ツール名エイリアスとツールグループ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 プロファイル — 場面に応じたツールセットの切り替え
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3 プロファイル — 場面に応じたツールセットの切り替え">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4つのプロファイル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各プロファイルの詳細
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プロファイルの使い分け
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 ツールポリシー — 「何を許可するか」の精密制御
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.4 ツールポリシー — 「何を許可するか」の精密制御">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allow-deny" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        allow / deny グロブパターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ポリシー評価ロジック
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6つのポリシーレイヤー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        オーナー限定ツール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gateway-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        危険なツール（Gateway HTTP拒否リスト）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alsoallow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        alsoAllowによる追加許可
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        実践的な設定例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 スキルとは何か — 汎用エージェントを専門家に変える仕組み
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.5 スキルとは何か — 汎用エージェントを専門家に変える仕組み">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキル＝「特定分野の専門マニュアル」を丸ごとパッケージにしたもの
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキルが提供する4つのもの
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skillmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SKILL.mdのフロントマター
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressive-disclosure-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progressive Disclosure — 3段階ロード
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#86-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 組み込みスキル約50種 — カテゴリ別ガイドツアー
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.6 組み込みスキル約50種 — カテゴリ別ガイドツアー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📱 メッセージング・コミュニケーション（10個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iot4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏠 スマートホーム・IoT（4個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎵 メディア・音声（8個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 ノート・タスク管理（5個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 開発・CI（5個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📄 ドキュメント処理（2個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 検索・情報（3個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📷 カメラ・画面（3個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔐 セキュリティ・認証（1個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 外部サービス（5個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openclaw4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ OpenClaw管理（4個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        その他（1個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中身を覗いてみよう
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 スキルの発見と読み込み — 7つのソースと優先順位
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.7 スキルの発見と読み込み — 7つのソースと優先順位">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7つの読み込みソース（優先順位順）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同名スキルの上書き
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        読み込みフロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上限設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プロンプトへの注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#88-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.8 スキルの発動メカニズム — descriptionが鍵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.8 スキルの発動メカニズム — descriptionが鍵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        発動の流れ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スラッシュコマンドによる明示的呼び出し
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        発動制御のフロントマター
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.9 カスタムスキルの作成 — 自分だけの専門家を作る
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.9 カスタムスキルの作成 — 自分だけの専門家を作る">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキルの配置場所
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最小構成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップバイステップ：翻訳スキルを作ってみる
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        命名規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skillmd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SKILL.mdのベストプラクティス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        高度なフロントマター
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skill-creator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        skill-creatorスキルによる作成支援
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clawhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ClawHubによる配布
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#810-configyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.10 スキル関連の設定 — config.yamlでの細かな制御
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.10 スキル関連の設定 — config.yamlでの細かな制御">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全体設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        主要な設定項目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        環境変数とAPIキーの注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        環境変数によるバンドルスキルディレクトリの上書き
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#811" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.11 プラグインによるツール拡張 — スキルとの違い
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.11 プラグインによるツール拡張 — スキルとの違い">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグイン＝実際にツールを追加できる仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体例で理解する
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ツール登録の全体フロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグインツールのポリシー制御
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグインスキル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#812" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.12 まとめと次章予告
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.12 まとめと次章予告">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要ポイントの振り返り
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次章予告
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    このガイドについて
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        この章が解き明かす「行動力の正体」
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 ツールとスキル — エージェントの「手足」と「技術書」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 ツールとスキル — エージェントの「手足」と「技術書」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ツール＝エージェントが実行できるアクション
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキル＝エージェントに手順知識を与えるプロンプト注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        連携パターン：ユーザーの質問から結果返却まで
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-26-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 コアツール全26種 — 11カテゴリの武器庫
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 コアツール全26種 — 11カテゴリの武器庫">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全26ツール一覧
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代表的なツールをピックアップ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ツール名エイリアスとツールグループ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 プロファイル — 場面に応じたツールセットの切り替え
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3 プロファイル — 場面に応じたツールセットの切り替え">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4つのプロファイル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各プロファイルの詳細
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プロファイルの使い分け
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 ツールポリシー — 「何を許可するか」の精密制御
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.4 ツールポリシー — 「何を許可するか」の精密制御">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allow-deny" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        allow / deny グロブパターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ポリシー評価ロジック
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6つのポリシーレイヤー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        オーナー限定ツール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gateway-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        危険なツール（Gateway HTTP拒否リスト）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alsoallow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        alsoAllowによる追加許可
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        実践的な設定例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 スキルとは何か — 汎用エージェントを専門家に変える仕組み
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.5 スキルとは何か — 汎用エージェントを専門家に変える仕組み">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキル＝「特定分野の専門マニュアル」を丸ごとパッケージにしたもの
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキルが提供する4つのもの
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skillmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SKILL.mdのフロントマター
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressive-disclosure-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progressive Disclosure — 3段階ロード
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#86-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 組み込みスキル約50種 — カテゴリ別ガイドツアー
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.6 組み込みスキル約50種 — カテゴリ別ガイドツアー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📱 メッセージング・コミュニケーション（10個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iot4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏠 スマートホーム・IoT（4個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎵 メディア・音声（8個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 ノート・タスク管理（5個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 開発・CI（5個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📄 ドキュメント処理（2個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 検索・情報（3個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📷 カメラ・画面（3個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔐 セキュリティ・認証（1個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 外部サービス（5個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openclaw4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ OpenClaw管理（4個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        その他（1個）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中身を覗いてみよう
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 スキルの発見と読み込み — 7つのソースと優先順位
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.7 スキルの発見と読み込み — 7つのソースと優先順位">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7つの読み込みソース（優先順位順）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同名スキルの上書き
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        読み込みフロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上限設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プロンプトへの注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#88-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.8 スキルの発動メカニズム — descriptionが鍵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.8 スキルの発動メカニズム — descriptionが鍵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        発動の流れ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スラッシュコマンドによる明示的呼び出し
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        発動制御のフロントマター
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.9 カスタムスキルの作成 — 自分だけの専門家を作る
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.9 カスタムスキルの作成 — 自分だけの専門家を作る">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スキルの配置場所
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最小構成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップバイステップ：翻訳スキルを作ってみる
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        命名規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skillmd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SKILL.mdのベストプラクティス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        高度なフロントマター
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skill-creator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        skill-creatorスキルによる作成支援
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clawhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ClawHubによる配布
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#810-configyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.10 スキル関連の設定 — config.yamlでの細かな制御
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.10 スキル関連の設定 — config.yamlでの細かな制御">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全体設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        主要な設定項目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        環境変数とAPIキーの注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        環境変数によるバンドルスキルディレクトリの上書き
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#811" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.11 プラグインによるツール拡張 — スキルとの違い
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.11 プラグインによるツール拡張 — スキルとの違い">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグイン＝実際にツールを追加できる仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体例で理解する
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ツール登録の全体フロー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグインツールのポリシー制御
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラグインスキル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#812" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.12 まとめと次章予告
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.12 まとめと次章予告">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要ポイントの振り返り
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次章予告
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="8">第8章：ツールとスキル<a class="headerlink" href="#8" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><em>「ドラえもん、なんか出してよ！」——のび太の無茶振りに、ドラえもんは四次元ポケットから「道具」を取り出す。しかし、ドラえもんの真の強みは道具そのものではない。<strong>どの道具を、いつ、どう使うかを知っている</strong>ことだ。OpenClawも同じである。26個のコアツールという「道具」と、約50個の組み込みスキルという「使い方の知識」。この2つが揃って初めて、ただの会話AIが「行動するエージェント」に変わるのだ。</em></p>
+</blockquote>
+<hr />
+<p>前章でチャンネルという「声」を手に入れたOpenClaw。Discord、Telegram、WhatsAppから話しかけられるようになった。だが、会話だけでは物足りない。ファイルを読み書きし、シェルコマンドを実行し、Webを検索し、画像を生成する——エージェントが実世界で「行動」するための仕組みが、この章のテーマだ。</p>
+<h2 id="_1">この章が解き明かす「行動力の正体」<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>ツールとスキル。この2つの言葉は似ているようで、まったく異なる概念である。混同したままだと、OpenClawの設計思想が見えてこない。</p>
+<p>この章を読み終える頃には、以下のことが明確になるだろう：</p>
+<ul>
+<li><strong>ツール</strong>（26個のコアツール）の全体像と11カテゴリの分類体系</li>
+<li><strong>スキル</strong>（約50個の組み込みスキル）の仕組みと発動メカニズム</li>
+<li>ツールとスキルの根本的な違い——<strong>アクション vs 知識注入</strong></li>
+<li><strong>ツールポリシー</strong>による6層のセキュリティ制御</li>
+<li><strong>カスタムスキル</strong>の作り方——SKILL.md一つで専門家を生み出す方法</li>
+<li><strong>プラグイン</strong>によるツール拡張と、スキルとの本質的な違い</li>
+</ul>
+<p>核心を先に言おう。<strong>ツールは「筋肉」、スキルは「技術書」だ。</strong> 筋肉だけでは何もできないし、技術書だけでは動けない。両方揃って初めてエージェントは専門家になる。</p>
+<!-- IMAGE: ch08-tools-vs-skills.png - ツール（アクション/関数呼び出し）とスキル（知識注入/プロンプト）の違いを対比した概念図 -->
+
+<hr />
+<h2 id="81">8.1 ツールとスキル — エージェントの「手足」と「技術書」<a class="headerlink" href="#81" title="Permanent link">&para;</a></h2>
+<p>まずは全体像を掴もう。</p>
+<h3 id="_2">ツール＝エージェントが実行できるアクション<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>ツールとは、エージェントが呼び出せる<strong>関数</strong>のことだ。JSONSchema（パラメータの型や必須/任意をJSON形式で定義する仕組み）で定義されたパラメータを受け取り、処理を実行し、結果を返す。ファイルの読み書き、シェルコマンドの実行、Web検索——これらはすべてツールとして実装されている。</p>
+<p>たとえば <code>exec</code> ツールは「シェルコマンドを実行する」というアクション。<code>read</code> ツールは「ファイルの中身を読む」というアクション。ツールは「何ができるか」の一覧であり、エージェントの<strong>筋肉</strong>にあたる。</p>
+<h3 id="_3">スキル＝エージェントに手順知識を与えるプロンプト注入<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>一方、スキルはアクションではない。スキルとは、エージェントのシステムプロンプトに<strong>手順知識を注入する</strong>仕組みだ。「天気予報を取得するには、<code>exec</code> ツールで <code>curl wttr.in</code> を実行せよ」——こうした専門的な手順書がスキルの正体である。</p>
+<p>スキル自体は何も「実行」しない。エージェントに「やり方」を教え、エージェントが既存のツールを使って実行する。スキルは<strong>技術書</strong>なのだ。</p>
+<h3 id="_4">連携パターン：ユーザーの質問から結果返却まで<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>ツールとスキルがどう連携するか、具体的な流れを見てみよう：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[ユーザー] 「今日の天気は？」
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      ↓
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[スキルのdescriptionでマッチ] → weatherスキルが該当
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      ↓
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>[エージェントがSKILL.mdを読む] → wttr.inの叩き方を学ぶ
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      ↓
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>[SKILL.mdの手順に従い、execツールを呼び出す]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      ↓
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>[exec実行: curl wttr.in/Tokyo] → 天気情報を取得
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      ↓
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>[ユーザーに結果を返す] 「東京は晴れ、気温22℃です」
+</code></pre></div>
+<p>ここが重要なポイントだ。<code>exec</code> ツール（筋肉）は誰でも持っている。しかし、<code>weather</code> スキル（技術書）を読んで初めて「天気予報の取り方」がわかるのである。ツール単体では「何でもできるが何もわからない」状態。スキルが加わって初めて「専門家」になる。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 最初は「ツールもスキルも同じじゃね？」って思ってたんだけど、実際に自分でスキルを作ってみて違いがハッキリわかった。execツールだけだと「何でもできるけど何もわからない」状態。そこにSKILL.mdを1枚置くだけで、急に専門家になる。この分離が美しいんだよな。</p>
+</blockquote>
+<hr />
+<h2 id="82-26-11">8.2 コアツール全26種 — 11カテゴリの武器庫<a class="headerlink" href="#82-26-11" title="Permanent link">&para;</a></h2>
+<p>OpenClawは <code>CORE_TOOL_DEFINITIONS</code> で定義された<strong>26個のコアツール</strong>を持つ。これらは11のセクション（カテゴリ）に分類されている。全体像を一気に見てみよう。</p>
+<!-- IMAGE: ch08-tool-catalog-map.png - 11カテゴリに分類された26個のコアツールの一覧マップ -->
+
+<h3 id="26">全26ツール一覧<a class="headerlink" href="#26" title="Permanent link">&para;</a></h3>
+<p>★ = 日常的に高頻度で使うツール</p>
+<table>
+<thead>
+<tr>
+<th>セクション</th>
+<th>ツールID</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Files</strong></td>
+<td><code>read</code> ★</td>
+<td>ファイルの内容を読む</td>
+</tr>
+<tr>
+<td></td>
+<td><code>write</code> ★</td>
+<td>ファイルを作成・上書き</td>
+</tr>
+<tr>
+<td></td>
+<td><code>edit</code></td>
+<td>ファイルを精密に編集</td>
+</tr>
+<tr>
+<td><strong>Runtime</strong></td>
+<td><code>exec</code> ★</td>
+<td>シェルコマンド実行</td>
+</tr>
+<tr>
+<td></td>
+<td><code>process</code></td>
+<td>バックグラウンドプロセス管理</td>
+</tr>
+<tr>
+<td><strong>Web</strong></td>
+<td><code>web_search</code> ★</td>
+<td>Web検索（Brave Search API）</td>
+</tr>
+<tr>
+<td></td>
+<td><code>web_fetch</code></td>
+<td>WebページのコンテンツをMarkdown抽出</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td><code>memory_search</code></td>
+<td>セマンティック検索</td>
+</tr>
+<tr>
+<td></td>
+<td><code>memory_get</code></td>
+<td>メモリファイル読み込み</td>
+</tr>
+<tr>
+<td><strong>Sessions</strong></td>
+<td><code>sessions_list</code></td>
+<td>セッション一覧</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sessions_history</code></td>
+<td>セッション履歴</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sessions_send</code></td>
+<td>セッションにメッセージ送信</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sessions_spawn</code></td>
+<td>サブエージェント生成</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sessions_yield</code></td>
+<td>サブエージェント結果待ち</td>
+</tr>
+<tr>
+<td></td>
+<td><code>subagents</code></td>
+<td>サブエージェント管理</td>
+</tr>
+<tr>
+<td></td>
+<td><code>session_status</code></td>
+<td>セッション状態確認</td>
+</tr>
+<tr>
+<td><strong>UI</strong></td>
+<td><code>browser</code></td>
+<td>Webブラウザ制御</td>
+</tr>
+<tr>
+<td></td>
+<td><code>canvas</code></td>
+<td>キャンバス制御</td>
+</tr>
+<tr>
+<td><strong>Messaging</strong></td>
+<td><code>message</code> ★</td>
+<td>メッセージ送信</td>
+</tr>
+<tr>
+<td><strong>Automation</strong></td>
+<td><code>cron</code></td>
+<td>タスクスケジュール</td>
+</tr>
+<tr>
+<td></td>
+<td><code>gateway</code></td>
+<td>Gateway制御</td>
+</tr>
+<tr>
+<td><strong>Nodes</strong></td>
+<td><code>nodes</code></td>
+<td>ノード＆デバイス管理</td>
+</tr>
+<tr>
+<td><strong>Agents</strong></td>
+<td><code>agents_list</code></td>
+<td>エージェント一覧</td>
+</tr>
+<tr>
+<td><strong>Media</strong></td>
+<td><code>image</code></td>
+<td>画像認識・理解</td>
+</tr>
+<tr>
+<td></td>
+<td><code>image_generate</code></td>
+<td>画像生成</td>
+</tr>
+<tr>
+<td></td>
+<td><code>tts</code></td>
+<td>テキスト読み上げ</td>
+</tr>
+</tbody>
+</table>
+<p>※ 上記に加え、<code>apply_patch</code>（OpenAI形式のパッチ適用）が存在するが、これは <code>exec</code> が許可されていれば自動的に利用可能になる特例ツールのため、独立カウントには含めていない。</p>
+<h3 id="_5">代表的なツールをピックアップ<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>Files（ファイル操作）— 3ツール ＋ apply_patch</strong></p>
+<p>開発作業の基本中の基本。<code>read</code> でファイルを読み、<code>write</code> で書き、<code>edit</code> で精密編集する。<code>apply_patch</code> はOpenAI形式のパッチ適用に対応しており、<code>exec</code> が許可されていれば自動的に利用可能になる特例がある。</p>
+<p><strong>Runtime（実行環境）— 2ツール</strong></p>
+<p><code>exec</code> はOpenClawの中でも最も強力なツールの一つ。任意のシェルコマンドを実行できる。<code>process</code> はバックグラウンドで実行中のプロセスを管理する。この2つがあるからこそ、エージェントは「会話するだけのAI」を超えた存在になれる。</p>
+<p><strong>Web（Web操作）— 2ツール</strong></p>
+<p><code>web_search</code> はBrave Search APIでWeb検索を実行し、<code>web_fetch</code> はURLからコンテンツをMarkdown形式で抽出する。情報収集の要だ。</p>
+<p><strong>Sessions（セッション管理）— 7ツール</strong></p>
+<p>第5章で学んだセッション管理の実行インターフェース。特に <code>sessions_spawn</code> と <code>sessions_yield</code> はサブエージェント生成に不可欠で、複雑なタスクを並行処理する鍵になる。<code>session_status</code> は唯一 <code>minimal</code> プロファイルでも使えるツールだ。</p>
+<p><strong>Messaging（メッセージング）— 1ツール</strong></p>
+<p>前章で登場した <code>message</code> ツール。Discord、Telegram、WhatsApp——どのプラットフォームにも、この1つのツールで送信できる。チャンネルの「翻訳者」がプラットフォームごとの差異を吸収してくれるのだ。</p>
+<p><strong>Media（メディア）— 3ツール</strong></p>
+<p><code>image</code> で画像を理解し、<code>image_generate</code> で画像を生成し、<code>tts</code> でテキストを音声に変換する。マルチモーダルなエージェント体験の入口である。</p>
+<h3 id="_6">ツール名エイリアスとツールグループ<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>OpenClawにはツール名の<strong>エイリアス</strong>がある。たとえば <code>bash</code> と入力しても <code>exec</code> として認識される。<code>apply-patch</code> は <code>apply_patch</code> のエイリアスだ。</p>
+<p>また、ポリシー設定で便利な<strong>ツールグループ</strong>が用意されている。代表的なグループを挙げる：</p>
+<ul>
+<li><code>group:fs</code> — ファイル操作ツール（read, write, edit, apply_patch）</li>
+<li><code>group:runtime</code> — 実行ツール（exec, process）</li>
+<li><code>group:web</code> — Web操作ツール（web_search, web_fetch）</li>
+<li><code>group:sessions</code> — セッション管理ツール</li>
+<li><code>group:messaging</code> — メッセージングツール</li>
+<li><code>group:media</code> — メディアツール</li>
+<li><code>group:plugins</code> — プラグイン提供ツール全体</li>
+<li><code>group:openclaw</code> — OpenClawコアツール群（<code>includeInOpenClawGroup: true</code> のツール）</li>
+</ul>
+<p>グループ名はツールポリシー（8.4節で詳述）で威力を発揮する。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 26個って聞くと多い気がするけど、実際によく使うのはread / write / exec / web_search / messageの5つくらい。残りは必要になった時に「あ、こんなのもあったな」って思い出す感じ。全部覚える必要はない。</p>
+</blockquote>
+<hr />
+<h2 id="83">8.3 プロファイル — 場面に応じたツールセットの切り替え<a class="headerlink" href="#83" title="Permanent link">&para;</a></h2>
+<p>26個のツールすべてを常に使えるようにするのは、セキュリティ上望ましくない。グループチャットで <code>exec</code> が使えてしまったら怖いだろう？そこで登場するのが<strong>プロファイル</strong>だ。</p>
+<h3 id="4">4つのプロファイル<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>OpenClawには4つのプロファイルが用意されている：</p>
+<table>
+<thead>
+<tr>
+<th>プロファイル</th>
+<th>利用可能ツール数</th>
+<th>主な用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>minimal</strong></td>
+<td>1個</td>
+<td>最小権限。<code>session_status</code> のみ</td>
+</tr>
+<tr>
+<td><strong>coding</strong></td>
+<td>20個</td>
+<td>開発作業。ファイル操作・実行・Web検索・サブエージェント等</td>
+</tr>
+<tr>
+<td><strong>messaging</strong></td>
+<td>5個</td>
+<td>メッセージ応答特化。セッション操作とmessageのみ</td>
+</tr>
+<tr>
+<td><strong>full</strong></td>
+<td>全ツール</td>
+<td>制限なし</td>
+</tr>
+</tbody>
+</table>
+<!-- IMAGE: ch08-profile-comparison.png - 4つのプロファイルで利用可能なツール数と代表ツールを比較した図 -->
+
+<h3 id="_7">各プロファイルの詳細<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>minimal — 1個</strong>
+- <code>session_status</code> のみ
+- 最も制限の厳しいプロファイル。「何もさせない」が基本方針</p>
+<p><strong>coding — 20個</strong>
+- <code>read</code>, <code>write</code>, <code>edit</code>, <code>apply_patch</code>（ファイル操作）
+- <code>exec</code>, <code>process</code>（実行環境）
+- <code>web_search</code>, <code>web_fetch</code>（Web操作）
+- <code>memory_search</code>, <code>memory_get</code>（メモリ）
+- <code>sessions_list</code>, <code>sessions_history</code>, <code>sessions_send</code>, <code>sessions_spawn</code>, <code>sessions_yield</code>, <code>subagents</code>, <code>session_status</code>（セッション管理）
+- <code>cron</code>（自動化）
+- <code>image</code>, <code>image_generate</code>（メディア）
+- 開発作業に必要な主要ツールが網羅されている</p>
+<p><strong>messaging — 5個</strong>
+- <code>sessions_list</code>, <code>sessions_history</code>, <code>sessions_send</code>, <code>session_status</code>（セッション操作）
+- <code>message</code>（メッセージ送信）
+- チャット応答に必要最小限のツールセット</p>
+<p><strong>full — 全ツール</strong>
+- <code>browser</code>, <code>canvas</code>, <code>gateway</code>, <code>nodes</code>, <code>agents_list</code>, <code>tts</code> など、他のプロファイルに含まれないツールもすべて利用可能</p>
+<h3 id="_8">プロファイルの使い分け<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>プロファイルはツールポリシーの「第一層」として機能する。たとえば：</p>
+<ul>
+<li><strong>DM（1対1チャット）</strong> → <code>coding</code> プロファイル：開発支援に必要なツールをフル活用</li>
+<li><strong>グループチャット</strong> → <code>messaging</code> プロファイル：メッセージ応答だけに制限</li>
+<li><strong>公開API経由</strong> → <code>minimal</code> プロファイル：最小権限で安全に</li>
+</ul>
+<p>場面に応じて武器を制限する発想は、セキュリティの基本原則「最小権限の原則（Principle of Least Privilege）」そのものである。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> グループチャットでexecツール使えちゃったら怖いでしょ？messagingプロファイルはそういう事故を防ぐためにある。場面に応じて武器を制限する発想、セキュリティ的に超大事。</p>
+</blockquote>
+<hr />
+<h2 id="84">8.4 ツールポリシー — 「何を許可するか」の精密制御<a class="headerlink" href="#84" title="Permanent link">&para;</a></h2>
+<p>プロファイルだけではまだ粒度が粗い。「codingプロファイルだけど <code>cron</code> は使わせたくない」「messagingプロファイルだけど <code>web_search</code> も使わせたい」——こうした細かな制御を実現するのが<strong>ツールポリシー</strong>だ。</p>
+<h3 id="allow-deny">allow / deny グロブパターン<a class="headerlink" href="#allow-deny" title="Permanent link">&para;</a></h3>
+<p>ツールポリシーは <code>allow</code>（許可）と <code>deny</code>（拒否）のグロブパターンリストで構成される：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">sandbox</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;read&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;write&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;exec&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;group:web&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">deny</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;gateway&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h3 id="_9">ポリシー評価ロジック<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>評価は以下の順序で行われる：</p>
+<ol>
+<li><code>deny</code> リストにマッチ → <strong>拒否</strong>（denyは最優先）</li>
+<li><code>allow</code> リストが空 → <strong>許可</strong>（明示的な制限なし＝全許可）</li>
+<li><code>allow</code> リストにマッチ → <strong>許可</strong></li>
+<li>特例：<code>apply_patch</code> は <code>exec</code> が許可されていれば自動的に許可</li>
+<li>それ以外 → <strong>拒否</strong></li>
+</ol>
+<p><strong>denyが最優先</strong>というのが重要なポイントだ。<code>allow: ["*"]</code> で全許可にしても、<code>deny: ["gateway"]</code> があればgatewayは使えない。</p>
+<h3 id="6">6つのポリシーレイヤー<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<p>ここからが核心。OpenClawでは、複数のポリシーが<strong>重畳的に</strong>適用される。すべてのレイヤーで許可されて初めて、そのツールが使える（AND評価）。</p>
+<p><strong>まずは2つだけ覚えればOK：</strong> 日常的に意識するのは「① プロファイルポリシー」と「② サンドボックスポリシー」の2つだけだ。残りの4レイヤーは上級者向けで、必要になった時に戻ってくればいい。</p>
+<table>
+<thead>
+<tr>
+<th>レイヤー</th>
+<th>説明</th>
+<th>設定箇所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. プロファイルポリシー</td>
+<td><code>coding</code> / <code>messaging</code> / <code>minimal</code> / <code>full</code> の基本セット</td>
+<td>プロファイル定義</td>
+</tr>
+<tr>
+<td>2. サンドボックスポリシー</td>
+<td>グローバルなallow / deny</td>
+<td><code>tools.sandbox.tools.allow</code> / <code>deny</code></td>
+</tr>
+<tr>
+<td>3. エージェント固有</td>
+<td>エージェントごとの制限</td>
+<td><code>agents.list[].tools.sandbox.tools</code></td>
+</tr>
+<tr>
+<td>4. グループポリシー</td>
+<td>チャンネル固有のツール制限</td>
+<td>チャンネル設定</td>
+</tr>
+<tr>
+<td>5. オーナー限定ポリシー</td>
+<td>非オーナーから特定ツールを隠す</td>
+<td>自動適用</td>
+</tr>
+<tr>
+<td>6. Gateway HTTP拒否リスト</td>
+<td>HTTP API経由の呼び出し制限</td>
+<td>自動適用</td>
+</tr>
+</tbody>
+</table>
+<!-- IMAGE: ch08-policy-layers.png - 6つのポリシーレイヤーが重畳的に評価されるフローチャート -->
+
+<h3 id="_10">オーナー限定ツール<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>一部のツールはデフォルトでオーナーのみ利用可能になっている：</p>
+<ul>
+<li><code>whatsapp_login</code> — WhatsAppログイン</li>
+<li><code>cron</code> — タスクスケジュール</li>
+<li><code>gateway</code> — Gateway制御</li>
+<li><code>nodes</code> — ノード＆デバイス管理</li>
+</ul>
+<p>非オーナーの送信者からは、これらのツールは完全に見えない状態になる。</p>
+<h3 id="gateway-http">危険なツール（Gateway HTTP拒否リスト）<a class="headerlink" href="#gateway-http" title="Permanent link">&para;</a></h3>
+<p>Gateway HTTP API経由でデフォルト拒否されるツールもある：</p>
+<ul>
+<li><code>sessions_spawn</code>, <code>sessions_send</code> — サブエージェント操作</li>
+<li><code>cron</code> — スケジュールタスク</li>
+<li><code>gateway</code> — Gateway制御</li>
+<li><code>whatsapp_login</code> — WhatsAppログイン</li>
+</ul>
+<p>これらはHTTP APIからの不正利用を防ぐための安全装置だ。</p>
+<h3 id="alsoallow">alsoAllowによる追加許可<a class="headerlink" href="#alsoallow" title="Permanent link">&para;</a></h3>
+<p>既存のポリシーに対して、追加で許可をマージする <code>alsoAllow</code> という仕組みもある：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">sandbox</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">alsoAllow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;cron&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;image_generate&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>これにより、基本ポリシーを変更せずに特定ツールだけ追加許可できる。なお、既存の <code>allow</code> リストが未設定（＝全許可状態）の場合、<code>alsoAllow</code> はその全許可に加えて指定ツールを明示的に許可リストへ追加する動作となる。</p>
+<h3 id="_11">実践的な設定例<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># サンドボックスツールポリシー</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">sandbox</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;read&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;write&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;exec&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;web_search&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">deny</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;gateway&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">alsoAllow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;cron&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># エージェント固有のポリシー</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nt">agents</span><span class="p">:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">list</span><span class="p">:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">research-agent</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nt">sandbox</span><span class="p">:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">          </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">            </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;group:fs&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;group:web&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">            </span><span class="nt">deny</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</code></pre></div>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 正直、ポリシーの重ね合わせは最初ややこしかった。でも「全部のレイヤーでOKじゃないと通らない」って覚えておけば大丈夫。サンドボックスでexec許可しても、プロファイルがmessagingならそもそも使えない。二重三重のチェック。</p>
+<p>💡 <strong>コラム：ツールグループで楽々ポリシー管理</strong></p>
+<p>ポリシー設定で個別ツール名を列挙するのは面倒だ。そこで活用したいのが<strong>ツールグループ</strong>。<code>group:fs</code>、<code>group:web</code> 等のグループ名をallow / denyに使えば、一発で複数ツールを制御できる。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">sandbox</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;group:fs&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;group:web&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>これだけで「ファイル操作とWeb検索だけ許可」が実現する。<code>group:plugins</code> を使えばプラグイン提供ツールもまとめて制御可能だ。ツールが増えても、グループ単位で管理していれば設定が肥大化しない。</p>
+</blockquote>
+<hr />
+<h2 id="85">8.5 スキルとは何か — 汎用エージェントを専門家に変える仕組み<a class="headerlink" href="#85" title="Permanent link">&para;</a></h2>
+<p>ここからはスキルの世界に入る。ツール（筋肉）の全体像を理解した今、スキル（技術書）の仕組みを深掘りしよう。</p>
+<h3 id="_12">スキル＝「特定分野の専門マニュアル」を丸ごとパッケージにしたもの<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>スキルを一言で言えば、「特定ドメインへのオンボーディングガイド」だ。汎用エージェントを、天気予報の専門家に、GitHub操作の専門家に、音声合成の専門家に変える仕組みである。技術的には、必要なファイルが1つのフォルダにまとまった<strong>モジュール化された自己完結型パッケージ</strong>として実装されている。</p>
+<h3 id="4_1">スキルが提供する4つのもの<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>専門ワークフロー</strong> — 特定ドメインの多段階手順（例：天気予報の取得手順）</li>
+<li><strong>ツール統合</strong> — 特定のファイル形式やAPIとの連携手順（例：Notion APIの叩き方）</li>
+<li><strong>ドメイン知識</strong> — 企業固有の知識、スキーマ、ビジネスロジック</li>
+<li><strong>バンドルリソース</strong> — スクリプト、リファレンスドキュメント、テンプレート等のアセット</li>
+</ol>
+<h3 id="_13">ディレクトリ構造<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>スキルのファイル構成はシンプルだ：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>skill-name/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── SKILL.md          (必須) スキル定義＋手順書
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>│   ├── YAMLフロントマター (必須: name, description)
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>│   └── Markdown本文      (手順・ガイダンス)
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>└── バンドルリソース    (任意)
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    ├── scripts/      実行可能コード（Python / Bash等）
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    ├── references/   必要に応じて読み込むドキュメント
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    └── assets/       出力に使用するファイル（テンプレート等）
+</code></pre></div>
+<p>最小構成は<strong>フォルダ + SKILL.md のみ</strong>。それだけでスキルとして機能する。</p>
+<!-- IMAGE: ch08-skill-structure.png - スキルのディレクトリ構造とSKILL.mdの構成要素を図解 -->
+
+<h3 id="skillmd">SKILL.mdのフロントマター<a class="headerlink" href="#skillmd" title="Permanent link">&para;</a></h3>
+<p>SKILL.mdの先頭にはYAMLフロントマターを記述する。最低限必要なのは <code>name</code> と <code>description</code> の2つだ。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nn">---</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">weather</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="no">Get current weather and forecasts via wttr.in or Open-Meteo.</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="no">Use when: user asks about weather, temperature, or forecasts for any location.</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="no">NOT for: historical weather data, severe weather alerts.</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="no">No API key needed.</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nn">---</span>
+</code></pre></div>
+<p>ここで<strong>descriptionが極めて重要</strong>だということを強調しておく。この説明文が、スキル発動の主要なトリガーメカニズムになるのだ（詳しくは8.8節で解説する）。</p>
+<h3 id="progressive-disclosure-3">Progressive Disclosure — 3段階ロード<a class="headerlink" href="#progressive-disclosure-3" title="Permanent link">&para;</a></h3>
+<p>スキルの設計で天才的なのが<strong>Progressive Disclosure（段階的開示）</strong>だ。約50個のスキルを一度にすべて読み込んだら、コンテキストウィンドウが溢れてしまう。そこでOpenClawは、スキルを3段階でロードする：</p>
+<table>
+<thead>
+<tr>
+<th>段階</th>
+<th>何がロードされるか</th>
+<th>タイミング</th>
+<th>サイズ目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. メタデータ</td>
+<td>name + description</td>
+<td>常にコンテキストに含まれる</td>
+<td>約100ワード</td>
+</tr>
+<tr>
+<td>2. SKILL.md本文</td>
+<td>Markdown手順書</td>
+<td>スキルがトリガーされた時</td>
+<td>5,000ワード未満推奨</td>
+</tr>
+<tr>
+<td>3. バンドルリソース</td>
+<td>scripts/, references/, assets/</td>
+<td>エージェントが必要に応じて読み込み</td>
+<td>サイズ制限なし</td>
+</tr>
+</tbody>
+</table>
+<p>人間が本を読むとき、まず目次（メタデータ）を見て、必要な章（SKILL.md本文）だけ読み、さらに詳しい情報が必要なら付録（バンドルリソース）を参照する——スキルの3段階ロードは、まさにこの自然な読書行動と同じ発想なのである。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> スキルの3段階ロードは天才的な設計だと思う。50個のスキルのSKILL.mdを全部読み込んだらコンテキスト溢れる。最初はdescriptionだけ見て、必要な時だけ中身を読む。人間の「目次だけ見て必要な章だけ読む」と同じ発想。</p>
+</blockquote>
+<hr />
+<h2 id="86-50">8.6 組み込みスキル約50種 — カテゴリ別ガイドツアー<a class="headerlink" href="#86-50" title="Permanent link">&para;</a></h2>
+<p>OpenClawにはバンドルスキルとして<strong>約50個の組み込みスキル</strong>が用意されている。これらは <code>/usr/lib/node_modules/openclaw/skills/</code> に格納されており、追加インストールなしで利用可能だ。10のカテゴリに分類して見ていこう。</p>
+<!-- IMAGE: ch08-builtin-skills-catalog.png - 10カテゴリに分類された組み込みスキルのカタログ風一覧図 -->
+
+<h3 id="10">📱 メッセージング・コミュニケーション（10個）<a class="headerlink" href="#10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>discord</code></td>
+<td>Discord操作（messageツール経由）</td>
+</tr>
+<tr>
+<td><code>slack</code></td>
+<td>Slack操作（message / slackツール経由）</td>
+</tr>
+<tr>
+<td><code>bluebubbles</code></td>
+<td>iMessage送受信（BlueBubbles経由）</td>
+</tr>
+<tr>
+<td><code>imsg</code></td>
+<td>iMessage / SMS CLI（Messages.app経由）</td>
+</tr>
+<tr>
+<td><code>wacli</code></td>
+<td>WhatsAppメッセージ送信・履歴検索</td>
+</tr>
+<tr>
+<td><code>himalaya</code></td>
+<td>IMAP / SMTPメール管理CLI</td>
+</tr>
+<tr>
+<td><code>gog</code></td>
+<td>Google Workspace CLI（Gmail, Calendar, Drive等）</td>
+</tr>
+<tr>
+<td><code>trello</code></td>
+<td>Trello REST API操作</td>
+</tr>
+<tr>
+<td><code>notion</code></td>
+<td>Notion API操作</td>
+</tr>
+<tr>
+<td><code>voice-call</code></td>
+<td>OpenClaw音声通話プラグイン</td>
+</tr>
+</tbody>
+</table>
+<h3 id="iot4">🏠 スマートホーム・IoT（4個）<a class="headerlink" href="#iot4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openhue</code></td>
+<td>Philips Hueライト・シーン制御</td>
+</tr>
+<tr>
+<td><code>eightctl</code></td>
+<td>Eight Sleepポッド制御</td>
+</tr>
+<tr>
+<td><code>sonoscli</code></td>
+<td>Sonosスピーカー制御</td>
+</tr>
+<tr>
+<td><code>blucli</code></td>
+<td>BluOS CLI</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8_1">🎵 メディア・音声（8個）<a class="headerlink" href="#8_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sag</code></td>
+<td>ElevenLabs TTS</td>
+</tr>
+<tr>
+<td><code>sherpa-onnx-tts</code></td>
+<td>ローカルTTS（オフライン）</td>
+</tr>
+<tr>
+<td><code>openai-whisper</code></td>
+<td>ローカル音声認識（Whisper CLI）</td>
+</tr>
+<tr>
+<td><code>openai-whisper-api</code></td>
+<td>OpenAI音声認識API</td>
+</tr>
+<tr>
+<td><code>spotify-player</code></td>
+<td>Spotify再生・検索</td>
+</tr>
+<tr>
+<td><code>songsee</code></td>
+<td>オーディオスペクトログラム生成</td>
+</tr>
+<tr>
+<td><code>video-frames</code></td>
+<td>動画からフレーム抽出</td>
+</tr>
+<tr>
+<td><code>gifgrep</code></td>
+<td>GIF検索・ダウンロード</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5">📝 ノート・タスク管理（5個）<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apple-notes</code></td>
+<td>Apple Notes管理（memo CLI）</td>
+</tr>
+<tr>
+<td><code>apple-reminders</code></td>
+<td>Apple Reminders管理</td>
+</tr>
+<tr>
+<td><code>bear-notes</code></td>
+<td>Bear Notes管理（grizzly CLI）</td>
+</tr>
+<tr>
+<td><code>things-mac</code></td>
+<td>Things 3タスク管理</td>
+</tr>
+<tr>
+<td><code>obsidian</code></td>
+<td>Obsidianボールト操作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ci5">🛠️ 開発・CI（5個）<a class="headerlink" href="#ci5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>github</code></td>
+<td>GitHub操作（gh CLI）</td>
+</tr>
+<tr>
+<td><code>gh-issues</code></td>
+<td>GitHubイシュー取得・PR自動化</td>
+</tr>
+<tr>
+<td><code>coding-agent</code></td>
+<td>コーディングタスクを外部エージェントに委任</td>
+</tr>
+<tr>
+<td><code>tmux</code></td>
+<td>tmuxセッション制御</td>
+</tr>
+<tr>
+<td><code>session-logs</code></td>
+<td>セッションログ分析</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2">📄 ドキュメント処理（2個）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nano-pdf</code></td>
+<td>PDF編集（自然言語指示）</td>
+</tr>
+<tr>
+<td><code>summarize</code></td>
+<td>URL・ポッドキャスト・ファイルの要約</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3">🔍 検索・情報（3個）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>weather</code></td>
+<td>天気予報（wttr.in / Open-Meteo）</td>
+</tr>
+<tr>
+<td><code>blogwatcher</code></td>
+<td>ブログ・RSS / Atomフィード監視</td>
+</tr>
+<tr>
+<td><code>goplaces</code></td>
+<td>Google Places API検索</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3_1">📷 カメラ・画面（3個）<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>camsnap</code></td>
+<td>RTSP / ONVIFカメラからフレーム / クリップ取得</td>
+</tr>
+<tr>
+<td><code>peekaboo</code></td>
+<td>macOS UI操作・キャプチャ</td>
+</tr>
+<tr>
+<td><code>canvas</code></td>
+<td>キャンバス制御</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1">🔐 セキュリティ・認証（1個）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1password</code></td>
+<td>1Password CLI操作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5_1">🌐 外部サービス（5個）<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>xurl</code></td>
+<td>X（Twitter）API操作</td>
+</tr>
+<tr>
+<td><code>ordercli</code></td>
+<td>Foodora注文履歴確認</td>
+</tr>
+<tr>
+<td><code>mcporter</code></td>
+<td>MCPサーバー / ツール呼び出し</td>
+</tr>
+<tr>
+<td><code>gemini</code></td>
+<td>Gemini CLI Q&amp;A</td>
+</tr>
+<tr>
+<td><code>oracle</code></td>
+<td>Oracle CLI操作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="openclaw4">⚙️ OpenClaw管理（4個）<a class="headerlink" href="#openclaw4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>skill-creator</code></td>
+<td>スキル作成・編集・監査</td>
+</tr>
+<tr>
+<td><code>clawhub</code></td>
+<td>ClawHub CLIでスキル検索・インストール・公開</td>
+</tr>
+<tr>
+<td><code>healthcheck</code></td>
+<td>ホストセキュリティ強化</td>
+</tr>
+<tr>
+<td><code>node-connect</code></td>
+<td>ノード接続診断</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1_1">その他（1個）<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スキル名</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model-usage</code></td>
+<td>モデル使用量・コスト確認</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">中身を覗いてみよう<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>「スキルって何が書いてあるの？」と思うだろう。<code>weather</code> スキルを例に中身を見てみよう。</p>
+<p>実は <code>weather</code> スキルの中身は「<code>exec</code> ツールで <code>curl wttr.in</code> を叩く手順が書いてあるだけ」なのだ。しかし、それが強力である。エージェントは天気APIの叩き方なんて知らないが、スキルを読めば一発でできる。これがスキルの本質——<strong>既存のツールに専門知識を与える</strong>ことなのである。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 約50個もあるのに、実際に名前と中身を見るまで知らないスキルだらけだった。「こんなのもあるの？」って発見が楽しい。自分に必要なやつだけ覚えておいて、あとは必要になった時に探せばいい。</p>
+</blockquote>
+<hr />
+<h2 id="87-7">8.7 スキルの発見と読み込み — 7つのソースと優先順位<a class="headerlink" href="#87-7" title="Permanent link">&para;</a></h2>
+<p>スキルは複数の場所から読み込まれる。そしてその優先順位を理解することが、カスタマイズの鍵になる。</p>
+<h3 id="7">7つの読み込みソース（優先順位順）<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<p>スキルは以下の場所から読み込まれる。<strong>後のソースが前のソースを上書きする</strong>（Map.set()方式）：</p>
+<table>
+<thead>
+<tr>
+<th>優先度</th>
+<th>ソース名</th>
+<th>パス</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>低</td>
+<td>extraDirs</td>
+<td><code>config.skills.load.extraDirs</code> で指定</td>
+<td>追加ディレクトリ</td>
+</tr>
+<tr>
+<td>↑</td>
+<td>プラグインスキル</td>
+<td>プラグインの <code>skills</code> フィールド</td>
+<td>プラグイン提供</td>
+</tr>
+<tr>
+<td>↑</td>
+<td>バンドルスキル</td>
+<td><code>/usr/lib/node_modules/openclaw/skills/</code></td>
+<td>OpenClaw同梱（約50個）</td>
+</tr>
+<tr>
+<td>↑</td>
+<td>マネージドスキル</td>
+<td><code>~/.openclaw/skills/</code></td>
+<td>OpenClaw管理</td>
+</tr>
+<tr>
+<td>↑</td>
+<td>パーソナルAgentsスキル</td>
+<td><code>~/.agents/skills/</code></td>
+<td>個人用</td>
+</tr>
+<tr>
+<td>↑</td>
+<td>プロジェクトAgentsスキル</td>
+<td><code>&lt;workspace&gt;/.agents/skills/</code></td>
+<td>プロジェクト用</td>
+</tr>
+<tr>
+<td>高</td>
+<td>ワークスペーススキル</td>
+<td><code>&lt;workspace&gt;/skills/</code></td>
+<td>最優先</td>
+</tr>
+</tbody>
+</table>
+<!-- IMAGE: ch08-skill-loading-pipeline.png - 7つのソースからスキルが読み込まれ、フィルタリング・プロンプト注入される流れ -->
+
+<h3 id="_15">同名スキルの上書き<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>最も重要なポイントは、<strong>ワークスペーススキルが最優先</strong>ということだ。バンドルの <code>weather</code> スキルが気に入らなければ、自分の <code>&lt;workspace&gt;/skills/weather/SKILL.md</code> に同名で配置すれば上書きできる。カスタマイズの自由度が高い設計である。</p>
+<h3 id="_16">読み込みフロー<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>スキルの読み込みは以下のステップで行われる：</p>
+<ol>
+<li>各ソースディレクトリの子ディレクトリをスキャン</li>
+<li>各子ディレクトリに <code>SKILL.md</code> があるか確認</li>
+<li><code>SKILL.md</code> のファイルサイズチェック（デフォルト最大256KB）</li>
+<li><code>loadSkillsFromDir()</code> でパース（<code>@mariozechner/pi-coding-agent</code> ライブラリ使用）</li>
+<li>パスがルート外に脱出していないかセキュリティチェック</li>
+<li>フロントマター解析 → メタデータ・呼び出しポリシー解決</li>
+<li><code>shouldIncludeSkill()</code> でフィルタリング（OS、依存バイナリ、環境変数、設定等）</li>
+</ol>
+<h3 id="_17">上限設定<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>スキルが無制限に増えるとパフォーマンスに影響するため、各種上限が設けられている：</p>
+<table>
+<thead>
+<tr>
+<th>設定</th>
+<th>デフォルト値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>maxCandidatesPerRoot</code></td>
+<td>300</td>
+</tr>
+<tr>
+<td><code>maxSkillsLoadedPerSource</code></td>
+<td>200</td>
+</tr>
+<tr>
+<td><code>maxSkillsInPrompt</code></td>
+<td>150</td>
+</tr>
+<tr>
+<td><code>maxSkillsPromptChars</code></td>
+<td>30,000文字</td>
+</tr>
+<tr>
+<td><code>maxSkillFileBytes</code></td>
+<td>256,000バイト（256KB）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">プロンプトへの注入<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>読み込まれたスキルは、システムプロンプトの <code>&lt;available_skills&gt;</code> XMLブロックとして注入される：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">&lt;available_skills&gt;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&lt;skill&gt;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&lt;name&gt;</span>weather<span class="nt">&lt;/name&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">&lt;description&gt;</span>Get<span class="w"> </span>current<span class="w"> </span>weather<span class="w"> </span>and<span class="w"> </span>forecasts<span class="w"> </span>via<span class="w"> </span>wttr.in...<span class="nt">&lt;/description&gt;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">&lt;location&gt;</span>/usr/lib/node_modules/openclaw/skills/weather/SKILL.md<span class="nt">&lt;/location&gt;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">&lt;/skill&gt;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nt">&lt;skill&gt;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nt">&lt;name&gt;</span>discord<span class="nt">&lt;/name&gt;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="nt">&lt;description&gt;</span>Discord<span class="w"> </span>ops<span class="w"> </span>via<span class="w"> </span>the<span class="w"> </span>message<span class="w"> </span>tool...<span class="nt">&lt;/description&gt;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nt">&lt;location&gt;</span>/usr/lib/node_modules/openclaw/skills/discord/SKILL.md<span class="nt">&lt;/location&gt;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="nt">&lt;/skill&gt;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">  </span>...
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="nt">&lt;/available_skills&gt;</span>
+</code></pre></div>
+<p>ホームディレクトリのパスは <code>~</code> に短縮され、1スキルあたり5-6トークンが節約される。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> ワークスペーススキルが最優先ってのがポイント。バンドルのweatherスキルが気に入らなければ、自分のworkspace/skills/weatherに同名で置けば上書きできる。カスタマイズの自由度が高い。</p>
+<p>💡 <strong>コラム：スキルの文字数予算とcompact format</strong></p>
+<p>スキルが増えすぎるとシステムプロンプトが肥大化する。OpenClawはこの問題に対して、30,000文字の予算を設けている。</p>
+<p>通常は各スキルの <code>name</code> + <code>description</code> + <code>location</code> がフル表示されるが、文字数予算を超過すると<strong>compact format</strong>に自動切り替えされる。compact formatでは <code>description</code> が省略され、<code>name</code> と <code>location</code> のみになる。</p>
+<p>それでも超過する場合は<strong>バイナリサーチ</strong>で収まる数まで削減される。「100個は多すぎる？50個なら？75個なら？」と半分ずつ試して、予算内に収まるスキル数を効率的に決定するのだ。</p>
+<p>開発者が気にしなくても、OpenClawが自動的にコンテキストを最適化してくれる——第6章のコンテキストエンジンと同じ思想がここにも生きている。</p>
+</blockquote>
+<hr />
+<h2 id="88-description">8.8 スキルの発動メカニズム — descriptionが鍵<a class="headerlink" href="#88-description" title="Permanent link">&para;</a></h2>
+<p>スキルがシステムプロンプトに注入されることはわかった。では、<strong>いつ、どのスキルが発動するのか？</strong> その鍵を握るのが <code>description</code> フィールドだ。</p>
+<h3 id="_19">発動の流れ<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ol>
+<li>ユーザーが質問する（「今日の天気は？」）</li>
+<li>エージェントは <code>&lt;available_skills&gt;</code> ブロック内のdescriptionを参照する</li>
+<li>質問にマッチするスキルを見つける（<code>weather</code> スキルの description に "weather, temperature, forecasts" とある）</li>
+<li>エージェントが <code>read</code> ツールで SKILL.md を読み込む</li>
+<li>SKILL.md の手順に従い、既存ツール（<code>exec</code> 等）を呼び出す</li>
+<li>結果をユーザーに返す</li>
+</ol>
+<!-- IMAGE: ch08-skill-trigger-flow.png - ユーザー質問からスキル発動、ツール実行、結果返却までのシーケンス図 -->
+
+<h3 id="_20">スラッシュコマンドによる明示的呼び出し<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>自動発動だけでなく、ユーザーが <code>/スキル名</code> のスラッシュコマンドで明示的にスキルを呼び出すこともできる。</p>
+<p>コマンド名のルール：
+- 英小文字・数字・アンダースコアのみ
+- 最大32文字
+- 重複する場合は <code>_2</code>, <code>_3</code> 等のサフィックスが自動追加</p>
+<h3 id="_21">発動制御のフロントマター<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>スキルの発動方法を細かく制御するフロントマターもある：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nn">---</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-skill</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;...&quot;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nt">user-invocable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">              </span><span class="c1"># /my-skill コマンドで呼べるか（デフォルト: true）</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nt">disable-model-invocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">   </span><span class="c1"># モデルの自動発動を禁止するか（デフォルト: false）</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">command-dispatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool</span><span class="w">            </span><span class="c1"># コマンド実行方式（toolでツール直接ディスパッチ）</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nt">command-tool</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exec</span><span class="w">                </span><span class="c1"># ディスパッチ先ツール名</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nt">allowed-tools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;message&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;exec&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># このスキルが使用するツールの宣言</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="nn">---</span>
+</code></pre></div>
+<ul>
+<li><code>user-invocable: false</code> にすると、スラッシュコマンドとしては使えなくなるが、モデルの自動発動は可能</li>
+<li><code>disable-model-invocation: true</code> にすると、モデルが勝手にスキルを発動しなくなり、ユーザーの明示的コマンドでのみ動作する</li>
+<li><code>command-dispatch: tool</code> を使えば、SKILL.mdを読まずにツールに直接ディスパッチできる</li>
+</ul>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> descriptionの書き方がスキルの命運を握ってる。曖昧に書くと発動しないし、広すぎると関係ないタスクでも発動しちゃう。「いつ使うか、何ができるか」を明確に書くのがコツ。weatherスキルの description に "NOT for: historical weather data" って除外条件まで書いてあるの、よくできてるなと思う。</p>
+</blockquote>
+<hr />
+<h2 id="89">8.9 カスタムスキルの作成 — 自分だけの専門家を作る<a class="headerlink" href="#89" title="Permanent link">&para;</a></h2>
+<p>ここまでで組み込みスキルの仕組みを理解した。次は<strong>自分だけのスキルを作ってみよう</strong>。驚くほど簡単だ。</p>
+<h3 id="_22">スキルの配置場所<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>カスタムスキルは以下のいずれかに配置する：</p>
+<table>
+<thead>
+<tr>
+<th>場所</th>
+<th>パス</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ワークスペース（最優先）</td>
+<td><code>&lt;workspace&gt;/skills/&lt;skill-name&gt;/</code></td>
+<td>プロジェクト固有</td>
+</tr>
+<tr>
+<td>パーソナル</td>
+<td><code>~/.agents/skills/&lt;skill-name&gt;/</code></td>
+<td>全プロジェクト共通</td>
+</tr>
+<tr>
+<td>プロジェクトAgents</td>
+<td><code>&lt;workspace&gt;/.agents/skills/&lt;skill-name&gt;/</code></td>
+<td>チーム共有</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_23">最小構成<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>スキル作成に必要な最小構成は、フォルダとSKILL.mdだけだ：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>my-skill/
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>└── SKILL.md
+</code></pre></div>
+<h3 id="_24">ステップバイステップ：翻訳スキルを作ってみる<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>実際にカスタムスキルを1つ作ってみよう。「英語テキストを日本語に翻訳するスキル」だ。</p>
+<p><strong>Step 1: フォルダ作成</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.openclaw/workspace/skills/translate-en-ja
+</code></pre></div>
+<p><strong>Step 2: SKILL.mdを書く</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nn">---</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">translate-en-ja</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="no">Translate English text to Japanese.</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="no">Use when: user provides English text and asks for Japanese translation,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="no">or when user says &quot;翻訳して&quot;, &quot;日本語にして&quot;, &quot;translate to Japanese&quot;.</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span><span class="no">NOT for: Japanese to English, or other language pairs.</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nn">---</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># English to Japanese Translation</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="c1">## Instructions</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="l l-Scalar l-Scalar-Plain">1. Read the provided English text carefully.</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="l l-Scalar l-Scalar-Plain">2. Translate it to natural Japanese, maintaining the original tone and nuance.</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="l l-Scalar l-Scalar-Plain">3. Use appropriate register (formal/casual) based on the source text.</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="l l-Scalar l-Scalar-Plain">4. For technical terms, provide the Japanese translation with the original English in parentheses on first occurrence.</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="l l-Scalar l-Scalar-Plain">## Output Format</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="l l-Scalar l-Scalar-Plain">- Present the translation directly without preamble.</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="l l-Scalar l-Scalar-Plain">- If the text is long, translate paragraph by paragraph.</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="l l-Scalar l-Scalar-Plain">- Preserve formatting (headings, lists, code blocks) from the original.</span>
+</code></pre></div>
+<p><strong>Step 3: テスト</strong></p>
+<p>OpenClawに「Translate this to Japanese: "The quick brown fox jumps over the lazy dog."」と話しかけてみる。descriptionの "translate to Japanese" にマッチし、SKILL.mdの手順に従って翻訳が実行されるはずだ。</p>
+<!-- IMAGE: ch08-custom-skill-creation.png - カスタムスキル作成のステップバイステップ図（フォルダ作成→SKILL.md記述→テスト→配布） -->
+
+<h3 id="_25">命名規則<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>小文字・数字・ハイフンのみ</strong></li>
+<li><strong>64文字以内</strong></li>
+<li>フォルダ名 = スキル名</li>
+<li>短い動詞から始まるフレーズ推奨</li>
+<li>ツール名でネームスペース化も可能（例：<code>gh-address-comments</code>）</li>
+</ul>
+<h3 id="skillmd_1">SKILL.mdのベストプラクティス<a class="headerlink" href="#skillmd_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>500行以下</strong>を推奨（コンテキストウィンドウ節約）</li>
+<li>命令形・不定詞形で記述する</li>
+<li>エージェントが既に知っている情報は含めない</li>
+<li>詳細情報は <code>references/</code> サブディレクトリに分離する</li>
+<li>トリガー条件は <strong>description</strong> に書く（本文ではなく）</li>
+</ul>
+<h3 id="_26">高度なフロントマター<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>APIキーが必要なスキルや、特定のバイナリに依存するスキルには、より高度なフロントマターを使う：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nn">---</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-api-skill</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;...&quot;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">openclaw</span><span class="p">:</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">emoji</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;🔧&quot;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="nt">primaryEnv</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MY_API_KEY</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="nt">requires</span><span class="p">:</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="nt">bins</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;curl&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;MY_API_KEY&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;linux&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;darwin&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="nt">install</span><span class="p">:</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">brew</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">        </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">brew</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="nt">formula</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-tool</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="nt">bins</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;my-tool&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">        </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Install</span><span class="nv"> </span><span class="s">my-tool</span><span class="nv"> </span><span class="s">(brew)&quot;</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">        </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">        </span><span class="nt">package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-tool</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">        </span><span class="nt">bins</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;my-tool&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">        </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Install</span><span class="nv"> </span><span class="s">my-tool</span><span class="nv"> </span><span class="s">(npm)&quot;</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="nn">---</span>
+</code></pre></div>
+<p><code>requires</code> で依存条件を宣言しておけば、条件を満たさない環境ではスキルが自動的にフィルタリングされる。たとえば <code>os: ["darwin"]</code> と書けばmacOSでのみ有効になる。</p>
+<h3 id="skill-creator">skill-creatorスキルによる作成支援<a class="headerlink" href="#skill-creator" title="Permanent link">&para;</a></h3>
+<p>スキル作成をさらに楽にするために、<code>skill-creator</code> という組み込みスキルがある。<code>scripts/init_skill.py</code> でスキルの雛形を自動生成できる：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 初期化</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>scripts/init_skill.py<span class="w"> </span>my-skill<span class="w"> </span>--path<span class="w"> </span>skills/public<span class="w"> </span>--resources<span class="w"> </span>scripts,references
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># パッケージング（.skillファイル生成、バリデーション付き）</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>scripts/package_skill.py<span class="w"> </span>path/to/skill-folder
+</code></pre></div>
+<h3 id="clawhub">ClawHubによる配布<a class="headerlink" href="#clawhub" title="Permanent link">&para;</a></h3>
+<p>作成したスキルは <code>clawhub</code> CLIで検索・インストール・公開できる。コミュニティとスキルを共有するエコシステムが整備されているのだ。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 実際にtranslate-articleとresearch-delegateっていう自作スキルを使ってる。最初は「スキル作るとか難しそう」と思ったけど、SKILL.mdにMarkdownで手順書くだけ。プログラミング不要。10分で作れる。</p>
+</blockquote>
+<hr />
+<h2 id="810-configyaml">8.10 スキル関連の設定 — config.yamlでの細かな制御<a class="headerlink" href="#810-configyaml" title="Permanent link">&para;</a></h2>
+<p>カスタムスキルの作り方がわかったところで、<code>config.yaml</code> でのスキル関連設定を整理しよう。</p>
+<h3 id="_27">全体設定<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">skills</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="c1"># バンドルスキルの許可リスト（未指定=全許可）</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">allowBundled</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;weather&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;discord&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;github&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="c1"># 個別スキル設定</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nt">weather</span><span class="p">:</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">        </span><span class="nt">WEATHER_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your-api-key&quot;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="nt">discord</span><span class="p">:</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># 無効化</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">  </span><span class="c1"># 読み込み設定</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">  </span><span class="nt">load</span><span class="p">:</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">    </span><span class="nt">extraDirs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/path/to/custom/skills&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">  </span><span class="c1"># スキル数制限</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">    </span><span class="nt">maxCandidatesPerRoot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">    </span><span class="nt">maxSkillsLoadedPerSource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">    </span><span class="nt">maxSkillsInPrompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">    </span><span class="nt">maxSkillsPromptChars</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30000</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">    </span><span class="nt">maxSkillFileBytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256000</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="w">  </span><span class="c1"># インストール設定</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="w">  </span><span class="nt">install</span><span class="p">:</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="w">    </span><span class="nt">preferBrew</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="w">    </span><span class="nt">nodeManager</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;npm&quot;</span><span class="w">  </span><span class="c1"># npm, pnpm, yarn, bun</span>
+</code></pre></div>
+<h3 id="_28">主要な設定項目<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p><strong><code>skills.allowBundled</code></strong> — バンドルスキルの許可リスト。指定すると、リストに含まれるスキルのみが有効になる。未指定なら全バンドルスキルが有効。</p>
+<p><strong><code>skills.entries</code></strong> — 個別スキルの有効/無効、環境変数、APIキーを設定する。</p>
+<p><strong><code>skills.load.extraDirs</code></strong> — 追加のスキル読み込みディレクトリを指定する。</p>
+<p><strong><code>skills.limits</code></strong> — 各種上限値を調整する。通常はデフォルトで十分だが、スキルが大量にある場合に調整が必要。</p>
+<h3 id="api">環境変数とAPIキーの注入<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
+<p>APIキーが必要なスキル（ElevenLabs TTS等）では、<code>entries</code> の <code>apiKey</code> フィールドを使う：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">skills</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">sag</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">      </span><span class="nt">apiKey</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your-elevenlabs-api-key&quot;</span>
+</code></pre></div>
+<p><code>apiKey</code> は、スキルの <code>primaryEnv</code> で指定された環境変数名に自動的にマッピングされる。たとえば <code>sag</code> スキルの <code>primaryEnv</code> が <code>ELEVENLABS_API_KEY</code> なら、上の設定で <code>ELEVENLABS_API_KEY=your-elevenlabs-api-key</code> がプロセス環境変数として注入される。</p>
+<p>また、<code>env</code> フィールドで任意の環境変数を直接注入することもできる：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">skills</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">my-skill</span><span class="p">:</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">        </span><span class="nt">CUSTOM_API_URL</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://api.example.com&quot;</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="nt">CUSTOM_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;xxx&quot;</span>
+</code></pre></div>
+<p><strong>セキュリティ上の注意：</strong> スキル環境変数はACPハーネス起動時にストリップされる。これにより、サブプロセスへのAPIキー漏洩が防止される。</p>
+<h3 id="_29">環境変数によるバンドルスキルディレクトリの上書き<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<p><code>OPENCLAW_BUNDLED_SKILLS_DIR</code> 環境変数で、バンドルスキルの参照先ディレクトリを上書きすることもできる。開発やテスト時に便利だ。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> APIキーが必要なスキル（ElevenLabs TTSとか）は、config.yamlのentries.スキル名.apiKeyに設定するだけ。primaryEnvで環境変数名に自動マッピングされるから、SKILL.md側でos.getenv()とかしなくていい。楽。</p>
+</blockquote>
+<hr />
+<h2 id="811">8.11 プラグインによるツール拡張 — スキルとの違い<a class="headerlink" href="#811" title="Permanent link">&para;</a></h2>
+<p>最後に、スキルとよく混同される<strong>プラグイン</strong>との違いを明確にしておこう。</p>
+<h3 id="_30">プラグイン＝実際にツールを追加できる仕組み<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<p>スキルは「既存のツールの使い方を教える」ものだった。一方、プラグインは <code>api.registerTool()</code> を通じて<strong>実際に新しいツールを追加できる</strong>。これが根本的な違いだ。</p>
+<table>
+<thead>
+<tr>
+<th>比較軸</th>
+<th>スキル</th>
+<th>プラグイン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本質</td>
+<td>プロンプト注入（知識）</td>
+<td>ツール定義の追加（機能）</td>
+</tr>
+<tr>
+<td>ツール追加</td>
+<td>できない</td>
+<td>できる（<code>api.registerTool()</code>）</td>
+</tr>
+<tr>
+<td>実装方法</td>
+<td>Markdownで手順を書く</td>
+<td>TypeScript / JavaScript でコードを書く</td>
+</tr>
+<tr>
+<td>既存ツールとの関係</td>
+<td>使い方を教える</td>
+<td>新しいツールを生み出す</td>
+</tr>
+<tr>
+<td>例</td>
+<td>weatherスキル → execで天気APIを叩く手順</td>
+<td>Firecrawlプラグイン → firecrawlツールを新規追加</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_31">具体例で理解する<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<p><strong>スキルの場合（weather）：</strong>
+1. weatherスキルのSKILL.mdに「<code>exec</code> ツールで <code>curl wttr.in</code> を叩け」と書いてある
+2. エージェントは既存の <code>exec</code> ツールを使って天気情報を取得する
+3. 新しいツールは追加されていない</p>
+<p><strong>プラグインの場合（Firecrawl）：</strong>
+1. Firecrawlプラグインが <code>api.registerTool()</code> で <code>firecrawl</code> ツールを登録する
+2. エージェントは新しい <code>firecrawl</code> ツールを直接呼び出せるようになる
+3. 26個のコアツールに加えて、新しいツールが追加されている</p>
+<h3 id="_32">ツール登録の全体フロー<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<p>ツールがどのように登録されるか、全体の流れを見てみよう：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>1. CORE_TOOL_DEFINITIONS（26個のコアツール定義）
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>      ↓
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>2. createOpenClawTools()（ランタイム用ツールオブジェクト生成）
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>      ↓
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>3. プラグイン api.registerTool()（追加ツール登録）
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>      ↓
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>4. applyOwnerOnlyToolPolicy()（オーナー限定ツールのフィルタリング）
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>      ↓
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>5. ツールポリシーパイプライン（6レイヤーの最終判定）
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>      ↓
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>6. エージェントが利用可能なツール一覧が決定
+</code></pre></div>
+<!-- IMAGE: ch08-tool-registration-flow.png - ツール登録の全体フロー図（コア定義→ランタイム生成→プラグイン追加→ポリシー適用） -->
+
+<h3 id="_33">プラグインツールのポリシー制御<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<p>プラグインが追加したツールも、通常のツールポリシーで制御できる：</p>
+<ul>
+<li><code>group:plugins</code> — プラグイン提供ツールをまとめて制御</li>
+<li><code>group:&lt;pluginId&gt;</code> — 特定プラグインのツールだけを制御</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">sandbox</span><span class="p">:</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">      </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;group:openclaw&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;group:plugins&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># コアツール＋プラグインツール全許可</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">      </span><span class="nt">deny</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;group:firecrawl&quot;</span><span class="p p-Indicator">]</span><span class="w">                   </span><span class="c1"># Firecrawlだけ拒否</span>
+</code></pre></div>
+<h3 id="_34">プラグインスキル<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<p>面白いことに、プラグインはツールだけでなく<strong>独自のスキルも提供できる</strong>。プラグインの <code>skills</code> フィールドでスキルディレクトリを指定すると、そのスキルもスキル読み込みパイプラインに組み込まれる。第7章で学んだチャンネルプラグインが独自のスキルを提供するケースもこのパターンだ。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> スキルとプラグインの違いは最初混乱した。スキルは「使い方マニュアル」で、プラグインは「新しい道具そのもの」。weatherスキルはexecで外部CLIを叩く手順を教えるだけだけど、Firecrawlプラグインは全く新しいfirecrawlツールを追加する。この区別がわかると、OpenClawの拡張モデルがスッキリ見える。</p>
+</blockquote>
+<hr />
+<h2 id="812">8.12 まとめと次章予告<a class="headerlink" href="#812" title="Permanent link">&para;</a></h2>
+<h3 id="_35">重要ポイントの振り返り<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<p>この章では、OpenClawの「行動力」の全貌を解き明かした。5つの重要ポイントを振り返ろう。</p>
+<p><strong>1. ツール＝アクション（26個コア）、スキル＝知識注入（約50個組み込み）</strong></p>
+<p>ツールはエージェントが実行できる関数（筋肉）。スキルはエージェントに手順知識を与えるプロンプト注入（技術書）。この根本的な違いを理解することが、OpenClawの設計思想を読み解く鍵だ。</p>
+<p><strong>2. プロファイルとポリシーの多層セキュリティ</strong></p>
+<p>4つのプロファイル（minimal / coding / messaging / full）と6つのポリシーレイヤーが重畳的に評価される。すべてのレイヤーで許可されて初めてツールが使える。最小権限の原則が徹底されている。</p>
+<p><strong>3. スキルの3段階ロード（Progressive Disclosure）</strong></p>
+<p>メタデータ→SKILL.md本文→バンドルリソースの3段階で段階的にロードされる。コンテキストウィンドウを効率的に使う賢い設計だ。</p>
+<p><strong>4. カスタムスキルはSKILL.md一つで作成可能</strong></p>
+<p>フォルダを作り、SKILL.mdにMarkdownで手順を書くだけ。プログラミング不要。10分で自分だけの専門家エージェントを作れる。</p>
+<p><strong>5. プラグインは新ツールを追加、スキルは既存ツールの使い方を教える</strong></p>
+<p>スキルはプロンプト注入のみでツール自体は追加しない。プラグインは <code>api.registerTool()</code> で実際にツールを追加する。この区別がOpenClawの拡張モデルの核心だ。</p>
+<h3 id="_36">次章予告<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<p>ツールとスキルで「手足」と「技術書」を手に入れたOpenClaw。しかし、これまで見てきた動作はすべて「人間が話しかけたら動く」という受動的なものだった。</p>
+<p>もし、毎朝8時に自動で天気予報を送ってくれたら？ サーバーの異常を検知して自動でアラートを飛ばしてくれたら？ 外部サービスからのWebhookを受けて即座に対応してくれたら？</p>
+<p><strong>第9章「自動化（Cron / Heartbeat / Webhook）」</strong> では、OpenClawが人間の指示なしに自律的に動く仕組みを解剖する。Cronジョブによるスケジュール実行、Heartbeatによる定期チェック、Webhookによる外部トリガー——エージェントが「待っている」状態から「自分で動く」状態に進化する、その仕組みのすべてが次章で明かされる。</p>
+<p>受動のAIから、能動のAIへ。次章が、その転換点だ。</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        この記事は役に立ちましたか？
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="役に立った" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="改善の余地あり" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              フィードバックありがとうございます！
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              フィードバックありがとうございます。改善します！
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 こうじ株式会社
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/clawd" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

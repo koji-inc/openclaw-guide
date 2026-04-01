@@ -46,6 +46,7 @@ nav:
     - 第6章 コンテキストエンジン: ch06-context-engine.md
     - 第7章 チャンネル接続: ch07-channel-connection.md
     - 第8章 ツールとスキル: ch08-tools-and-skills.md
+    - 第9章 自動化: ch09-automation.md
   - このガイドについて: about.md
 
 markdown_extensions:

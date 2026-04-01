@@ -26,7 +26,7 @@ OpenClawは、WhatsApp・Telegram・Discord・iMessageなど複数のチャッ�
 | 6 | [コンテキストエンジン](ch06-context-engine.md) | システムプロンプト、Bootstrap files、コンパクション、トークン管理 |
 | 7 | [チャンネル接続](ch07-channel-connection.md) | プラットフォーム翻訳、グループポリシー、ブロードキャスト |
 | 8 | [ツールとスキル](ch08-tools-and-skills.md) | 26コアツール、50組み込みスキル、ポリシー制御、カスタムスキル |
-| 9 | 自動化 | *Coming Soon* |
+| 9 | [自動化](ch09-automation.md) | Cron / Heartbeat / Webhook による運用自動化 |
 | 10 | セキュリティとペアリング | *Coming Soon* |
 | 11 | 応用編 | *Coming Soon* |
 

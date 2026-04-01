@@ -24,8 +24,8 @@ OpenClawは、WhatsApp・Telegram・Discord・iMessageなど複数のチャッ�
 | 4 | [エージェントの仕組み](ch04-agent-mechanics.md) | 2層構造、ライフサイクル、記憶、マルチエージェント |
 | 5 | [セッション管理](ch05-session-management.md) | セッションキー、スコープ、リセット、cron連携 |
 | 6 | [コンテキストエンジン](ch06-context-engine.md) | システムプロンプト、Bootstrap files、コンパクション、トークン管理 |
-| 7 | チャンネル接続 | *Coming Soon* |
-| 8 | ツールとスキル | *Coming Soon* |
+| 7 | [チャンネル接続](ch07-channel-connection.md) | プラットフォーム翻訳、グループポリシー、ブロードキャスト |
+| 8 | [ツールとスキル](ch08-tools-and-skills.md) | 26コアツール、50組み込みスキル、ポリシー制御、カスタムスキル |
 | 9 | 自動化 | *Coming Soon* |
 | 10 | セキュリティとペアリング | *Coming Soon* |
 | 11 | 応用編 | *Coming Soon* |

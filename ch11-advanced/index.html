@@ -2328,15 +2328,13 @@
 <li>VPS上でOpenClawを常時稼働させるための具体的な構成と手順</li>
 <li>4つの実践レシピで「組み合わせの力」を体感する</li>
 </ul>
-<!-- IMAGE: ch11-complete-architecture.png - OpenClaw全体アーキテクチャの総括図 -->
-
+<p><img alt="OpenClaw全体アーキテクチャの総括図" src="../images/ch11-complete-architecture.png" /></p>
 <hr />
 <h2 id="111">11.1 マルチエージェント実践 — 分業の本質<a class="headerlink" href="#111" title="Permanent link">&para;</a></h2>
 <p>第4章でサブエージェントの概念を紹介した。「複雑なタスクを分業する」という思想だ。しかし、あの時は<code>sessions_spawn</code>の基本しか触れなかった。ここでは、マルチエージェントの<strong>5つのツール</strong>を使い分け、実際のパイプラインを構築するところまで踏み込む。</p>
 <h3 id="1111-5">11.1.1 5つのマルチエージェントツール<a class="headerlink" href="#1111-5" title="Permanent link">&para;</a></h3>
 <p>マルチエージェント操作に関わるツールは5つある。それぞれの役割を整理しよう。</p>
-<!-- IMAGE: ch11-multi-agent-patterns.png - sessions_spawn/send/yield/subagents/listの5ツール使い分けフロー -->
-
+<p><img alt="sessions_spawn/send/yield/subagents/listの5ツール使い分けフロー" src="../images/ch11-multi-agent-patterns.png" /></p>
 <table>
 <thead>
 <tr>
@@ -2379,8 +2377,7 @@
 </blockquote>
 <h3 id="1112-3-thread-run-session">11.1.2 3つのモード — thread / run / session<a class="headerlink" href="#1112-3-thread-run-session" title="Permanent link">&para;</a></h3>
 <p>サブエージェントを生成する際、<code>sessions_spawn</code> には3つの主要なモードがある。どれを選ぶかでサブエージェントの振る舞いが大きく変わる。</p>
-<!-- IMAGE: ch11-thread-session-modes.png - thread/run/sessionの3モード比較図 -->
-
+<p><img alt="thread/run/sessionの3モード比較図" src="../images/ch11-thread-session-modes.png" /></p>
 <h4 id="thread-true"><code>thread: true</code>（スレッドバインド）<a class="headerlink" href="#thread-true" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;research&quot;</span><span class="p">,</span>
@@ -2457,8 +2454,7 @@
 </blockquote>
 <h3 id="1113-acpagent-communication-protocol-coding-agent">11.1.3 ACP（Agent Communication Protocol）ハーネス — Coding Agentとの連携<a class="headerlink" href="#1113-acpagent-communication-protocol-coding-agent" title="Permanent link">&para;</a></h3>
 <p>OpenClawのマルチエージェント機能には、もう一つ強力な仕組みがある。<strong>ACPハーネス</strong>だ。これは外部のCoding Agent（Claude Code、OpenAI Codex等）をサブプロセスとして起動し、OpenClawのツールインフラの上で動かす仕組みだ。</p>
-<!-- IMAGE: ch11-acp-harness.png - ACP harnessとcoding agentsの連携図 -->
-
+<p><img alt="ACP harnessとcoding agentsの連携図" src="../images/ch11-acp-harness.png" /></p>
 <h4 id="acp">ACPとは何か<a class="headerlink" href="#acp" title="Permanent link">&para;</a></h4>
 <p>ACPはPiエージェントコアに組み込まれた通信プロトコルで、外部のCoding Agentと標準化された方法でやり取りする。具体的には：</p>
 <ol>
@@ -2529,8 +2525,7 @@
 <p>第7章でチャンネルプラグインを、第8章でプラグインによるツール拡張を学んだ。ここではプラグインシステム全体を俯瞰し、4種類のプラグインの使い分けと、排他スロットの仕組みまで踏み込む。</p>
 <h3 id="1121-4">11.2.1 プラグインの4種類<a class="headerlink" href="#1121-4" title="Permanent link">&para;</a></h3>
 <p>OpenClawのプラグインは4つのカテゴリに分類される。</p>
-<!-- IMAGE: ch11-plugin-types.png - 4種類のプラグインタイプの分類図 -->
-
+<p><img alt="4種類のプラグインタイプの分類図" src="../images/ch11-plugin-types.png" /></p>
 <table>
 <thead>
 <tr>
@@ -2633,8 +2628,7 @@
 </ul>
 <h3 id="1124-pluginsslots">11.2.4 排他スロット（plugins.slots）の理解<a class="headerlink" href="#1124-pluginsslots" title="Permanent link">&para;</a></h3>
 <p>プラグインシステムで最も理解しにくい概念が<strong>排他スロット</strong>だ。これは「同じ機能を提供する複数のプラグインが衝突しないようにする仕組み」である。</p>
-<!-- IMAGE: ch11-plugin-slot-system.png - 排他スロットシステムの仕組み図 -->
-
+<p><img alt="排他スロットシステムの仕組み図" src="../images/ch11-plugin-slot-system.png" /></p>
 <h4 id="_5">スロットとは何か<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>たとえば、コンテキストエンジンを2つインストールしたとする。両方が同時にコンテキストを組み立てようとしたら、競合が起きる。排他スロットは「この機能を担当するプラグインは1つだけ」という制約を設ける。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>{
@@ -2736,8 +2730,7 @@
 </blockquote>
 <h3 id="1133-systemd">11.3.3 systemdサービスとして登録する方法<a class="headerlink" href="#1133-systemd" title="Permanent link">&para;</a></h3>
 <p>VPSにOpenClawをインストールした後、systemdサービスとして登録すればOS起動時に自動的に立ち上がる。</p>
-<!-- IMAGE: ch11-systemd-flow.png - systemdサービスの起動・監視フロー -->
-
+<p><img alt="systemdサービスの起動・監視フロー" src="../images/ch11-systemd-flow.png" /></p>
 <h4 id="1openclaw">方法1：OpenClaw組み込みコマンド（推奨）<a class="headerlink" href="#1openclaw" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># systemdサービスとして登録</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>openclaw<span class="w"> </span>gateway<span class="w"> </span>install
@@ -2795,8 +2788,7 @@
 </blockquote>
 <h3 id="1134-tailscale-gateway">11.3.4 Tailscale + Gateway設定でセキュアな外部アクセス<a class="headerlink" href="#1134-tailscale-gateway" title="Permanent link">&para;</a></h3>
 <p>VPS上のOpenClawに安全にアクセスするには、<strong>Tailscale</strong>が最も手軽で強力だ。</p>
-<!-- IMAGE: ch11-vps-architecture.png - VPS + Tailscale + Gatewayの構成図 -->
-
+<p><img alt="VPS + Tailscale + Gatewayの構成図" src="../images/ch11-vps-architecture.png" /></p>
 <h4 id="tailscale">Tailscaleとは<a class="headerlink" href="#tailscale" title="Permanent link">&para;</a></h4>
 <p>Tailscaleは、WireGuardベースのVPNサービスだ。自分のデバイス間にプライベートネットワーク（Tailnet）を自動構築する。OpenClawとの相性が抜群で、以下の利点がある：</p>
 <ul>
@@ -2872,8 +2864,7 @@
 <hr />
 <h2 id="114">11.4 実践レシピ集 — 組み合わせパターン<a class="headerlink" href="#114" title="Permanent link">&para;</a></h2>
 <p>ここまでで、マルチエージェント、プラグイン、VPS常時稼働の知識が揃った。最後に、これらを<strong>組み合わせた</strong>実践的なレシピを4つ紹介する。「あ、こういう使い方ができるのか」という発見を楽しんでほしい。</p>
-<!-- IMAGE: ch11-recipe-overview.png - 4つの実践レシピの概要図 -->
-
+<p><img alt="4つの実践レシピの概要図" src="../images/ch11-recipe-overview.png" /></p>
 <h3 id="1cron">レシピ1：日次レポート自動生成（Cron + マルチエージェント）<a class="headerlink" href="#1cron" title="Permanent link">&para;</a></h3>
 <p><strong>やりたいこと：</strong> 毎朝8時に、前日の活動サマリー・天気・ニュースをまとめたレポートをDiscordに自動送信する。</p>
 <p><strong>構成：</strong>

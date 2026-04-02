@@ -2746,8 +2746,7 @@
 <p>この順番が重要だ。モデルの「賢さ」に頼ってセキュリティを担保しようとするのではなく、アクセス制御という構造的な防御を先に敷いている。モデルがどんなに騙されても、そもそもアクセスできない領域には手が届かない——これがOpenClawの哲学だ。</p>
 <h3 id="1013-5trust-boundary-matrix">10.1.3 5つの信頼境界（Trust Boundary Matrix）<a class="headerlink" href="#1013-5trust-boundary-matrix" title="Permanent link">&para;</a></h3>
 <p>OpenClawのセキュリティは5層の信頼境界で構成されている。</p>
-<!-- IMAGE: ch10-trust-boundaries.png - 5つの信頼境界を同心円で表した図。中心がエージェント、外側に向かってTB1→TB5。各境界に何があるかを簡潔にラベル -->
-
+<p><img alt="5つの信頼境界を同心円で表した図。中心がエージェント、外側に向かってTB1→TB5。各境界に何があるかを簡潔にラベル" src="../images/ch10-trust-boundaries.png" /></p>
 <table>
 <thead>
 <tr>
@@ -2829,8 +2828,7 @@
 </table>
 <p>デフォルトの <code>pairing</code> が最もバランスが良い。初めての送信者にはペアリングコードが送られ、あなた（オーナー）がCLIで承認するまで、その人のメッセージは処理されない。</p>
 <h4 id="_2">ペアリングの具体的な流れ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
-<!-- IMAGE: ch10-dm-pairing-flow.png - DMペアリングの流れ図。未知ユーザーがDM → ペアリングコード発行 → CLI承認 → 以降は通信可能 -->
-
+<p><img alt="DMペアリングの流れ図。未知ユーザーがDM → ペアリングコード発行 → CLI承認 → 以降は通信可能" src="../images/ch10-dm-pairing-flow.png" /></p>
 <ol>
 <li>未知のユーザーがエージェントにDMを送る</li>
 <li>エージェントがペアリングコードを生成し、ユーザーに通知する</li>
@@ -2856,8 +2854,7 @@
 <p>DMペアリングが「メッセージを送る人」の認証なら、ノードペアリングは「接続するデバイス」の認証だ。macOSアプリやiPadからGatewayに接続する際、そのデバイスが信頼できるかを確認する仕組みである。</p>
 <h4 id="_3">ノードペアリングの仕組み<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <p>Gatewayが「どのノードが参加可能か」の<strong>ソース・オブ・トゥルース</strong>（信頼の源泉）となる。UI（macOSアプリ等）は承認/拒否のフロントエンドにすぎない。</p>
-<!-- IMAGE: ch10-node-pairing-flow.png - ノードペアリングのシーケンス図。ノード→Gateway(WSリクエスト)→保留→CLI承認→トークン発行→再接続→完了 -->
-
+<p><img alt="ノードペアリングのシーケンス図。ノード→Gateway(WSリクエスト)→保留→CLI承認→トークン発行→再接続→完了" src="../images/ch10-node-pairing-flow.png" /></p>
 <p>フローを見てみよう：</p>
 <ol>
 <li>ノードがGatewayのWebSocketに接続し、ペアリングリクエストを送信する</li>
@@ -2901,8 +2898,7 @@
 <p>ペアリングで「誰と話すか」を決めた。次はGateway自体への接続をどう守るかだ。外部からの不正アクセスを防ぐ最も基本的な防御線であり、ここが突破されれば内側のセキュリティは全て無意味になる。</p>
 <h3 id="1031-4">10.3.1 4つの認証モード<a class="headerlink" href="#1031-4" title="Permanent link">&para;</a></h3>
 <p>Gateway認証（<code>gateway.auth.mode</code>）には4つのモードがある。</p>
-<!-- IMAGE: ch10-gateway-auth-modes.png - 4つの認証モードの比較図。セキュリティレベル（低→高）と設定の手軽さを2軸で配置 -->
-
+<p><img alt="4つの認証モードの比較図。セキュリティレベル（低→高）と設定の手軽さを2軸で配置" src="../images/ch10-gateway-auth-modes.png" /></p>
 <table>
 <thead>
 <tr>
@@ -3028,8 +3024,7 @@
 <p>ほとんどのケースでは <code>docker</code> を使えばいい。SSHバックエンドは「強力なリモートマシンでコードを実行したい」場合、OpenShellは「マネージドなサンドボックス環境を使いたい」場合の選択肢だ。</p>
 <h3 id="1042">10.4.2 モードとスコープ<a class="headerlink" href="#1042" title="Permanent link">&para;</a></h3>
 <p>サンドボックスの動作を制御する3つの軸がある：<strong>モード</strong>（いつサンドボックスを使うか）、<strong>スコープ</strong>（コンテナの共有範囲）、<strong>ワークスペースアクセス</strong>（ファイルアクセスの権限）だ。</p>
-<!-- IMAGE: ch10-sandbox-modes.png - sandbox mode × scope の組み合わせマトリクス。各セルに「どのセッションがどのコンテナで動くか」を図示 -->
-
+<p><img alt="sandbox mode × scope の組み合わせマトリクス。各セルに「どのセッションがどのコンテナで動くか」を図示" src="../images/ch10-sandbox-modes.png" /></p>
 <h4 id="sandboxmode">モード（<code>sandbox.mode</code>）<a class="headerlink" href="#sandboxmode" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -3178,8 +3173,7 @@
 </code></pre></div>
 <h3 id="1052-secretref">10.5.2 SecretRefコントラクト<a class="headerlink" href="#1052-secretref" title="Permanent link">&para;</a></h3>
 <p>APIキー以外にも、チャネルのトークン、外部サービスの認証情報など、さまざまなシークレットを管理する必要がある。OpenClawはこれらを<strong>SecretRef</strong>という統一的な仕組みで扱う。</p>
-<!-- IMAGE: ch10-secretref-flow.png - SecretRefの解決フロー。config内のSecretRef → provider → env/file/exec → 値取得 → ランタイムに注入 -->
-
+<p><img alt="SecretRefの解決フロー。config内のSecretRef → provider → env/file/exec → 値取得 → ランタイムに注入" src="../images/ch10-secretref-flow.png" /></p>
 <h4 id="_8">統一形式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>{ source: &quot;env&quot; | &quot;file&quot; | &quot;exec&quot;, provider: &quot;default&quot;, id: &quot;...&quot; }
 </code></pre></div>
@@ -3400,8 +3394,7 @@ OpenClawはシークレットの平文バックアップを一切書かない。
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w"> </span>--fix<span class="w">    </span><span class="c1"># 自動修正適用</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w"> </span>--json<span class="w">   </span><span class="c1"># JSON出力（CI/CD連携用）</span>
 </code></pre></div>
-<!-- IMAGE: ch10-security-audit-output.png - openclaw security audit の出力例（ターミナルスクリーンショット風） -->
-
+<p><img alt="openclaw security audit の出力例（ターミナルスクリーンショット風）" src="../images/ch10-security-audit-output.png" /></p>
 <p>基本チェックでは、設定ファイルのパーミッション、認証設定、サンドボックスの有効性、公開ポートなどを確認する。<code>--deep</code> を付けると実際にGatewayへの接続テストも行い、実環境での脆弱性をプローブする。</p>
 <p><code>--fix</code> は検出された問題を自動的に修正する。ファイルパーミッションの修正やmissing設定の追加など、安全に自動化できる修正を行う。手動で直したい場合は、まず <code>--json</code> で結果を確認してから対応するのが良い。</p>
 <blockquote>
@@ -3481,8 +3474,7 @@ OpenClawはシークレットの平文バックアップを一切書かない。
 </blockquote>
 <h3 id="1083">10.8.3 攻撃チェーンと防御の対応<a class="headerlink" href="#1083" title="Permanent link">&para;</a></h3>
 <p>個別の脅威よりも怖いのは、複数の脅威が連鎖する<strong>攻撃チェーン</strong>だ。ATLASは3つのクリティカルパスを特定している。</p>
-<!-- IMAGE: ch10-attack-chain.png - 3つの攻撃チェーンを矢印で示し、各矢印の途中に「ここで断ち切る防御策」をラベル付け -->
-
+<p><img alt="3つの攻撃チェーンを矢印で示し、各矢印の途中に「ここで断ち切る防御策」をラベル付け" src="../images/ch10-attack-chain.png" /></p>
 <h4 id="1">チェーン1: スキルベースデータ窃取<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>T-PERSIST-001（悪意あるスキル）→ T-EVADE-001（モデレーションバイパス）→ T-EXFIL-003（クレデンシャル窃取）
 </code></pre></div>

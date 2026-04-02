@@ -811,21 +811,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#thread-true" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        thread: true（スレッドバインド）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#mode-run" class="md-nav__link">
     <span class="md-ellipsis">
       
-        mode: "run"（ワンショット）
+        mode: "run"（ワンショット） — 最も基本
       
     </span>
   </a>
@@ -837,6 +826,17 @@
     <span class="md-ellipsis">
       
         mode: "session"（持続セッション）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thread-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        thread: true（スレッドバインド）
       
     </span>
   </a>
@@ -921,10 +921,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1115-streamto-parent" class="md-nav__link">
+  <a href="#1115-streamto-parent-acp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11.1.5 streamTo: "parent" でリアルタイム進捗表示
+        11.1.5 streamTo: "parent" でリアルタイム進捗表示（ACP専用）
       
     </span>
   </a>
@@ -1609,21 +1609,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#thread-true" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        thread: true（スレッドバインド）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#mode-run" class="md-nav__link">
     <span class="md-ellipsis">
       
-        mode: "run"（ワンショット）
+        mode: "run"（ワンショット） — 最も基本
       
     </span>
   </a>
@@ -1635,6 +1624,17 @@
     <span class="md-ellipsis">
       
         mode: "session"（持続セッション）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thread-true" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        thread: true（スレッドバインド）
       
     </span>
   </a>
@@ -1719,10 +1719,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1115-streamto-parent" class="md-nav__link">
+  <a href="#1115-streamto-parent-acp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11.1.5 streamTo: "parent" でリアルタイム進捗表示
+        11.1.5 streamTo: "parent" でリアルタイム進捗表示（ACP専用）
       
     </span>
   </a>
@@ -2378,74 +2378,79 @@
 <h3 id="1112-3-thread-run-session">11.1.2 3つのモード — thread / run / session<a class="headerlink" href="#1112-3-thread-run-session" title="Permanent link">&para;</a></h3>
 <p>サブエージェントを生成する際、<code>sessions_spawn</code> には3つの主要なモードがある。どれを選ぶかでサブエージェントの振る舞いが大きく変わる。</p>
 <p><img alt="thread/run/sessionの3モード比較図" src="../images/ch11-thread-session-modes.png" /></p>
-<h4 id="thread-true"><code>thread: true</code>（スレッドバインド）<a class="headerlink" href="#thread-true" title="Permanent link">&para;</a></h4>
+<h4 id="mode-run"><code>mode: "run"</code>（ワンショット） — 最も基本<a class="headerlink" href="#mode-run" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;research&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nx">thread</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Go言語の最新トレンドを調査して&quot;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">})</span>
-</code></pre></div>
-<p><strong>特徴：</strong> 親セッションのスレッドに結びつく。Discord等でスレッドが作成され、サブエージェントの応答がそのスレッド内に表示される。ユーザーがスレッド内で追加質問もできる。</p>
-<p><strong>使いどころ：</strong> ユーザーとサブエージェントの対話が必要な場合。「リサーチ結果を見て、追加質問したい」ようなシナリオに向いている。</p>
-<h4 id="mode-run"><code>mode: "run"</code>（ワンショット）<a class="headerlink" href="#mode-run" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;translate&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;この英文を日本語に翻訳して: ...&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nx">timeoutSeconds</span><span class="o">:</span><span class="w"> </span><span class="mf">300</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">})</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;translate&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nx">task</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;この英文を日本語に翻訳して: ...&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nx">timeoutSeconds</span><span class="o">:</span><span class="w"> </span><span class="mf">300</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">})</span>
 </code></pre></div>
 <p><strong>特徴：</strong> タスクを投げて結果だけ受け取る。サブエージェントは独立した隔離セッションで実行され、完了時に結果を自動報告（push-based completion）する。第4章で紹介した基本パターンだ。</p>
 <p><strong>使いどころ：</strong> 翻訳、要約、ファイル生成など、「やって、結果だけ教えて」の独立タスク。<strong>最もよく使うパターン</strong>。</p>
 <h4 id="mode-session"><code>mode: "session"</code>（持続セッション）<a class="headerlink" href="#mode-session" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;coding-partner&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;session&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;新しいプロジェクトのセットアップを手伝って&quot;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">})</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;coding-partner&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;session&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nx">task</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;新しいプロジェクトのセットアップを手伝って&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">})</span>
 </code></pre></div>
 <p><strong>特徴：</strong> セッションが持続する。<code>sessions_send</code> で追加メッセージを送り続けることができ、サブエージェントは過去の会話コンテキストを保持する。</p>
 <p><strong>使いどころ：</strong> 長期的なプロジェクトで、サブエージェントと複数回のやり取りが必要な場合。コードレビューの往復など。</p>
+<h4 id="thread-true"><code>thread: true</code>（スレッドバインド）<a class="headerlink" href="#thread-true" title="Permanent link">&para;</a></h4>
+<p><code>thread</code> は <code>mode</code> とは独立したパラメータだ。主に <code>runtime: "acp"</code> でCoding Agentを呼ぶ際にDiscord等のスレッドに紐づけるために使う。<code>thread: true</code> を指定すると、サブエージェントの応答がスレッド内に表示され、ユーザーがスレッド内で追加質問することもできる。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;research&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nx">runtime</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;acp&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nx">agentId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;codex&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nx">thread</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nx">task</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Go言語の最新トレンドを調査して&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">})</span>
+</code></pre></div>
+<blockquote>
+<p>⚠️ <strong>ここに注意：</strong> <code>thread: true</code> かつ <code>mode</code> 未指定の場合、自動的に <code>mode: "session"</code> として扱われる。<code>thread</code> は「どこに表示するか」、<code>mode</code> は「セッションの寿命」を制御するパラメータであり、この2つは直交する概念だ。</p>
+</blockquote>
+<p><strong>使いどころ：</strong> ユーザーとサブエージェントの対話が必要な場合。ACP経由でCoding Agentにタスクを投げつつ、ユーザーがスレッド内で追加質問するシナリオに向いている。</p>
 <h4 id="_2">使い分け早見表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
 <th>判断基準</th>
-<th>thread</th>
 <th>run</th>
 <th>session</th>
+<th>thread: true</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ユーザーとの対話</td>
-<td>○</td>
 <td>×</td>
 <td>△</td>
+<td>○</td>
 </tr>
 <tr>
 <td>独立完結</td>
-<td>×</td>
 <td>○</td>
+<td>×</td>
 <td>×</td>
 </tr>
 <tr>
 <td>コンテキスト持続</td>
-<td>○</td>
 <td>×</td>
+<td>○</td>
 <td>○</td>
 </tr>
 <tr>
 <td>最も手軽</td>
-<td>△</td>
-<td>○</td>
+<td>⭐</td>
+<td>×</td>
 <td>×</td>
 </tr>
 <tr>
-<td>推奨度（初心者）</td>
-<td>△</td>
-<td>⭐</td>
-<td>△</td>
+<td>主な用途</td>
+<td>翻訳・要約・生成</td>
+<td>長期タスク</td>
+<td>ACP+対話型</td>
 </tr>
 </tbody>
 </table>
@@ -2453,7 +2458,8 @@
 <p>💬 <strong>こうじの実感：</strong> 迷ったら <code>mode: "run"</code> でOK。「投げて、待って、受け取る」——これだけで8割のユースケースをカバーできる。threadやsessionは「runじゃ足りないな」と感じてから使えばいい。</p>
 </blockquote>
 <h3 id="1113-acpagent-communication-protocol-coding-agent">11.1.3 ACP（Agent Communication Protocol）ハーネス — Coding Agentとの連携<a class="headerlink" href="#1113-acpagent-communication-protocol-coding-agent" title="Permanent link">&para;</a></h3>
-<p>OpenClawのマルチエージェント機能には、もう一つ強力な仕組みがある。<strong>ACPハーネス</strong>だ。これは外部のCoding Agent（Claude Code、OpenAI Codex等）をサブプロセスとして起動し、OpenClawのツールインフラの上で動かす仕組みだ。</p>
+<p>ここまでの <code>sessions_spawn</code>（<code>runtime: "subagent"</code>）は、OpenClaw内部のエージェントが別のOpenClawセッションを生成する仕組みだった。しかし、「コードを書く」「リポジトリ全体をリファクタリングする」といった作業では、専用のCoding Agent（Claude Code、OpenAI Codex等）の方が得意な場合がある。</p>
+<p><strong>ACPハーネス</strong>は、そうした外部Coding Agentを <code>runtime: "acp"</code> で呼び出し、OpenClawのツールインフラの上で安全に動かす仕組みだ。通常のサブエージェントで足りるなら <code>runtime: "subagent"</code>、コーディング特化の重い作業なら <code>runtime: "acp"</code> と使い分ける。</p>
 <p><img alt="ACP harnessとcoding agentsの連携図" src="../images/ch11-acp-harness.png" /></p>
 <h4 id="acp">ACPとは何か<a class="headerlink" href="#acp" title="Permanent link">&para;</a></h4>
 <p>ACPはPiエージェントコアに組み込まれた通信プロトコルで、外部のCoding Agentと標準化された方法でやり取りする。具体的には：</p>
@@ -2506,19 +2512,23 @@
 <li><strong>各ステージは独立</strong>：リサーチャーがコケても、他のステージに影響しない</li>
 <li><strong>ファイルを介した連携</strong>：ステージ間のデータ受け渡しは、ワークスペースのファイル経由。APIコールでやり取りするのではなく、「ファイルに書く→次のエージェントが読む」というシンプルな設計</li>
 </ul>
-<h3 id="1115-streamto-parent">11.1.5 <code>streamTo: "parent"</code> でリアルタイム進捗表示<a class="headerlink" href="#1115-streamto-parent" title="Permanent link">&para;</a></h3>
+<h3 id="1115-streamto-parent-acp">11.1.5 <code>streamTo: "parent"</code> でリアルタイム進捗表示（ACP専用）<a class="headerlink" href="#1115-streamto-parent-acp" title="Permanent link">&para;</a></h3>
 <p>サブエージェントの実行中、親エージェント（≒ユーザー）は「今どこまで進んだんだろう？」と気になる。<code>streamTo: "parent"</code> オプションを使うと、サブエージェントの出力がリアルタイムで親セッションにストリーミングされる。</p>
+<blockquote>
+<p>⚠️ <strong>ここに注意：</strong> <code>streamTo: "parent"</code> は <code>runtime: "acp"</code>（Coding Agent連携）でのみ利用可能だ。通常のサブエージェント（<code>runtime: "subagent"</code>）で指定するとエラーになる。通常のサブエージェントの進捗を把握するには、<code>subagents</code> ツールで状態を確認するか、サブエージェント側からファイルに進捗を書き出す方式を使う。</p>
+</blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">sessions_spawn</span><span class="p">({</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;long-research&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;大規模な調査を実施して&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nx">streamTo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nx">timeoutSeconds</span><span class="o">:</span><span class="w"> </span><span class="mf">1800</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">})</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">runtime</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;acp&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nx">agentId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;codex&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nx">task</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;大規模な調査を実施して&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nx">streamTo</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nx">timeoutSeconds</span><span class="o">:</span><span class="w"> </span><span class="mf">1800</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">})</span>
 </code></pre></div>
-<p>これにより、Discordやターミナル上で「調査中...まず競合Aを分析...次に競合Bを...」というように、進捗がリアルタイムで見える。30分かかる調査でも「ちゃんと動いてるな」と安心できる。</p>
+<p>ACP経由でCoding Agentを呼び出す場合、Discordやターミナル上で「調査中...まず競合Aを分析...次に競合Bを...」というように、進捗がリアルタイムで見える。30分かかる調査でも「ちゃんと動いてるな」と安心できる。</p>
 <blockquote>
-<p>💬 <strong>こうじの実感：</strong> <code>streamTo: "parent"</code> は地味だけど超便利。長いタスクを投げて放置すると「フリーズした？」って不安になるけど、進捗が流れてくると安心する。実況中継みたいなもんだよね。</p>
+<p>💬 <strong>こうじの実感：</strong> <code>streamTo: "parent"</code> は地味だけど超便利。Coding Agentに重い作業を投げたとき、進捗が流れてくると安心する。実況中継みたいなもんだよね。通常のサブエージェントでは使えないけど、代わりにファイル経由で進捗を共有する方式で十分やれる。</p>
 </blockquote>
 <hr />
 <h2 id="112">11.2 プラグイン実践 — 機能を拡張する<a class="headerlink" href="#112" title="Permanent link">&para;</a></h2>
@@ -2579,7 +2589,7 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>openclaw<span class="w"> </span>plugins<span class="w"> </span>list
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># プラグインの削除</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>openclaw<span class="w"> </span>plugins<span class="w"> </span>remove<span class="w"> </span>@openclaw/line
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>openclaw<span class="w"> </span>plugins<span class="w"> </span>uninstall<span class="w"> </span>@openclaw/line
 </code></pre></div>
 <p>インストールされたプラグインは <code>~/.openclaw/plugins/</code> に保存される。Gatewayの再起動後に自動的にロードされる。</p>
 <h4 id="_4">プラグインの有効/無効<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
@@ -3073,15 +3083,13 @@
 <p>ドキュメントの修正、翻訳、スキルの追加——コード以外の貢献も大いに求められている。</p>
 <h4 id="2-clawhub">2. ClawHub<a class="headerlink" href="#2-clawhub" title="Permanent link">&para;</a></h4>
 <p>ClawHubはOpenClawのスキル・プラグインマーケットプレイスだ。自作スキルを公開したり、他のユーザーが作ったスキルをインストールしたりできる。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># スキルの検索</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>openclaw<span class="w"> </span>clawhub<span class="w"> </span>search<span class="w"> </span>weather
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># ClawHubからスキルをインストール</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>openclaw<span class="w"> </span>plugins<span class="w"> </span>install<span class="w"> </span>clawhub:@community/awesome-skill
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># スキルのインストール</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>openclaw<span class="w"> </span>clawhub<span class="w"> </span>install<span class="w"> </span>@community/awesome-skill
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># 自作スキルの公開</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>openclaw<span class="w"> </span>clawhub<span class="w"> </span>publish<span class="w"> </span>./skills/my-skill
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># インストール済みスキルの一覧</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>openclaw<span class="w"> </span>plugins<span class="w"> </span>list
 </code></pre></div>
+<p>スキルの検索は <a href="https://clawhub.ai">clawhub.ai</a> で行い、見つけたスキルを <code>openclaw plugins install clawhub:&lt;パッケージ名&gt;</code> でインストールする形式だ。自作スキルの公開についてはClawHubサイトのドキュメントを参照してほしい。</p>
 <p>第8章で学んだカスタムスキル作成の知識を活かして、コミュニティに貢献してみてほしい。</p>
 <h4 id="3">3. コミュニティ<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <p>OpenClawのコミュニティは活発で、Discordサーバーで日々議論が行われている。使い方の質問、バグ報告、新機能のアイデア——気軽に参加してほしい。</p>

@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/about/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch01-what-is-openclaw/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch02-architecture/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch03-installation/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch04-agent-mechanics/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch05-session-management/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch06-context-engine/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch07-channel-connection/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch08-tools-and-skills/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
     </url>
     <url>
          <loc>https://koji-inc.github.io/openclaw-guide/ch09-automation/</loc>
-         <lastmod>2026-04-01</lastmod>
+         <lastmod>2026-04-02</lastmod>
+    </url>
+    <url>
+         <loc>https://koji-inc.github.io/openclaw-guide/ch10-security/</loc>
+         <lastmod>2026-04-02</lastmod>
     </url>
 </urlset>

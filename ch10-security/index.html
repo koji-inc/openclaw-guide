@@ -1,0 +1,3759 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="エンジニア向け OpenClaw 体系解説テキスト">
+      
+      
+      
+        <link rel="canonical" href="https://koji-inc.github.io/openclaw-guide/ch10-security/">
+      
+      
+        <link rel="prev" href="../ch09-automation/">
+      
+      
+        <link rel="next" href="../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第10章 セキュリティとペアリング - OpenClaw完全攻略ガイド</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans JP";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-PEJWVD6EE4"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-PEJWVD6EE4",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-PEJWVD6EE4",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href=".." title="OpenClaw完全攻略ガイド" class="md-header__button md-logo" aria-label="OpenClaw完全攻略ガイド" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenClaw完全攻略ガイド
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第10章 セキュリティとペアリング
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="ダークモードに切り替え"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="ダークモードに切り替え" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="ライトモードに切り替え"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="ライトモードに切り替え" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/koji-inc/openclaw-guide" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    koji-inc/openclaw-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  ホーム
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch01-what-is-openclaw/" class="md-tabs__link">
+          
+  
+  
+  カリキュラム
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  このガイドについて
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenClaw完全攻略ガイド" class="md-nav__button md-logo" aria-label="OpenClaw完全攻略ガイド" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenClaw完全攻略ガイド
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/koji-inc/openclaw-guide" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    koji-inc/openclaw-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ホーム
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    カリキュラム
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    カリキュラム
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01-what-is-openclaw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 OpenClawとは何か
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 アーキテクチャ全体像
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03-installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 インストール＆初期設定
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04-agent-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 エージェントの仕組み
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05-session-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 セッション管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06-context-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 コンテキストエンジン
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07-channel-connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 チャンネル接続
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08-tools-and-skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 ツールとスキル
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 自動化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 セキュリティとペアリング
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 セキュリティとペアリング
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        この章を読み終える頃にわかること
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 セキュリティモデルの全体像 — 「意図的であること」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.1 セキュリティモデルの全体像 — 「意図的であること」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1.1 シングルユーザー信頼モデル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1012-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1.2 3つの設計原則 — アクセス制御 &gt; インテリジェンス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1013-5trust-boundary-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1.3 5つの信頼境界（Trust Boundary Matrix）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 ペアリング — 「誰と話すか」を決める
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 ペアリング — 「誰と話すか」を決める">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021-dm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.1 DMペアリング — チャネルレベルの門番
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2.1 DMペアリング — チャネルレベルの門番">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dm4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMポリシーの4段階
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ペアリングの具体的な流れ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.2 ノードペアリング — デバイス接続の認証
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2.2 ノードペアリング — デバイス接続の認証">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ノードペアリングの仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-approvalmacos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-approval（macOS）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Gateway認証 — 接続を守る
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 Gateway認証 — 接続を守る">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1 4つの認証モード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032-trusted-proxy-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.2 Trusted Proxy Auth（上級）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3.2 Trusted Proxy Auth（上級）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033-tailscale-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.3 Tailscale Serve認証
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 サンドボックス — ツール実行の隔離
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 サンドボックス — ツール実行の隔離">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.1 サンドボックスの種類
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1042" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.2 モードとスコープ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4.2 モードとスコープ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sandboxmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        モード（sandbox.mode）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandboxscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スコープ（sandbox.scope）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandboxworkspaceaccess" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ワークスペースアクセス（sandbox.workspaceAccess）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1043-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.3 Dockerサンドボックスの詳細
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4.3 Dockerサンドボックスの詳細">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        イメージ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ネットワーク制限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        セキュリティデフォルト
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 シークレット管理 — 秘密を安全に扱う
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 シークレット管理 — 秘密を安全に扱う">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1051" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.1 モデル認証の管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.1 モデル認証の管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIキー方式（推奨）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setup-token方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1052-secretref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.2 SecretRefコントラクト
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.2 SecretRefコントラクト">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        統一形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ランタイムモデル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1053" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.3 シークレット運用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.3 シークレット運用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一方向安全ポリシー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ファイルパーミッション推奨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クレデンシャルストレージマップ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106-elevated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 ツールポリシーとelevated権限 — 行動範囲の制限
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6 ツールポリシーとelevated権限 — 行動範囲の制限">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1061" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.1 ツールポリシーのセキュリティ視点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.1 ツールポリシーのセキュリティ視点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-vs-tool-policy-vs-elevated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sandbox vs tool-policy vs elevated の使い分け
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コントロールプレーンツールのリスク
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1062-elevated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.2 Elevated権限 — ホスト実行のエスケープハッチ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.2 Elevated権限 — ホスト実行のエスケープハッチ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ゲート
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exec承認モデル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107-openclaw-security-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 openclaw security audit — 設定を診断する
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7 openclaw security audit — 設定を診断する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-audit4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        security auditの4つのモード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardened-baseline-60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hardened baseline — 60秒でできる堅牢化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        段階的に緩める
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108-atlas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8 脅威モデルATLAS — 何から守るべきか
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 脅威モデルATLAS — 何から守るべきか">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081-atlas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1 ATLASフレームワークの概要
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082-critical4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2 Critical脅威トップ4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8.2 Critical脅威トップ4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t-exec-001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-EXEC-001: 直接プロンプトインジェクション
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-persist-001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-PERSIST-001: 悪意あるスキルインストール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-exfil-003" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-EXFIL-003: クレデンシャルハーベスティング
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-impact-001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-IMPACT-001: 不正コマンド実行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3 攻撃チェーンと防御の対応
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8.3 攻撃チェーンと防御の対応">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チェーン1: スキルベースデータ窃取
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チェーン2: プロンプトインジェクション → RCE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チェーン3: 間接インジェクション経由流出
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        「脆弱性ではない」パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P0推奨対策
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLA+による正式検証
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9 インシデントレスポンス — 「もしも」の時
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 インシデントレスポンス — 「もしも」の時">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3ステップの対応手順
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3ステップの対応手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップ1: 封じ込め
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップ2: ローテーション
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップ3: 監査
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10 まとめ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.10 まとめ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次章への橋渡し
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    このガイドについて
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        この章を読み終える頃にわかること
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 セキュリティモデルの全体像 — 「意図的であること」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.1 セキュリティモデルの全体像 — 「意図的であること」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1.1 シングルユーザー信頼モデル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1012-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1.2 3つの設計原則 — アクセス制御 &gt; インテリジェンス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1013-5trust-boundary-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1.3 5つの信頼境界（Trust Boundary Matrix）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 ペアリング — 「誰と話すか」を決める
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 ペアリング — 「誰と話すか」を決める">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021-dm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.1 DMペアリング — チャネルレベルの門番
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2.1 DMペアリング — チャネルレベルの門番">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dm4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMポリシーの4段階
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ペアリングの具体的な流れ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.2 ノードペアリング — デバイス接続の認証
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2.2 ノードペアリング — デバイス接続の認証">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ノードペアリングの仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-approvalmacos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-approval（macOS）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Gateway認証 — 接続を守る
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 Gateway認証 — 接続を守る">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1 4つの認証モード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032-trusted-proxy-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.2 Trusted Proxy Auth（上級）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3.2 Trusted Proxy Auth（上級）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仕組み
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033-tailscale-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.3 Tailscale Serve認証
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 サンドボックス — ツール実行の隔離
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 サンドボックス — ツール実行の隔離">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.1 サンドボックスの種類
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1042" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.2 モードとスコープ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4.2 モードとスコープ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sandboxmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        モード（sandbox.mode）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandboxscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スコープ（sandbox.scope）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandboxworkspaceaccess" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ワークスペースアクセス（sandbox.workspaceAccess）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1043-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.3 Dockerサンドボックスの詳細
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4.3 Dockerサンドボックスの詳細">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        イメージ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ネットワーク制限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        セキュリティデフォルト
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 シークレット管理 — 秘密を安全に扱う
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 シークレット管理 — 秘密を安全に扱う">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1051" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.1 モデル認証の管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.1 モデル認証の管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIキー方式（推奨）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setup-token方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1052-secretref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.2 SecretRefコントラクト
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.2 SecretRefコントラクト">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        統一形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ランタイムモデル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1053" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.3 シークレット運用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.3 シークレット運用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一方向安全ポリシー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ファイルパーミッション推奨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クレデンシャルストレージマップ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106-elevated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 ツールポリシーとelevated権限 — 行動範囲の制限
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6 ツールポリシーとelevated権限 — 行動範囲の制限">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1061" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.1 ツールポリシーのセキュリティ視点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.1 ツールポリシーのセキュリティ視点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-vs-tool-policy-vs-elevated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sandbox vs tool-policy vs elevated の使い分け
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コントロールプレーンツールのリスク
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1062-elevated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.2 Elevated権限 — ホスト実行のエスケープハッチ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.2 Elevated権限 — ホスト実行のエスケープハッチ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ゲート
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exec承認モデル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107-openclaw-security-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 openclaw security audit — 設定を診断する
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7 openclaw security audit — 設定を診断する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-audit4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        security auditの4つのモード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardened-baseline-60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hardened baseline — 60秒でできる堅牢化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        段階的に緩める
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108-atlas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8 脅威モデルATLAS — 何から守るべきか
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 脅威モデルATLAS — 何から守るべきか">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081-atlas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1 ATLASフレームワークの概要
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082-critical4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2 Critical脅威トップ4
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8.2 Critical脅威トップ4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#t-exec-001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-EXEC-001: 直接プロンプトインジェクション
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-persist-001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-PERSIST-001: 悪意あるスキルインストール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-exfil-003" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-EXFIL-003: クレデンシャルハーベスティング
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-impact-001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        T-IMPACT-001: 不正コマンド実行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3 攻撃チェーンと防御の対応
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8.3 攻撃チェーンと防御の対応">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チェーン1: スキルベースデータ窃取
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チェーン2: プロンプトインジェクション → RCE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チェーン3: 間接インジェクション経由流出
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        「脆弱性ではない」パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P0推奨対策
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLA+による正式検証
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9 インシデントレスポンス — 「もしも」の時
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 インシデントレスポンス — 「もしも」の時">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3ステップの対応手順
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3ステップの対応手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップ1: 封じ込め
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップ2: ローテーション
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ステップ3: 監査
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10 まとめ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.10 まとめ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        次章への橋渡し
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="10">第10章：セキュリティとペアリング<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><em>「家の鍵をかけずに寝る人はいない。でも、AIエージェントに鍵をかけ忘れている人は多い。OpenClawのセキュリティは『完全に安全な設定は存在しない』という正直な前提から始まる。目標は完璧ではなく、<strong>意図的であること</strong>だ。」</em></p>
+</blockquote>
+<hr />
+<p>前章でエージェントに<strong>自律性</strong>を与えた。Heartbeatで30分おきに巡回させ、Cronで定時タスクを仕込み、Webhookで外部イベントに即応する——24時間365日、あなたの代わりに動くエージェントが完成した。しかし、自律的に動くということは「暴走したらどうする？」「権限を越えたら？」という問いが避けて通れないということでもある。</p>
+<p>家に例えるなら、鍵（認証）をかけ、誰を入れるか（ペアリング）を決め、部屋を仕切り（サンドボックス）、金庫に大事なものをしまい（シークレット）、防犯カメラ（監査）を設置する——この章では、OpenClawの<strong>安全装置</strong>の全体像を解き明かす。キーワードは<strong>爆発半径（blast radius）の制御</strong>。何かが起きても、被害を最小限に閉じ込める設計だ。</p>
+<h2 id="_1">この章を読み終える頃にわかること<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OpenClawのセキュリティ設計思想（シングルユーザー信頼モデル）と5つの信頼境界</li>
+<li>DMペアリングとノードペアリングの仕組みと設定方法</li>
+<li>Gateway認証の4つのモードと使い分け</li>
+<li>サンドボックスの種類・モード・スコープの選び方</li>
+<li>シークレット管理（SecretRef）の仕組みと安全な運用方法</li>
+<li><code>openclaw security audit</code> で自分の設定を診断する方法</li>
+<li>脅威モデルATLASの読み方と、Critical脅威への対策</li>
+</ul>
+<hr />
+<h2 id="101">10.1 セキュリティモデルの全体像 — 「意図的であること」<a class="headerlink" href="#101" title="Permanent link">&para;</a></h2>
+<p>個別の設定を触る前に「OpenClawがどんな考え方でセキュリティを設計しているか」を知っておこう。地図を見てから街を歩くのと同じだ。全体像が見えていれば、以降の各セクションが腹落ちしやすくなる。</p>
+<h3 id="1011">10.1.1 シングルユーザー信頼モデル<a class="headerlink" href="#1011" title="Permanent link">&para;</a></h3>
+<p>OpenClawのセキュリティモデルは「<strong>パーソナルアシスタント信頼モデル</strong>」と呼ばれる。1つのGatewayにつき1つの信頼されたオペレーター境界——つまり<strong>シングルユーザー前提</strong>で設計されている。</p>
+<p>これは重要なポイントだ。OpenClawは複数の敵対的なユーザーが1つのGateway/エージェントを共有する「敵対的マルチテナント」を想定していない。もし複数の信頼できないユーザーを隔離する必要があるなら、信頼境界ごとにGatewayを分離する（別OSユーザーや別ホストで運用する）のが推奨される。</p>
+<h3 id="1012-3">10.1.2 3つの設計原則 — アクセス制御 &gt; インテリジェンス<a class="headerlink" href="#1012-3" title="Permanent link">&para;</a></h3>
+<p>OpenClawのセキュリティは3つの原則に基づいて階層的に設計されている。</p>
+<ol>
+<li><strong>Identity first（まず身元確認）</strong> — DMペアリングや許可リストで「誰がボットと話せるか」を決定する。これが最外殻の防御だ</li>
+<li><strong>Scope next（次にスコープ）</strong> — グループ許可リスト、メンション要件、ツールポリシー、サンドボックス、デバイス権限で「何ができるか」を制限する</li>
+<li><strong>Model last（モデルは最後）</strong> — LLMモデルは操作可能だと仮定する。仮に操作されても、爆発半径（blast radius）が限定されるように設計する</li>
+</ol>
+<p>この順番が重要だ。モデルの「賢さ」に頼ってセキュリティを担保しようとするのではなく、アクセス制御という構造的な防御を先に敷いている。モデルがどんなに騙されても、そもそもアクセスできない領域には手が届かない——これがOpenClawの哲学だ。</p>
+<h3 id="1013-5trust-boundary-matrix">10.1.3 5つの信頼境界（Trust Boundary Matrix）<a class="headerlink" href="#1013-5trust-boundary-matrix" title="Permanent link">&para;</a></h3>
+<p>OpenClawのセキュリティは5層の信頼境界で構成されている。</p>
+<!-- IMAGE: ch10-trust-boundaries.png - 5つの信頼境界を同心円で表した図。中心がエージェント、外側に向かってTB1→TB5。各境界に何があるかを簡潔にラベル -->
+
+<table>
+<thead>
+<tr>
+<th>信頼境界</th>
+<th>役割</th>
+<th>主な仕組み</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TB1: チャネルアクセス</strong></td>
+<td>誰がエージェントと話せるか</td>
+<td>Device Pairing（30秒猶予期間）、AllowFrom/AllowList、Token/Password/Tailscale認証</td>
+</tr>
+<tr>
+<td><strong>TB2: セッション隔離</strong></td>
+<td>会話はどう分離されるか</td>
+<td>セッションキー（<code>agent:channel:peer</code>）、エージェントごとツールポリシー、トランスクリプトログ</td>
+</tr>
+<tr>
+<td><strong>TB3: ツール実行</strong></td>
+<td>コードはどこで動くか</td>
+<td>Docker sandbox / Host（exec-approvals）、Node リモート実行、SSRF保護（DNSピニング+IPブロック）</td>
+</tr>
+<tr>
+<td><strong>TB4: 外部コンテンツ</strong></td>
+<td>外部データはどう扱うか</td>
+<td>外部コンテンツのXMLタグラッピング、セキュリティ注意書き挿入</td>
+</tr>
+<tr>
+<td><strong>TB5: サプライチェーン</strong></td>
+<td>スキルは安全か</td>
+<td>ClawHub スキル公開（semver、SKILL.md必須）、パターンベースモデレーション、VirusTotalスキャン（開発中）</td>
+</tr>
+</tbody>
+</table>
+<p>TB1からTB5に向かって、外側から内側へ順番に防御が深くなっていく。この章ではTB1〜TB3を中心に、具体的な設定方法を見ていく。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 「完全に安全なセットアップは存在しない」って最初ドキッとしたけど、考えてみれば当たり前だよね。スマホだってパスワードかけてても盗まれたらアウトなわけで。大事なのは「自分が何を守ってて、何を許容してるか」を把握してること。OpenClawはそこを正直に言ってくれるのが好き。</p>
+<p>⚠️ <strong>ここに注意</strong>: OpenClawは「1人のオーナーが1つのGatewayを使う」前提で設計されている。複数の信頼できないユーザーが同じGatewayを共有する構成は<strong>推奨されない</strong>。必要なら信頼境界ごとにGatewayを分離すること。</p>
+</blockquote>
+<hr />
+<h2 id="102">10.2 ペアリング — 「誰と話すか」を決める<a class="headerlink" href="#102" title="Permanent link">&para;</a></h2>
+<p>セキュリティの第一歩は「誰がエージェントに話しかけられるか」の制御だ。ペアリングはOpenClawを使い始めて最初に触るセキュリティ機能であり、日常的に最も意識する部分でもある。</p>
+<h3 id="1021-dm">10.2.1 DMペアリング — チャネルレベルの門番<a class="headerlink" href="#1021-dm" title="Permanent link">&para;</a></h3>
+<p>DMペアリングは「知らない人からのメッセージをどう扱うか」を制御する仕組みだ。WhatsApp、Discord、Telegram——どのチャネルでも共通のポリシーが使える。</p>
+<h4 id="dm4">DMポリシーの4段階<a class="headerlink" href="#dm4" title="Permanent link">&para;</a></h4>
+<p><code>dmPolicy</code>（または <code>*.dm.policy</code>）で設定できるポリシーは4つある。</p>
+<table>
+<thead>
+<tr>
+<th>ポリシー</th>
+<th>動作</th>
+<th>ユースケース</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pairing</code>（デフォルト）</td>
+<td>不明な送信者にペアリングコードを送信し、承認されるまで無視</td>
+<td>個人利用（推奨）</td>
+</tr>
+<tr>
+<td><code>allowlist</code></td>
+<td>不明な送信者をブロック（ペアリング自体なし）</td>
+<td>完全に閉じた運用</td>
+</tr>
+<tr>
+<td><code>open</code></td>
+<td>誰でもDM可能（<code>"*"</code> の明示的オプトイン必須）</td>
+<td>公開ボット</td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td>受信DMを完全無視</td>
+<td>DM不要な場合</td>
+</tr>
+</tbody>
+</table>
+<p>デフォルトの <code>pairing</code> が最もバランスが良い。初めての送信者にはペアリングコードが送られ、あなた（オーナー）がCLIで承認するまで、その人のメッセージは処理されない。</p>
+<h4 id="_2">ペアリングの具体的な流れ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<!-- IMAGE: ch10-dm-pairing-flow.png - DMペアリングの流れ図。未知ユーザーがDM → ペアリングコード発行 → CLI承認 → 以降は通信可能 -->
+
+<ol>
+<li>未知のユーザーがエージェントにDMを送る</li>
+<li>エージェントがペアリングコードを生成し、ユーザーに通知する</li>
+<li>コードの有効期限は<strong>1時間</strong>。繰り返しDMが来ても、新規リクエストが作成されるまでは再送信しない</li>
+<li>オーナーがCLIで承認する：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 保留中のペアリングリクエストを確認</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openclaw<span class="w"> </span>pairing<span class="w"> </span>list<span class="w"> </span>&lt;channel&gt;
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># コードを指定して承認</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>openclaw<span class="w"> </span>pairing<span class="w"> </span>approve<span class="w"> </span>&lt;channel&gt;<span class="w"> </span>&lt;code&gt;
+</code></pre></div>
+<ol>
+<li>承認されたペアは <code>~/.openclaw/credentials/&lt;channel&gt;-allowFrom.json</code> に保存される</li>
+<li>非デフォルトアカウントの場合: <code>&lt;channel&gt;-&lt;accountId&gt;-allowFrom.json</code></li>
+</ol>
+<p>保留リクエストにはチャネルあたり<strong>3件</strong>の上限がある。スパム的なペアリング要求が溜まるのを防ぐ仕組みだ。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 最初WhatsAppでDMしたら「ペアリングコードを送りました」って言われて「は？」ってなった。でも考えたら、知らない人からのDMをいきなり処理されたら怖いよね。この仕組みがあるおかげで「こいつは晃一さんだな」って確認してから話し始められる。</p>
+<p>⚠️ <strong>ここに注意</strong>: <code>open</code> ポリシーは便利だが、誰でもエージェントと会話できてしまう。公開ボットを意図的に作る場合以外は使わないこと。設定するには <code>"*"</code> の明示的なオプトインが必須だ。</p>
+</blockquote>
+<h3 id="1022">10.2.2 ノードペアリング — デバイス接続の認証<a class="headerlink" href="#1022" title="Permanent link">&para;</a></h3>
+<p>DMペアリングが「メッセージを送る人」の認証なら、ノードペアリングは「接続するデバイス」の認証だ。macOSアプリやiPadからGatewayに接続する際、そのデバイスが信頼できるかを確認する仕組みである。</p>
+<h4 id="_3">ノードペアリングの仕組み<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>Gatewayが「どのノードが参加可能か」の<strong>ソース・オブ・トゥルース</strong>（信頼の源泉）となる。UI（macOSアプリ等）は承認/拒否のフロントエンドにすぎない。</p>
+<!-- IMAGE: ch10-node-pairing-flow.png - ノードペアリングのシーケンス図。ノード→Gateway(WSリクエスト)→保留→CLI承認→トークン発行→再接続→完了 -->
+
+<p>フローを見てみよう：</p>
+<ol>
+<li>ノードがGatewayのWebSocketに接続し、ペアリングリクエストを送信する</li>
+<li>Gatewayが保留リクエストを保存し、<code>node.pair.requested</code> イベントを発行する</li>
+<li>オーナーがCLI（またはUI）で承認 or 拒否する</li>
+<li>承認時、Gatewayが<strong>新しいトークン</strong>を発行する（再ペアリング時はトークンローテーション）</li>
+<li>ノードがそのトークンで再接続し、ペアリングが完了する</li>
+</ol>
+<p>重要な点がいくつかある：</p>
+<ul>
+<li>保留リクエストの有効期限は<strong>5分</strong>（DMの1時間よりかなり短い）</li>
+<li><code>node.pair.request</code> メソッドは<strong>冪等</strong>（何度呼んでも同じ結果）</li>
+<li>承認は<strong>常に</strong>新トークンを生成する。<code>node.pair.request</code> からトークンが返ることはない</li>
+</ul>
+<p>承認済みノードは <code>~/.openclaw/nodes/paired.json</code> に、保留リクエストは <code>pending.json</code> に保存される。</p>
+<h4 id="cli">CLI操作<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 保留中のペアリングリクエストを確認</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>openclaw<span class="w"> </span>nodes<span class="w"> </span>pending
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 承認</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>openclaw<span class="w"> </span>nodes<span class="w"> </span>approve<span class="w"> </span>&lt;requestId&gt;
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># 拒否</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>openclaw<span class="w"> </span>nodes<span class="w"> </span>reject<span class="w"> </span>&lt;requestId&gt;
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># 接続中ノードの状態確認</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>openclaw<span class="w"> </span>nodes<span class="w"> </span>status
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># ノードに名前をつける</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>openclaw<span class="w"> </span>nodes<span class="w"> </span>rename<span class="w"> </span>--node<span class="w"> </span>&lt;id<span class="p">|</span>name<span class="p">|</span>ip&gt;<span class="w"> </span>--name<span class="w"> </span><span class="s2">&quot;Living Room iPad&quot;</span>
+</code></pre></div>
+<h4 id="auto-approvalmacos">Auto-approval（macOS）<a class="headerlink" href="#auto-approvalmacos" title="Permanent link">&para;</a></h4>
+<p>macOSアプリには <code>silent: true</code> マークとSSH接続検証による<strong>自動承認</strong>の仕組みがある。ローカルのmacOSアプリがSSHで接続を検証できる場合、ペアリング承認を自動的にスキップできる。</p>
+<p>なお、Gateway認証レベルでも別の自動承認がある（10.3節で後述）。ローカル接続（ループバックまたはGateway自身のTailscaleアドレス）からの<strong>デバイスペアリング</strong>は自動承認されるが、他のTailscaleピアからのリクエストはペアリング承認が必要だ。この2つは異なるレイヤーの話なので混同しないよう注意。</p>
+<blockquote>
+<p>💡 <strong>コラム：なぜノードペアリングは5分でDMは1時間？</strong>
+ノードペアリングはデバイスが物理的に近くにある状態で行う操作なので、短い猶予で十分だ。一方DMペアリングは、別端末でCLI承認する必要があり、すぐに対応できないこともあるため長めに設定されている。また、ノードペアリングはトークン発行を伴うため、保留状態が長いとセキュリティリスクが高まる。ユースケースに合わせた現実的なタイムアウト設計だ。</p>
+</blockquote>
+<hr />
+<h2 id="103-gateway">10.3 Gateway認証 — 接続を守る<a class="headerlink" href="#103-gateway" title="Permanent link">&para;</a></h2>
+<p>ペアリングで「誰と話すか」を決めた。次はGateway自体への接続をどう守るかだ。外部からの不正アクセスを防ぐ最も基本的な防御線であり、ここが突破されれば内側のセキュリティは全て無意味になる。</p>
+<h3 id="1031-4">10.3.1 4つの認証モード<a class="headerlink" href="#1031-4" title="Permanent link">&para;</a></h3>
+<p>Gateway認証（<code>gateway.auth.mode</code>）には4つのモードがある。</p>
+<!-- IMAGE: ch10-gateway-auth-modes.png - 4つの認証モードの比較図。セキュリティレベル（低→高）と設定の手軽さを2軸で配置 -->
+
+<table>
+<thead>
+<tr>
+<th>モード</th>
+<th>仕組み</th>
+<th>推奨度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>token</code></td>
+<td>共有ベアラートークン</td>
+<td>⭐ <strong>推奨</strong></td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>パスワード認証（env: <code>OPENCLAW_GATEWAY_PASSWORD</code> 推奨）</td>
+<td>○ 手軽</td>
+</tr>
+<tr>
+<td><code>trusted-proxy</code></td>
+<td>ID認識リバースプロキシに認証を委任</td>
+<td>△ 上級者向け</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>認証なし</td>
+<td>❌ <strong>非推奨（critical警告）</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>最も重要なポイント</strong>: 認証が未設定の場合、GatewayはWebSocket接続を<strong>拒否する</strong>（fail-closed）。「認証を設定し忘れたらフルオープン」ではなく「設定し忘れたら誰も接続できない」という安全側に倒した設計だ。</p>
+<p>トークンの生成は簡単だ：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>openclaw<span class="w"> </span>doctor<span class="w"> </span>--generate-gateway-token
+</code></pre></div>
+<p>これだけで十分にランダムなトークンが生成される。</p>
+<blockquote>
+<p>⚠️ <strong>ここに注意</strong>: <code>auth.mode: "none"</code> は<strong>絶対に本番で使わないこと</strong>。Gatewayが外部に露出している場合、誰でもエージェントを操作できてしまう。OpenClawは認証未設定時にcritical警告を出すが、それを無視してはいけない。</p>
+<p>💬 <strong>こうじの実感：</strong> 正直、最初は <code>token</code> 一択でいい。Trusted Proxyとか聞くと「うっ」ってなるけど、それは企業向けの話。個人利用なら <code>token</code> + Tailscaleで十分すぎるくらい守れるよ。</p>
+</blockquote>
+<h3 id="1032-trusted-proxy-auth">10.3.2 Trusted Proxy Auth（上級）<a class="headerlink" href="#1032-trusted-proxy-auth" title="Permanent link">&para;</a></h3>
+<p>企業や複数ユーザー環境では、Pomerium、Caddy + OAuth、nginx + oauth2-proxy、Traefik + Forward Auth といったID認識リバースプロキシの背後でOpenClawを運用したい場合がある。Trusted Proxy Authはそのための仕組みだ。</p>
+<h4 id="_4">仕組み<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ol>
+<li>リバースプロキシがユーザーを認証する（OAuth/OIDC/SAML等）</li>
+<li>プロキシが認証済みユーザーIDをヘッダーで付与する（例: <code>x-forwarded-user</code>）</li>
+<li>OpenClawが <code>gateway.trustedProxies</code> でプロキシのIPを確認する</li>
+<li>ヘッダーからユーザーIDを抽出し、検証OKならリクエストを承認する</li>
+</ol>
+<p>設定例はこうなる：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  gateway: {
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    trustedProxies: [&quot;10.0.0.1&quot;],
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    auth: {
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>      mode: &quot;trusted-proxy&quot;,
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>      trustedProxy: {
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        userHeader: &quot;x-forwarded-user&quot;,         // 必須
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        requiredHeaders: [&quot;x-forwarded-proto&quot;],  // オプション
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        allowUsers: [&quot;nick@example.com&quot;],        // オプション（空=全認証ユーザー許可）
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>      },
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    },
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  },
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>}
+</code></pre></div>
+<p><code>allowUsers</code> を空にすると、プロキシが認証した全ユーザーがアクセスできる。特定のユーザーに絞りたい場合はメールアドレス等を列挙する。</p>
+<p>Trusted Proxy Authが有効な場合、Control UIのWebSocketセッションはデバイスペアリング不要で接続できるようになる。プロキシが認証を代行しているためだ。</p>
+<p>対応プロキシと対応ヘッダーの例：
+- <strong>Pomerium</strong>: <code>x-pomerium-claim-email</code>
+- <strong>Caddy + OAuth</strong>: カスタムヘッダー
+- <strong>nginx + oauth2-proxy</strong>: <code>x-forwarded-user</code>
+- <strong>Traefik + Forward Auth</strong>: カスタムヘッダー</p>
+<h3 id="1033-tailscale-serve">10.3.3 Tailscale Serve認証<a class="headerlink" href="#1033-tailscale-serve" title="Permanent link">&para;</a></h3>
+<p>Tailscaleを使ってGatewayを公開している場合、Tailscale Serve経由の認証も利用できる。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  gateway: {
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    auth: {
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>      allowTailscale: true  // Serveのデフォルト
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    }
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  }
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>}
+</code></pre></div>
+<p><code>allowTailscale: true</code> にすると、Tailscale Serveが付与するヘッダー（<code>tailscale-user-login</code>）を認証に使う。<code>x-forwarded-for</code> ヘッダーはローカルのTailscaleデーモン（<code>tailscale whois</code>）で検証される。</p>
+<p>ただし注意点がある。HTTP APIエンドポイント（<code>/v1/*</code>, <code>/tools/invoke</code> 等）は<strong>Tailscale認証だけでは不十分</strong>で、別途token/password認証が必要だ。Tailscale認証はあくまでWebSocket接続（チャット）のレイヤーでの認証であり、APIアクセスには従来の認証が引き続き求められる。</p>
+<hr />
+<h2 id="104">10.4 サンドボックス — ツール実行の隔離<a class="headerlink" href="#104" title="Permanent link">&para;</a></h2>
+<p>認証で「誰が入るか」を制御した。次は「入った後に何ができるか」の制限だ。サンドボックスはエージェントのツール実行をホストから隔離する重要な防御レイヤーであり、第8章で紹介したツールの「実行環境」を制御する。</p>
+<h3 id="1041">10.4.1 サンドボックスの種類<a class="headerlink" href="#1041" title="Permanent link">&para;</a></h3>
+<p>サンドボックスには3つのバックエンド（<code>agents.defaults.sandbox.backend</code>）がある。</p>
+<table>
+<thead>
+<tr>
+<th>バックエンド</th>
+<th>実行場所</th>
+<th>セットアップ</th>
+<th>ワークスペース</th>
+<th>ブラウザサンドボックス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker</code>（デフォルト）</td>
+<td>ローカルコンテナ</td>
+<td><code>scripts/sandbox-setup.sh</code></td>
+<td>バインドマウント or コピー</td>
+<td>対応</td>
+</tr>
+<tr>
+<td><code>ssh</code></td>
+<td>SSH接続可能なホスト</td>
+<td>SSHキー + ターゲットホスト</td>
+<td>リモート正規（シード1回）</td>
+<td>非対応</td>
+</tr>
+<tr>
+<td><code>openshell</code></td>
+<td>OpenShell管理サンドボックス</td>
+<td>OpenShellプラグイン有効化</td>
+<td><code>mirror</code> or <code>remote</code></td>
+<td>未対応</td>
+</tr>
+</tbody>
+</table>
+<p>ほとんどのケースでは <code>docker</code> を使えばいい。SSHバックエンドは「強力なリモートマシンでコードを実行したい」場合、OpenShellは「マネージドなサンドボックス環境を使いたい」場合の選択肢だ。</p>
+<h3 id="1042">10.4.2 モードとスコープ<a class="headerlink" href="#1042" title="Permanent link">&para;</a></h3>
+<p>サンドボックスの動作を制御する3つの軸がある：<strong>モード</strong>（いつサンドボックスを使うか）、<strong>スコープ</strong>（コンテナの共有範囲）、<strong>ワークスペースアクセス</strong>（ファイルアクセスの権限）だ。</p>
+<!-- IMAGE: ch10-sandbox-modes.png - sandbox mode × scope の組み合わせマトリクス。各セルに「どのセッションがどのコンテナで動くか」を図示 -->
+
+<h4 id="sandboxmode">モード（<code>sandbox.mode</code>）<a class="headerlink" href="#sandboxmode" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>モード</th>
+<th>動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"off"</code></td>
+<td>サンドボックスなし。全てホストで実行</td>
+</tr>
+<tr>
+<td><code>"non-main"</code></td>
+<td>非メインセッション（グループチャット、チャネル等）のみサンドボックス化</td>
+</tr>
+<tr>
+<td><code>"all"</code></td>
+<td>全セッションをサンドボックス化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推奨は <code>"non-main"</code> から始めること</strong>だ。メインセッション（あなたとの1対1のDM）はホストで実行し、グループチャットのように他人のメッセージに反応する可能性がある場面ではサンドボックスに閉じ込める。慣れてきたら <code>"all"</code> に移行するのが良い。</p>
+<h4 id="sandboxscope">スコープ（<code>sandbox.scope</code>）<a class="headerlink" href="#sandboxscope" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>スコープ</th>
+<th>動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"session"</code>（デフォルト）</td>
+<td>セッションごとに1コンテナ</td>
+</tr>
+<tr>
+<td><code>"agent"</code></td>
+<td>エージェントごとに1コンテナ</td>
+</tr>
+<tr>
+<td><code>"shared"</code></td>
+<td>全サンドボックスセッションで1コンテナ共有</td>
+</tr>
+</tbody>
+</table>
+<p><code>"session"</code> がデフォルトで最も安全だ。セッションが終わればコンテナも消える。<code>"shared"</code> は複数セッション間でファイルを共有したい場合に使うが、隔離レベルは下がる。</p>
+<h4 id="sandboxworkspaceaccess">ワークスペースアクセス（<code>sandbox.workspaceAccess</code>）<a class="headerlink" href="#sandboxworkspaceaccess" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>設定</th>
+<th>動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"none"</code>（デフォルト）</td>
+<td><code>~/.openclaw/sandboxes</code> のサンドボックス専用ワークスペースのみ</td>
+</tr>
+<tr>
+<td><code>"ro"</code></td>
+<td>エージェントワークスペースを <code>/agent</code> に読み取り専用マウント</td>
+</tr>
+<tr>
+<td><code>"rw"</code></td>
+<td>エージェントワークスペースを <code>/workspace</code> に読み書きマウント</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> サンドボックスの設定は「保険」みたいなもの。普段は何も起きないけど、万が一エージェントが変なコマンドを実行しても、コンテナの中で閉じ込められる。特にグループチャットで他人のメッセージに反応する場合は必須だと思う。</p>
+</blockquote>
+<h3 id="1043-docker">10.4.3 Dockerサンドボックスの詳細<a class="headerlink" href="#1043-docker" title="Permanent link">&para;</a></h3>
+<p>デフォルトバックエンドであるDockerサンドボックスについて、もう少し詳しく見ておこう。</p>
+<h4 id="_5">イメージ<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>イメージ</th>
+<th>用途</th>
+<th>セットアップ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openclaw-sandbox:bookworm-slim</code></td>
+<td>デフォルト</td>
+<td><code>scripts/sandbox-setup.sh</code></td>
+</tr>
+<tr>
+<td><code>openclaw-sandbox-common:bookworm-slim</code></td>
+<td>共通ツール版</td>
+<td><code>scripts/sandbox-common-setup.sh</code></td>
+</tr>
+<tr>
+<td>ブラウザ版</td>
+<td>ブラウザ操作が必要な場合</td>
+<td><code>scripts/sandbox-browser-setup.sh</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_6">ネットワーク制限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>Dockerサンドボックスはデフォルトで<strong>ネットワークなし</strong>だ。コンテナ内からインターネットにアクセスすることはできない。これは意図的な設計で、エージェントが外部にデータを送信するリスクを根本から断つ。</p>
+<p>さらに以下の制限がある：
+- <code>network: "host"</code> は<strong>ブロック</strong>される
+- <code>network: "container:&lt;id&gt;"</code> はデフォルトで<strong>ブロック</strong>される（<code>dangerouslyAllowContainerNamespaceJoin: true</code> で解除可能だが非推奨）</p>
+<h4 id="_7">セキュリティデフォルト<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>危険なバインドソース（<code>docker.sock</code>, <code>/etc</code>, <code>/proc</code>, <code>/sys</code>, <code>/dev</code>）は自動的に<strong>ブロック</strong>される</li>
+<li><code>readOnlyRoot: true</code> でルートファイルシステムを読み取り専用にできる</li>
+</ul>
+<p>何がサンドボックス化されているか分からなくなったら、以下のコマンドでデバッグできる：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>openclaw<span class="w"> </span>sandbox<span class="w"> </span>explain
+</code></pre></div>
+<blockquote>
+<p>⚠️ <strong>ここに注意</strong>: <code>sandbox.mode: "off"</code> + <code>exec.security: "full"</code> の組み合わせは最も危険な設定だ。エージェントがホスト上で任意のコマンドを承認なしに実行できてしまう。この2つを同時に設定するのは避けること。</p>
+</blockquote>
+<hr />
+<h2 id="105">10.5 シークレット管理 — 秘密を安全に扱う<a class="headerlink" href="#105" title="Permanent link">&para;</a></h2>
+<p>サンドボックスで実行環境を隔離した。次は、APIキーやトークンといった「秘密の情報」をどう管理するかだ。漏洩すれば全てが台無しになる、最も慎重に扱うべき領域である。</p>
+<h3 id="1051">10.5.1 モデル認証の管理<a class="headerlink" href="#1051" title="Permanent link">&para;</a></h3>
+<p>エージェントがLLMを呼び出すには、モデルプロバイダーへの認証が必要だ。OpenClawには2つの認証方式がある。</p>
+<h4 id="api">APIキー方式（推奨）<a class="headerlink" href="#api" title="Permanent link">&para;</a></h4>
+<p>特に長時間稼働するGateway（デーモン運用）では<strong>APIキー方式が推奨</strong>される。環境変数で設定するのが基本だ：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 環境変数に設定</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span><span class="s2">&quot;sk-ant-...&quot;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="s2">&quot;sk-...&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># デーモン用は ~/.openclaw/.env に設定</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;ANTHROPIC_API_KEY=sk-ant-...&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.openclaw/.env
+</code></pre></div>
+<p>APIキーの優先順序は以下の通り：
+1. <code>OPENCLAW_LIVE_&lt;PROVIDER&gt;_KEY</code> — 最優先
+2. <code>&lt;PROVIDER&gt;_API_KEYS</code> — 複数キー（カンマ区切り）
+3. <code>&lt;PROVIDER&gt;_API_KEY</code> — 標準
+4. <code>&lt;PROVIDER&gt;_API_KEY_*</code> — ワイルドカード</p>
+<p>レートリミットエラー（429等）が発生した場合のみ次のキーでリトライする。重複キーは自動的に除外される。</p>
+<h4 id="setup-token">setup-token方式<a class="headerlink" href="#setup-token" title="Permanent link">&para;</a></h4>
+<p>Claude CLIで <code>claude setup-token</code> を実行してトークンを取得し、<code>openclaw models auth setup-token --provider anthropic</code> でOpenClawに登録することで、サブスクリプション認証を使うこともできるが、Anthropicがサブスクリプション利用をブロックする場合があるため、APIキー方式の方が安定する。</p>
+<p>認証の状態は以下のコマンドで確認できる：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>openclaw<span class="w"> </span>models<span class="w"> </span>status<span class="w">           </span><span class="c1"># 現在のモデル認証状態</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>openclaw<span class="w"> </span>models<span class="w"> </span>status<span class="w"> </span>--check<span class="w">   </span><span class="c1"># exit 1=期限切れ/不在, exit 2=期限間近</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>openclaw<span class="w"> </span>doctor<span class="w">                  </span><span class="c1"># 全体的な健康チェック</span>
+</code></pre></div>
+<h3 id="1052-secretref">10.5.2 SecretRefコントラクト<a class="headerlink" href="#1052-secretref" title="Permanent link">&para;</a></h3>
+<p>APIキー以外にも、チャネルのトークン、外部サービスの認証情報など、さまざまなシークレットを管理する必要がある。OpenClawはこれらを<strong>SecretRef</strong>という統一的な仕組みで扱う。</p>
+<!-- IMAGE: ch10-secretref-flow.png - SecretRefの解決フロー。config内のSecretRef → provider → env/file/exec → 値取得 → ランタイムに注入 -->
+
+<h4 id="_8">統一形式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>{ source: &quot;env&quot; | &quot;file&quot; | &quot;exec&quot;, provider: &quot;default&quot;, id: &quot;...&quot; }
+</code></pre></div>
+<p>3つのソースから秘密の値を取得できる：</p>
+<p><strong>1. <code>env</code>（環境変数）</strong> — 最もシンプル。IDは <code>^[A-Z][A-Z0-9_]{0,127}$</code> のパターンに従う。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{ source: &quot;env&quot;, id: &quot;DISCORD_BOT_TOKEN&quot; }
+</code></pre></div>
+<p><strong>2. <code>file</code>（JSONファイル）</strong> — JSONファイルの特定のキーを参照する。IDはRFC6901 JSON Pointerだ。
+- <code>mode: "json"</code>: JSONオブジェクトのポインタ解決
+- <code>mode: "singleValue"</code>: ファイル全体を値として返す</p>
+<p><strong>3. <code>exec</code>（外部コマンド）</strong> — 1Password CLI、HashiCorp Vault、sopsなどの外部シークレットマネージャーと連携する。コマンドは絶対パスで指定し、シェルは経由しない。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1Password CLI</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>op<span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">&quot;op://vault/item/field&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># HashiCorp Vault</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>vault<span class="w"> </span>kv<span class="w"> </span>get<span class="w"> </span>-field<span class="o">=</span>api_key<span class="w"> </span>secret/openclaw
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># sops</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>sops<span class="w"> </span>-d<span class="w"> </span>--extract<span class="w"> </span><span class="s1">&#39;[&quot;api_key&quot;]&#39;</span><span class="w"> </span>secrets.enc.yaml
+</code></pre></div>
+<h4 id="_9">ランタイムモデル<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>SecretRefの解決には重要な特性がある：</p>
+<ul>
+<li><strong>即時解決（eager）</strong>: アクティベーション時に解決し、リクエストパスでは遅延しない</li>
+<li><strong>起動時fail-fast</strong>: アクティブなSecretRefが解決できなければ起動を中止する</li>
+<li><strong>リロード時atomic swap</strong>: 全て成功するか、前回の正常なスナップショットを維持するか。中途半端な状態にはならない</li>
+<li><strong>アクティブサーフェスフィルタリング</strong>: 無効なサーフェス（例: 無効化されたチャネル）の未解決refはブロックしない</li>
+</ul>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> シークレット管理って聞くと「面倒くさそう…」って思うけど、最初は環境変数に入れるだけでOK。1PasswordやVault連携は「APIキーが10個超えたな」ってなってから考えれば十分。</p>
+</blockquote>
+<h3 id="1053">10.5.3 シークレット運用<a class="headerlink" href="#1053" title="Permanent link">&para;</a></h3>
+<p>日々のシークレット運用にはCLIコマンドが用意されている：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>openclaw<span class="w"> </span>secrets<span class="w"> </span>audit<span class="w"> </span>--check<span class="w">       </span><span class="c1"># 監査（平文値、未解決ref、シャドウイング等をチェック）</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>openclaw<span class="w"> </span>secrets<span class="w"> </span>configure<span class="w">           </span><span class="c1"># インタラクティブな設定ウィザード</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>openclaw<span class="w"> </span>secrets<span class="w"> </span>apply<span class="w"> </span>--from<span class="w"> </span>&lt;plan&gt;<span class="w"> </span><span class="c1"># プランファイルから一括適用</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>openclaw<span class="w"> </span>secrets<span class="w"> </span>reload<span class="w">              </span><span class="c1"># ランタイムリロード（atomic swap）</span>
+</code></pre></div>
+<p><code>secrets audit</code> は以下をチェックする：
+- 設定ファイルに残っている<strong>平文の秘密値</strong>
+- <strong>未解決のSecretRef</strong>（存在しない環境変数やファイルの参照）
+- <strong>優先度シャドウイング</strong>（同じキーが複数箇所で定義されている）
+- <strong>レガシー残留物</strong>（古い形式のシークレット設定）</p>
+<h4 id="_10">一方向安全ポリシー<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>OpenClawはシークレットの平文バックアップを<strong>一切書かない</strong>。これは意図的な設計だ。プリフライトチェック → ランタイム検証 → コミットという一方向のフローで、「万が一バックアップが漏れたら全キーが流出」というリスクを根本から排除している。</p>
+<h4 id="_11">ファイルパーミッション推奨<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>パス</th>
+<th>推奨パーミッション</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.openclaw/</code></td>
+<td><code>700</code></td>
+</tr>
+<tr>
+<td><code>~/.openclaw/openclaw.json</code></td>
+<td><code>600</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_12">クレデンシャルストレージマップ<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>どの認証情報がどこに保存されるかを把握しておくことも重要だ：</p>
+<table>
+<thead>
+<tr>
+<th>資格情報</th>
+<th>保存場所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WhatsApp</td>
+<td><code>~/.openclaw/credentials/whatsapp/&lt;accountId&gt;/creds.json</code></td>
+</tr>
+<tr>
+<td>Telegram bot token</td>
+<td>config/env or <code>channels.telegram.tokenFile</code></td>
+</tr>
+<tr>
+<td>Discord bot token</td>
+<td>config/env or SecretRef</td>
+</tr>
+<tr>
+<td>Slack tokens</td>
+<td>config/env</td>
+</tr>
+<tr>
+<td>ペアリング許可リスト</td>
+<td><code>~/.openclaw/credentials/&lt;channel&gt;-allowFrom.json</code></td>
+</tr>
+<tr>
+<td>モデル認証プロファイル</td>
+<td><code>~/.openclaw/agents/&lt;agentId&gt;/agent/auth-profiles.json</code></td>
+</tr>
+<tr>
+<td>ノードペアリング</td>
+<td><code>~/.openclaw/nodes/paired.json</code>, <code>pending.json</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>コラム：なぜ「一方向安全ポリシー」なのか？</strong>
+OpenClawはシークレットの平文バックアップを一切書かない。「万が一バックアップが漏れたら全キーが流出」というリスクを根本から排除するためだ。不便に感じるかもしれないが、セキュリティは利便性とのトレードオフ。OpenClawは「安全側に倒す」を選んでいる。シークレットマネージャー（1Password等）を使えば、OpenClaw側にバックアップがなくても困ることはない。</p>
+</blockquote>
+<hr />
+<h2 id="106-elevated">10.6 ツールポリシーとelevated権限 — 行動範囲の制限<a class="headerlink" href="#106-elevated" title="Permanent link">&para;</a></h2>
+<p>サンドボックスが「<strong>どこで</strong>実行するか」なら、ツールポリシーは「<strong>何を</strong>実行できるか」だ。第8章で詳しく扱った内容なので、ここではセキュリティの文脈で重要なポイントに絞って見ていく。</p>
+<h3 id="1061">10.6.1 ツールポリシーのセキュリティ視点<a class="headerlink" href="#1061" title="Permanent link">&para;</a></h3>
+<p>ツールポリシーは2つのレイヤーで構成されている（詳細は第8章参照）：</p>
+<ol>
+<li><strong>ツールプロファイル</strong> (<code>tools.profile</code>) — ベースの許可リスト</li>
+<li><strong>グローバル/エージェント別ポリシー</strong> (<code>tools.allow</code> / <code>tools.deny</code>) — 追加の許可・拒否</li>
+</ol>
+<p>セキュリティ上最も重要なルールは「<strong><code>deny</code> は常に最優先</strong>」ということだ。<code>allow</code> に入っていても <code>deny</code> に入っていればブロックされる。これはハードストップであり、<code>/exec</code> コマンドでもオーバーライドできない。</p>
+<h4 id="sandbox-vs-tool-policy-vs-elevated">sandbox vs tool-policy vs elevated の使い分け<a class="headerlink" href="#sandbox-vs-tool-policy-vs-elevated" title="Permanent link">&para;</a></h4>
+<p>この3つの違いが分かりにくいので、整理しておこう：</p>
+<table>
+<thead>
+<tr>
+<th>コントロール</th>
+<th>何を決めるか</th>
+<th>対象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sandbox</strong></td>
+<td>ツールが<strong>どこで</strong>実行されるか</td>
+<td>Docker vs ホスト</td>
+</tr>
+<tr>
+<td><strong>Tool policy</strong></td>
+<td><strong>どのツール</strong>が使えるか</td>
+<td>allow/deny リスト</td>
+</tr>
+<tr>
+<td><strong>Elevated</strong></td>
+<td>exec専用<strong>ホスト実行</strong>エスケープハッチ</td>
+<td>execのみ</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_13">コントロールプレーンツールのリスク<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p>特に注意すべきは、永続的な変更を行える2つのツールだ：
+- <strong><code>gateway</code></strong>: <code>config.apply</code>, <code>config.patch</code>, <code>update.run</code> を呼べる——設定自体を書き換えられる
+- <strong><code>cron</code></strong>: 元のチャット/タスクが終了した後も実行し続けるジョブを作成できる</p>
+<p>これらを安易にエージェントに許可すると、エージェント自身が自分のセキュリティ設定を緩めたり、永続的なバックドアを仕込んだりする可能性がある。推奨される deny 設定：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>{ tools: { deny: [&quot;gateway&quot;, &quot;cron&quot;, &quot;sessions_spawn&quot;, &quot;sessions_send&quot;] } }
+</code></pre></div>
+<p>ツールグループも活用しよう：
+- <code>group:runtime</code>: exec, bash, process
+- <code>group:fs</code>: read, write, edit, apply_patch
+- <code>group:sessions</code>: sessions_list, sessions_history, sessions_send, sessions_spawn, session_status
+- <code>group:memory</code>: memory_search, memory_get
+- <code>group:ui</code>: browser, canvas
+- <code>group:automation</code>: cron, gateway
+- <code>group:messaging</code>: message
+- <code>group:nodes</code>: nodes
+- <code>group:openclaw</code>: 全ビルトインOpenClawツール</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> sandbox / tool-policy / elevated の3つの違いが最初まじでわからなかった。「どこで（sandbox）」「何を（tool-policy）」「特例で（elevated）」って覚えると整理しやすい。この3つが揃って初めて「エージェントの行動範囲」が決まるんだよね。</p>
+</blockquote>
+<h3 id="1062-elevated">10.6.2 Elevated権限 — ホスト実行のエスケープハッチ<a class="headerlink" href="#1062-elevated" title="Permanent link">&para;</a></h3>
+<p>Elevated権限は、サンドボックス内からホストで <code>exec</code> を実行するための<strong>エスケープハッチ</strong>だ。サンドボックスに閉じ込めたエージェントに「この操作だけはホストでやっていいよ」と例外を与える仕組みである。</p>
+<h4 id="_14">ゲート<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>有効化</strong>: <code>tools.elevated.enabled</code>（デフォルト: <code>false</code>）</li>
+<li><strong>送信者許可リスト</strong>: <code>tools.elevated.allowFrom.&lt;provider&gt;</code> — 誰がElevatedを使えるか</li>
+</ul>
+<h4 id="_15">操作<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>/elevated on</code>: ホストでexec実行を許可する（ただしexec承認はまだ必要な場合がある）</li>
+<li><code>/elevated full</code>: セッション中のexec承認をスキップする</li>
+</ul>
+<h4 id="exec">Exec承認モデル<a class="headerlink" href="#exec" title="Permanent link">&para;</a></h4>
+<p><code>tools.exec.security</code> でexecの承認レベルを設定する：</p>
+<table>
+<thead>
+<tr>
+<th>モード</th>
+<th>動作</th>
+<th>リスク</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"deny"</code></td>
+<td>exec全拒否</td>
+<td>最も安全</td>
+</tr>
+<tr>
+<td><code>"allowlist"</code> + <code>"ask"</code></td>
+<td>許可リスト + ユーザー確認</td>
+<td>バランス</td>
+</tr>
+<tr>
+<td><code>"full"</code></td>
+<td>全exec許可</td>
+<td><strong>warn/critical</strong></td>
+</tr>
+</tbody>
+</table>
+<p>承認はリクエストコンテキストに正確にバインドされる。インタプリタ/ランタイムコマンドで1つの直接ローカルファイルを特定できない場合、承認ベースの実行は拒否される。<code>strictInlineEval</code> を有効にすると、<strong>インタプリタ許可リスト使用時に</strong>インラインeval形式で再承認が強制される。</p>
+<p><strong>重要</strong>: Elevatedはツールallow/denyを<strong>オーバーライドしない</strong>。<code>deny</code> に入っているツールは、Elevatedであっても使えない。</p>
+<blockquote>
+<p>⚠️ <strong>ここに注意</strong>: <code>elevated.enabled: true</code> + <code>exec.security: "full"</code> は「サンドボックスの意味がほぼなくなる」組み合わせだ。Elevatedを有効にする場合は、<code>exec.security: "allowlist"</code> と <code>ask: "always"</code> を必ずセットで設定すること。</p>
+</blockquote>
+<hr />
+<h2 id="107-openclaw-security-audit">10.7 <code>openclaw security audit</code> — 設定を診断する<a class="headerlink" href="#107-openclaw-security-audit" title="Permanent link">&para;</a></h2>
+<p>ここまで多くの設定項目を見てきた。「正しく設定できているか分からない…」と不安になるのは自然なことだ。OpenClawにはそのための強力なコマンドがある。</p>
+<h3 id="security-audit4">security auditの4つのモード<a class="headerlink" href="#security-audit4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w">          </span><span class="c1"># 基本チェック</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w"> </span>--deep<span class="w">   </span><span class="c1"># ライブGatewayプローブ含む</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w"> </span>--fix<span class="w">    </span><span class="c1"># 自動修正適用</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w"> </span>--json<span class="w">   </span><span class="c1"># JSON出力（CI/CD連携用）</span>
+</code></pre></div>
+<!-- IMAGE: ch10-security-audit-output.png - openclaw security audit の出力例（ターミナルスクリーンショット風） -->
+
+<p>基本チェックでは、設定ファイルのパーミッション、認証設定、サンドボックスの有効性、公開ポートなどを確認する。<code>--deep</code> を付けると実際にGatewayへの接続テストも行い、実環境での脆弱性をプローブする。</p>
+<p><code>--fix</code> は検出された問題を自動的に修正する。ファイルパーミッションの修正やmissing設定の追加など、安全に自動化できる修正を行う。手動で直したい場合は、まず <code>--json</code> で結果を確認してから対応するのが良い。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> <code>openclaw security audit</code> は困ったときの最強コマンド。何を設定すればいいかわからなくても、これ打てば「ここが危ないよ」って教えてくれる。<code>--fix</code> で自動修正もしてくれるから、まずこれを実行するのがオススメ。</p>
+</blockquote>
+<h3 id="hardened-baseline-60">hardened baseline — 60秒でできる堅牢化<a class="headerlink" href="#hardened-baseline-60" title="Permanent link">&para;</a></h3>
+<p>「とりあえず安全にしたい」という人のために、コピペで使える堅牢化設定を紹介する。これをベースにして、必要に応じて緩めていくのが安全なアプローチだ。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>{
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  gateway: {
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    mode: &quot;local&quot;,
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    bind: &quot;loopback&quot;,
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    auth: { mode: &quot;token&quot;, token: &quot;replace-with-long-random-token&quot; },
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>  },
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>  session: { dmScope: &quot;per-channel-peer&quot; },
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>  tools: {
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>    profile: &quot;messaging&quot;,
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>    deny: [&quot;group:automation&quot;, &quot;group:runtime&quot;, &quot;group:fs&quot;, &quot;sessions_spawn&quot;, &quot;sessions_send&quot;],
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    fs: { workspaceOnly: true },
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    exec: { security: &quot;deny&quot;, ask: &quot;always&quot; },
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    elevated: { enabled: false },
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>  },
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>  channels: {
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    whatsapp: { dmPolicy: &quot;pairing&quot;, groups: { &quot;*&quot;: { requireMention: true } } },
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>  },
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>}
+</code></pre></div>
+<p>各設定の意味：
+- <strong><code>bind: "loopback"</code></strong> — Gatewayをローカル接続のみに制限
+- <strong><code>auth: { mode: "token" }</code></strong> — トークン認証を有効化
+- <strong><code>deny: ["group:automation", ...]</code></strong> — 危険なツールグループを全てブロック
+- <strong><code>exec: { security: "deny" }</code></strong> — コマンド実行を全て拒否
+- <strong><code>elevated: { enabled: false }</code></strong> — Elevated権限を無効化
+- <strong><code>dmPolicy: "pairing"</code></strong> — DMはペアリングによる承認制
+- <strong><code>requireMention: true</code></strong> — グループチャットではメンション必須</p>
+<h3 id="_16">段階的に緩める<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>この堅牢化設定はかなり制限的だ。実用性に応じて段階的に機能を解放していくのが良い。</p>
+<ol>
+<li><strong>最小構成（上記）</strong> — DMのみ、ツールなし。まずはこの状態で動作確認</li>
+<li><strong>+ファイルアクセス</strong> — <code>deny</code> から <code>group:fs</code> を外し、ファイル読み書きを許可</li>
+<li><strong>+サンドボックス実行</strong> — <code>sandbox.mode: "all"</code> を追加し、<code>exec.security: "allowlist"</code> に変更。コンテナ内でのみコマンド実行を許可</li>
+<li><strong>+自動化</strong> — <code>deny</code> から <code>group:automation</code> を外し、Cron/Heartbeatを許可</li>
+<li><strong>フル機能</strong> — 適切なツールポリシーで全ツールを有効化。ここまで来たらセキュリティの全体像が理解できているはず</li>
+</ol>
+<p>いきなりステップ5にジャンプするのではなく、各ステップで <code>openclaw security audit</code> を実行して状態を確認しながら進めよう。</p>
+<blockquote>
+<p>💡 <strong>コラム：緩い状態から締めるより、堅い状態から緩める方が安全</strong>
+この堅牢化設定はかなり制限的だ。exec全拒否、ファイルシステムアクセス全拒否、自動化ツール全拒否。正直、これだけだとエージェントにできることがかなり限られる。しかし「最初から緩くして後で締める」より「最初から固くして必要に応じて緩める」方が圧倒的に安全だ。何を許可したか自分で把握できるし、「知らない間にヤバい設定になってた」が起きない。</p>
+</blockquote>
+<hr />
+<h2 id="108-atlas">10.8 脅威モデルATLAS — 何から守るべきか<a class="headerlink" href="#108-atlas" title="Permanent link">&para;</a></h2>
+<p>ここまでで「どう守るか」の具体的な手段を学んだ。最後に「<strong>何から守るべきか</strong>」という視点を見ていこう。OpenClawは脅威モデルをMITRE ATLASフレームワークに基づいて体系化しており、その名も<strong>THREAT-MODEL-ATLAS</strong>だ。</p>
+<h3 id="1081-atlas">10.8.1 ATLASフレームワークの概要<a class="headerlink" href="#1081-atlas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>バージョン</strong>: 1.0-draft</li>
+<li><strong>最終更新</strong>: 2026-02-04</li>
+<li><strong>方法論</strong>: MITRE ATLAS + Data Flow Diagrams</li>
+<li><strong>リポジトリ</strong>: <a href="https://github.com/openclaw/trust">openclaw/trust</a></li>
+</ul>
+<p>ATLASでは脅威を「偵察 → 初期アクセス → 実行 → 永続化 → 防御回避 → 発見 → 収集/流出 → 影響」というカテゴリで分類している。攻撃者がどのフェーズにいるかを特定し、対応する防御策を講じるためのフレームワークだ。</p>
+<p>全ての脅威を列挙するのは本書の範囲を超えるので、ここではCriticalレベルの脅威と、代表的な攻撃チェーンに絞って解説する。</p>
+<h3 id="1082-critical4">10.8.2 Critical脅威トップ4<a class="headerlink" href="#1082-critical4" title="Permanent link">&para;</a></h3>
+<p>ATLASが「Critical」と評価している脅威は4つある。</p>
+<h4 id="t-exec-001">T-EXEC-001: 直接プロンプトインジェクション<a class="headerlink" href="#t-exec-001" title="Permanent link">&para;</a></h4>
+<p>ユーザーが悪意ある指示を直接エージェントに入力する攻撃だ。「以前の指示を全て無視して…」といった指示でエージェントの動作を乗っ取ろうとする。</p>
+<p><strong>防御</strong>: TB1のペアリング・許可リスト（10.2節）で、そもそも悪意あるユーザーがエージェントと会話できないようにする。DMポリシーを <code>pairing</code> にしておけば、承認されたユーザーだけが会話できる。</p>
+<h4 id="t-persist-001">T-PERSIST-001: 悪意あるスキルインストール<a class="headerlink" href="#t-persist-001" title="Permanent link">&para;</a></h4>
+<p>不正なスキルがインストールされ、永続的にエージェントの動作に影響を与える攻撃だ。スキルはエージェントの起動時に毎回読み込まれるため、一度インストールされると長期的なバックドアになりうる。</p>
+<p><strong>防御</strong>: TB5のサプライチェーン防御。ClawHubのスキルはsemverバージョニングとSKILL.md必須ルールでモデレーションされている。VirusTotalスキャンも開発中（R-001）。信頼できないソースからのスキルインストールは避けること。</p>
+<h4 id="t-exfil-003">T-EXFIL-003: クレデンシャルハーベスティング<a class="headerlink" href="#t-exfil-003" title="Permanent link">&para;</a></h4>
+<p>エージェントがアクセスできる認証情報（APIキー、トークン等）を外部に送信する攻撃だ。</p>
+<p><strong>防御</strong>: SecretRefによるシークレット管理（10.5節）で平文の認証情報を設定ファイルから排除する。サンドボックス（10.4節）でネットワークアクセスを制限し、ツールポリシー（10.6節）で <code>web_fetch</code> や <code>message</code> を制限する。</p>
+<h4 id="t-impact-001">T-IMPACT-001: 不正コマンド実行<a class="headerlink" href="#t-impact-001" title="Permanent link">&para;</a></h4>
+<p>エージェントがホスト上で任意のコマンドを実行する攻撃だ。最悪の場合、システム全体が乗っ取られる。</p>
+<p><strong>防御</strong>: サンドボックス（10.4節）でツール実行をコンテナに隔離する。exec承認モデル（10.6節）で <code>security: "allowlist"</code> + <code>ask: "always"</code> を設定する。<code>elevated.enabled: false</code> をデフォルトにしておく。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 脅威モデルって聞くと「セキュリティ専門家向けでしょ？」って思うかもだけど、ATLASは「こういう攻撃がありえるよ」ってリスト化してくれてるだけ。全部を覚える必要はなくて、Criticalの4つだけ意識しておけば十分。</p>
+</blockquote>
+<h3 id="1083">10.8.3 攻撃チェーンと防御の対応<a class="headerlink" href="#1083" title="Permanent link">&para;</a></h3>
+<p>個別の脅威よりも怖いのは、複数の脅威が連鎖する<strong>攻撃チェーン</strong>だ。ATLASは3つのクリティカルパスを特定している。</p>
+<!-- IMAGE: ch10-attack-chain.png - 3つの攻撃チェーンを矢印で示し、各矢印の途中に「ここで断ち切る防御策」をラベル付け -->
+
+<h4 id="1">チェーン1: スキルベースデータ窃取<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>T-PERSIST-001（悪意あるスキル）→ T-EVADE-001（モデレーションバイパス）→ T-EXFIL-003（クレデンシャル窃取）
+</code></pre></div>
+<p><strong>断ち切るポイント</strong>: スキルのインストール時点（TB5: サプライチェーン防御）。信頼できるソースからのみスキルをインストールする。</p>
+<h4 id="2-rce">チェーン2: プロンプトインジェクション → RCE<a class="headerlink" href="#2-rce" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>T-EXEC-001（直接プロンプトインジェクション）→ T-EXEC-004（exec承認バイパス）→ T-IMPACT-001（不正コマンド実行）
+</code></pre></div>
+<p><strong>断ち切るポイント</strong>: exec承認モデル（10.6節）。<code>security: "allowlist"</code> にしておけば、承認されていないコマンドは実行されない。サンドボックスが第2の防御線。</p>
+<h4 id="3">チェーン3: 間接インジェクション経由流出<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>T-EXEC-002（間接プロンプトインジェクション）→ T-EXFIL-001（web_fetch経由データ窃取）→ 外部流出
+</code></pre></div>
+<p><strong>断ち切るポイント</strong>: TB4の外部コンテンツラッピング + ツールポリシーで <code>web_fetch</code> を制限する。サンドボックスのネットワーク制限も有効。</p>
+<h4 id="_17">「脆弱性ではない」パターン<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p>ATLASでは以下を<strong>設計上の仕様</strong>として明確に線引きしている：</p>
+<ul>
+<li>ポリシー/認証/サンドボックスバイパスを伴わない「プロンプトインジェクションのみ」のチェーン</li>
+<li>1つの共有ホスト/設定で敵対的マルチテナント運用を前提とするクレーム</li>
+<li><code>sessions.list</code> / <code>sessions.preview</code> / <code>chat.history</code> へのオペレーターアクセスをIDORと分類するもの</li>
+<li>ループバックのみデプロイでのHSTS未設定</li>
+<li><code>sessionKey</code> を認証トークンとして扱う「ユーザーごと認証不足」</li>
+</ul>
+<p>これは重要な判断だ。「モデルが騙されること自体」は脆弱性ではなく、「騙された結果として防御が突破されること」が脆弱性——この線引きがOpenClawのセキュリティ哲学を端的に表している。</p>
+<blockquote>
+<p>⚠️ <strong>ここに注意</strong>: 「プロンプトインジェクションのみのチェーン」（ポリシー/認証/サンドボックスのバイパスを伴わないもの）はOpenClawの脆弱性とは見なされない。これは設計上の判断だ。モデルは操作可能と仮定した上で、爆発半径を限定するアプローチをとっている。</p>
+</blockquote>
+<h4 id="p0">P0推奨対策<a class="headerlink" href="#p0" title="Permanent link">&para;</a></h4>
+<p>ATLASが最優先（P0）として推奨している対策は3つだ：
+- <strong>R-001</strong>: VirusTotal統合の完了（スキルのマルウェアスキャン）
+- <strong>R-002</strong>: スキルサンドボックス化（スキル実行を隔離環境で）
+- <strong>R-003</strong>: 機密アクション出力バリデーション</p>
+<p>いずれも開発中であり、将来のバージョンで順次実装される予定だ。</p>
+<h4 id="tla">TLA+による正式検証<a class="headerlink" href="#tla" title="Permanent link">&para;</a></h4>
+<p>OpenClawのセキュリティ保証の一部は、正式検証言語<strong>TLA+</strong>（Temporal Logic of Actions）による数学的検証でバックアップされている（リポジトリ: <code>vignesh07/openclaw-formal-models</code>）。検証されているクレームには以下が含まれる：</p>
+<ul>
+<li>Gateway exposure: ループバック超バインド + 認証なしでリモート侵害が可能であること</li>
+<li>nodes.run pipeline: コマンド許可リスト + ライブ承認必須、承認はトークン化でリプレイ防止</li>
+<li>Pairing store: TTLと保留リクエスト上限が尊重されること</li>
+<li>Pairing concurrency: MaxPendingと冪等性が並行処理下でも保証されること</li>
+<li>Ingress gating: メンション必須グループで無認可コマンドがゲーティングをバイパスできないこと</li>
+<li>Routing isolation: 異なるピアのDMが明示的リンクなしに同一セッションに統合されないこと</li>
+<li>Ingress trace correlation: ファンアウト全体でトレース相関を保持、リトライで二重処理しないこと</li>
+</ul>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> TLA+なんて聞くと「ガチのやつじゃん…」ってなるけど、要するに「数学的に正しいことを証明してる」ってこと。全部を理解する必要はないけど、「ちゃんとした人たちがちゃんと検証してるんだな」と安心材料にはなるよね。</p>
+</blockquote>
+<hr />
+<h2 id="109">10.9 インシデントレスポンス — 「もしも」の時<a class="headerlink" href="#109" title="Permanent link">&para;</a></h2>
+<p>どれだけ対策しても「もしも」は起こりうる。APIキーが漏れた、不審な動作が見つかった、セッションログにおかしな内容がある——そんな時のために、対応手順を知っておこう。</p>
+<h3 id="3_1">3ステップの対応手順<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">ステップ1: 封じ込め<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<p>まず被害の拡大を止める。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Gatewayを停止</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>openclaw<span class="w"> </span>gateway<span class="w"> </span>stop
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># 設定を変更してloopbackに制限</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># gateway.bind: &quot;loopback&quot;</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1"># DM/グループを無効化</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># channels.*.dmPolicy: &quot;disabled&quot;</span>
+</code></pre></div>
+<p><strong>とにかくGatewayを止める</strong>のが最優先だ。外部との接続を全て断てば、攻撃者のアクセスも断たれる。</p>
+<h4 id="2">ステップ2: ローテーション<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<p>漏洩した可能性のある認証情報を全て回転させる。</p>
+<ul>
+<li><strong>Gateway認証トークン</strong> — 新しいトークンを生成</li>
+<li><strong>リモートクライアントシークレット</strong> — ノードペアリングのトークンを再発行</li>
+<li><strong>プロバイダー/APIキー</strong> — Anthropic、OpenAI等の全APIキーを再生成</li>
+</ul>
+<p>「どれが漏れたか分からない」場合は、<strong>全て回転させる</strong>のが安全だ。</p>
+<h4 id="3_2">ステップ3: 監査<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
+<p>何が起きたかを調査する。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># ログを確認</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>cat<span class="w"> </span>/tmp/openclaw/openclaw-YYYY-MM-DD.log
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># トランスクリプト（会話履歴）を確認</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="c1"># ~/.openclaw/agents/&lt;agentId&gt;/sessions/*.jsonl</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># セキュリティ監査を再実行</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>openclaw<span class="w"> </span>security<span class="w"> </span>audit<span class="w"> </span>--deep
+</code></pre></div>
+<p>ログとトランスクリプトから不審な操作を特定し、再発防止策を講じる。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> 「インシデントレスポンスなんて大げさな…」って思うかもだけど、APIキーが漏れたときに「何すればいい？」がわかってるかどうかで被害が全然違う。この3ステップだけ覚えておいて——<strong>止める、回す、調べる</strong>。</p>
+<p>⚠️ <strong>ここに注意</strong>: インシデント発生時、最初にやるべきは「原因調査」ではなく「封じ込め」だ。Gatewayを止めずにログを調べている間に、攻撃者がさらにデータを持ち出す可能性がある。</p>
+</blockquote>
+<hr />
+<h2 id="1010">10.10 まとめ<a class="headerlink" href="#1010" title="Permanent link">&para;</a></h2>
+<p>この章では、OpenClawのセキュリティモデルを全方位から見てきた。最後に一覧表で整理しよう。</p>
+<table>
+<thead>
+<tr>
+<th>セキュリティ領域</th>
+<th>何を守るか</th>
+<th>主な設定</th>
+<th>推奨デフォルト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DMペアリング</td>
+<td>誰がDMできるか</td>
+<td><code>dmPolicy</code></td>
+<td><code>pairing</code></td>
+</tr>
+<tr>
+<td>ノードペアリング</td>
+<td>どのデバイスが接続できるか</td>
+<td><code>openclaw nodes approve</code></td>
+<td>手動承認</td>
+</tr>
+<tr>
+<td>Gateway認証</td>
+<td>Gatewayへの接続</td>
+<td><code>gateway.auth.mode</code></td>
+<td><code>token</code></td>
+</tr>
+<tr>
+<td>サンドボックス</td>
+<td>ツール実行の隔離</td>
+<td><code>sandbox.mode</code> / <code>backend</code></td>
+<td><code>docker</code> + <code>non-main</code></td>
+</tr>
+<tr>
+<td>シークレット管理</td>
+<td>APIキー等の秘密情報</td>
+<td>SecretRef / env</td>
+<td>環境変数</td>
+</tr>
+<tr>
+<td>ツールポリシー</td>
+<td>使えるツールの制限</td>
+<td><code>tools.allow</code> / <code>deny</code></td>
+<td>危険ツールdeny</td>
+</tr>
+<tr>
+<td>Elevated</td>
+<td>ホスト実行の特例</td>
+<td><code>elevated.enabled</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>監査</td>
+<td>設定の診断</td>
+<td><code>security audit</code></td>
+<td>定期実行</td>
+</tr>
+</tbody>
+</table>
+<p>セキュリティは「一度設定したら終わり」ではない。新しいチャネルを追加するたびにペアリングポリシーを確認し、新しいスキルをインストールするたびにツールポリシーを見直し、定期的に <code>openclaw security audit</code> を走らせる。その繰り返しが「意図的なセキュリティ」を維持するコツだ。</p>
+<blockquote>
+<p>💬 <strong>こうじの実感：</strong> セキュリティの章って長くなりがちだけど、結局やることは「<strong>誰が入れるか決める（ペアリング）→ 入口を守る（認証）→ 中で何ができるか決める（サンドボックス＋ポリシー）→ 大事なものを隠す（シークレット）→ 定期的にチェックする（監査）</strong>」の5ステップ。この順番で設定していけば、そんなに迷わないはず。</p>
+</blockquote>
+<hr />
+<h3 id="_18">次章への橋渡し<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>エージェントに安全装置を取り付けた。誰が話しかけられるかをペアリングで制御し、Gatewayを認証で守り、サンドボックスでツール実行を隔離し、シークレットを安全に管理し、脅威モデルで「何から守るべきか」を理解した。</p>
+<p>しかし、セキュリティ設定は「一度やったら終わり」ではない。OpenClawは進化し続け、新しい機能が追加され、新しい脅威も生まれる。次章では、OpenClawの<strong>アップデートとメンテナンス</strong>——長期的にエージェントを健全に保つ方法を学ぶ。</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        この記事は役に立ちましたか？
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="役に立った" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="改善の余地あり" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              フィードバックありがとうございます！
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              フィードバックありがとうございます。改善します！
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 こうじ株式会社
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/clawd" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
